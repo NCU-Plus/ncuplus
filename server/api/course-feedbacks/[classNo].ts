@@ -9,7 +9,7 @@ export default defineEventHandler(async (event): Promise<APICourseFeedback> => {
   const config = useRuntimeConfig();
   const { data: courseFeedback } = <APIResponse<APICourseFeedback>>(
     await $fetch(
-      `${config.public.apiBaseUrl}/course-feedback/${event.context.params.classNo}`
+      `${config.public.apiBaseUrl}/course-feedbacks/${event.context.params.classNo}`
     )
   );
   if (!courseFeedback)
