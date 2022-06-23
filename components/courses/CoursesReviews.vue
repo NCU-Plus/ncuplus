@@ -37,7 +37,10 @@
             "
           >
             <font-awesome-icon :icon="['fas', 'thumbs-up']" />
-            {{ reviewData.likes.length }}
+            {{
+              reviewData.reactions.filter((e) => e.type === ReactionType.LIKE)
+                .length
+            }}
           </div>
           <div
             class="cursor-pointer"
@@ -49,7 +52,11 @@
             "
           >
             <font-awesome-icon :icon="['fas', 'thumbs-down']" />
-            {{ reviewData.dislikes.length }}
+            {{
+              reviewData.reactions.filter(
+                (e) => e.type === ReactionType.DISLIKE
+              ).length
+            }}
           </div>
         </div>
         <div class="flex space-x-2" v-if="editing === reviewData.id">
@@ -87,9 +94,8 @@
       >
       </textarea>
       <div class="flex justify-end">
-        <!-- content = ''; -->
         <button
-          @click="emits('add', { content: content })"
+          @click="createReview()"
           class="px-4 py-2 bg-sky-400 hover:bg-sky-500 text-white rounded-md"
         >
           送出
@@ -105,6 +111,7 @@ import { DropdownMenuOptions } from "./CoursesDropdownMenuOptions";
 import { getUsernameById } from "@/helpers/user";
 import { toDatetimeString } from "@/helpers/time";
 import { ReactionType } from "~~/types/ReactionType";
+import { APIReview } from "~~/types/APIReview";
 
 const emits = defineEmits<{
   (event: "openDropdownMenu", data: DropdownMenuOptions): void;
@@ -120,7 +127,7 @@ const emits = defineEmits<{
   ): void;
   (event: "cancelEdit"): void;
 }>();
-const props = defineProps<{ reviewsData: any[]; editing: number }>();
+const props = defineProps<{ reviewsData: APIReview[]; editing: number }>();
 const content = ref("");
 const editingContent = ref("");
 
@@ -137,13 +144,18 @@ function openDropdownMenu(id: number, event: MouseEvent) {
   });
 }
 
+function createReview() {
+  emits("add", { content: content.value });
+  content.value = "";
+}
+
 watch(
   () => props.editing,
   (newValue, oldValue) => {
     if (oldValue === 0 && newValue !== 0) {
       editingContent.value = props.reviewsData.find(
         (reviewData) => reviewData.id === newValue
-      ).content;
+      )!.content;
     }
   }
 );
