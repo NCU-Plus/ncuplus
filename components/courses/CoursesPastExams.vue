@@ -60,38 +60,40 @@
       </tbody>
     </table>
     <div class="w-full flex flex-col md:flex-row mb-4 space-y-2 justify-end">
-      <transition name="form-fade">
-        <div
-          v-show="uploading"
-          class="flex flex-col md:flex-row space-y-2 md:space-x-4 items-center mx-4"
-        >
-          <input
-            v-model="uploadData.year"
-            class="pl-2 rounded-sm"
-            placeholder="考古年度"
-            required
-          />
-          <input
-            v-model="uploadData.description"
-            class="pl-2 rounded-sm"
-            placeholder="檔案說明"
-            required
-          />
-          <input @change="setUploadFile" type="file" required />
-          <button
-            @click="upload"
-            class="px-4 py-2 bg-sky-400 hover:bg-sky-500 text-white rounded-md"
+      <div class="flex">
+        <transition name="form-fade">
+          <div
+            v-show="uploading"
+            class="flex flex-col md:flex-row space-x-2 md:space-x-4 items-center mx-4"
           >
-            送出
-          </button>
-        </div></transition
-      >
-      <button
-        @click="uploading = !uploading"
-        class="px-4 py-2 bg-sky-400 hover:bg-sky-500 text-white rounded-md"
-      >
-        我要上傳
-      </button>
+            <input
+              v-model="uploadData.year"
+              class="pl-2 rounded-sm"
+              placeholder="考古年度"
+              required
+            />
+            <input
+              v-model="uploadData.description"
+              class="pl-2 rounded-sm"
+              placeholder="檔案說明"
+              required
+            />
+            <input @change="setUploadFile" type="file" required />
+            <button
+              @click="upload"
+              class="px-4 py-2 bg-sky-400 hover:bg-sky-500 text-white rounded-md"
+            >
+              送出
+            </button>
+          </div></transition
+        >
+        <button
+          @click="uploading = !uploading"
+          class="px-4 py-2 bg-sky-400 hover:bg-sky-500 text-white rounded-md"
+        >
+          我要上傳
+        </button>
+      </div>
     </div>
     <div class="w-full flex flex-col mb-14">
       <div class="p-2 bg-gray-300 rounded-t-md">
