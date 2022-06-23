@@ -76,25 +76,26 @@
                 {{ formatPasswordCard(course.passwordCard) }}
               </td>
             </tr>
+            <span v-if="showingPastCourses && pending">Loading...</span>
             <tr
-              v-show="showingPastCourses"
-              v-for="pastCourseData of pastCoursesData"
+              v-if="showingPastCourses && !pending"
+              v-for="pastCourse of pastCourses.filter(
+                (c) => c.serialNo !== course.serialNo
+              )"
               class="border-t-[1px] border-slate-300"
             >
               <td class="p-2">
-                {{ pastCourseData.year }}-{{
-                  formatSemester(pastCourseData.semester)
-                }}
+                {{ pastCourse.year }}-{{ formatSemester(pastCourse.semester) }}
               </td>
-              <td class="p-2">{{ pastCourseData.departmentName }}</td>
-              <td class="p-2">{{ pastCourseData.serialNo }}</td>
+              <td class="p-2">{{ pastCourse.departmentName }}</td>
+              <td class="p-2">{{ pastCourse.serialNo }}</td>
               <td class="p-2">
-                {{ formatCourseType(pastCourseData.courseType) }}
+                {{ formatCourseType(pastCourse.courseType) }}
               </td>
-              <td class="p-2">{{ pastCourseData.limitCnt }}</td>
-              <td class="p-2">{{ pastCourseData.classTimes }}</td>
+              <td class="p-2">{{ pastCourse.limitCnt }}</td>
+              <td class="p-2">{{ pastCourse.classTimes }}</td>
               <td class="p-2">
-                {{ formatPasswordCard(pastCourseData.passwordCard) }}
+                {{ formatPasswordCard(pastCourse.passwordCard) }}
               </td>
             </tr>
           </tbody>
@@ -146,7 +147,7 @@
 
 <script setup lang="ts">
 import { Course } from "~/types/Course";
-import { reactive, ref } from "vue";
+import { reactive, Ref, ref } from "vue";
 import {
   formatCourseType,
   formatSemester,
@@ -164,6 +165,7 @@ import {
 } from "~/helpers/course-feedback";
 import { DropdownMenuOptions } from "~/components/courses/CoursesDropdownMenuOptions";
 import { AsyncData } from "#app";
+import { APICourseFeedback } from "~~/types/APICourseFeedback";
 
 const dropdownMenuOptions = reactive({
   type: "",
@@ -171,16 +173,19 @@ const dropdownMenuOptions = reactive({
 const editingComment = ref(0);
 const editingReview = ref(0);
 const showingPastCourses = ref(false);
-const pastCourses = [] as any[];
-const pastCoursesData = reactive([] as any[]);
 
 const route = useRoute();
 
 const { data: course } = (await useFetch(
   `/api/courses/${route.params.id}`
 )) as unknown as AsyncData<Course, Error>;
-const { data: courseFeedback } = await useFetch(
-  `/api/course-feedback/${(course.value as unknown as Course).classNo}`
+const { data: courseFeedback } = (await useFetch(
+  `/api/course-feedbacks/${(course.value as unknown as Course).classNo}`
+)) as unknown as AsyncData<APICourseFeedback, Error>;
+const { pending, data: pastCourses } = <AsyncData<Course[], Error>>(
+  useLazyFetch(
+    `/api/past-courses/${(course.value as unknown as Course).classNo}`
+  )
 );
 
 function openDropdownMenu(data: DropdownMenuOptions) {
@@ -205,23 +210,7 @@ function dele() {
   // else del(dropdownMenuOptions.type, dropdownMenuOptions.id, reviewsData);
 }
 
-async function showPastCourses() {
+function showPastCourses() {
   showingPastCourses.value = !showingPastCourses.value;
-  if (showingPastCourses.value && pastCoursesData.length === 0) {
-    const tasks: Promise<any>[] = [];
-    for (const pastCourse of pastCourses) {
-      if (pastCourse.courseId != route.params.id)
-        tasks.push(
-          useFetch("/api/courses/:id", {
-            params: {
-              id: pastCourse.courseId,
-            },
-          })
-        );
-    }
-    for (const { data: course } of await Promise.all(tasks)) {
-      pastCoursesData.push(course);
-    }
-  }
 }
 </script>

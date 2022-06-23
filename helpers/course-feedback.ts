@@ -80,7 +80,7 @@ async function createCommentOrReview(
   const config = useRuntimeConfig();
   const response = <APIResponse<APIReview | APIComment>>(
     await $fetch(
-      `${config.public.apiBaseUrl}/course-feedback/${classNo}/${target}s`,
+      `${config.public.apiBaseUrl}/course-feedbacks/${classNo}/${target}s`,
       {
         method: "POST",
         body: { content: content },
@@ -212,7 +212,7 @@ export async function createPastExam(
   formdata.append("description", uploadData.description);
   const response = <APIResponse<APIPastExam>>(
     await $fetch(
-      `${config.public.apiBaseUrl}/course-feedback/${classNo}/past-exams`,
+      `${config.public.apiBaseUrl}/course-feedbacks/${classNo}/past-exams`,
       {
         method: "POST",
         body: formdata,
