@@ -27,7 +27,7 @@
         <h1 class="mt-20 text-4xl font-bold text-center">Features</h1>
         <div class="w-full overflow-x-scroll md:overflow-x-hidden">
           <div class="w-fit md:w-full mx-auto flex justify-center flex-nowrap">
-            <router-link class="w-72 md:w-1/5" to="/courses">
+            <NuxtLink class="w-72 md:w-1/5" to="/courses">
               <div
                 class="w-full flex flex-col space-y-8 items-center justify-center hover:bg-gray-200"
               >
@@ -40,7 +40,7 @@
                     現在不用再CTRL+F了，在網站中一次找出所有你想要的!
                   </p>
                 </div>
-              </div></router-link
+              </div></NuxtLink
             >
           </div>
         </div>
