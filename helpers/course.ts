@@ -1,5 +1,3 @@
-import { CourseData } from "~/components/courses/CourseData";
-
 export function formatSemester(semester: number): string {
   return semester ? "下" : "上";
 }

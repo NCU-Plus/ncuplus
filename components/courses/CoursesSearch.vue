@@ -52,7 +52,7 @@
 
 <script setup lang="ts">
 import { computed, reactive, ref, watch } from "vue";
-import { CourseData } from "./CourseData";
+import { Course } from "~/types/Course";
 import { SearchOptions } from "./CoursesSearchOptions";
 const advanceSearch = ref(false);
 const searchOptions = reactive(<SearchOptions>{
@@ -62,7 +62,7 @@ const searchOptions = reactive(<SearchOptions>{
 });
 
 const props = defineProps<{
-  coursesData: CourseData[];
+  coursesData: Course[];
 }>();
 const emit = defineEmits(["search"]);
 

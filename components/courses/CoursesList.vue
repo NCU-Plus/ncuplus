@@ -76,11 +76,11 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
-import { CourseData } from "./CourseData";
+import { Course } from "~/types/Course";
 import { formatSemester } from "@/helpers/course";
 
 const props = defineProps<{
-  coursesData: CourseData[];
+  coursesData: Course[];
 }>();
 
 const page = ref(1);
