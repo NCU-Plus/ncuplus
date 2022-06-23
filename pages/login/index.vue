@@ -11,9 +11,11 @@
         <h1 class="font-black text-6xl text-center">NCU+</h1>
         <h6 class="text-sm mt-8">中央大學學生請使用Portal的單一簽入</h6>
       </div>
-      <button class="w-60 h-10 bg-sky-400 text-white rounded-md">
-        中大Portal單一簽入
-      </button>
+      <a :href="loginUrl">
+        <button class="w-60 h-10 bg-sky-400 text-white rounded-md">
+          中大Portal單一簽入
+        </button>
+      </a>
     </div></FullpageHeader
   >
 </template>
@@ -21,4 +23,6 @@
 <script setup lang="ts">
 // @ts-ignore
 import loginBg from "~/assets/background/操場.jpg";
+const config = useRuntimeConfig();
+const loginUrl = `${config.public.apiBaseUrl}/auth/oauth`;
 </script>
