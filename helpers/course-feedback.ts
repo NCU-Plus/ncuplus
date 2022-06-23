@@ -5,25 +5,24 @@ import { APIPastExam } from "~~/types/APIPastExam";
 import { APIReaction } from "~~/types/APIReaction";
 import { APIResponse } from "~~/types/APIResponse";
 import { APIReview } from "~~/types/APIReview";
+import { ReactionType } from "~~/types/ReactionType";
+import { APIClient } from "./APIClient";
 
 type CourseFeedbackType = "comment" | "review";
 
 export async function createReaction(
   target: CourseFeedbackType,
-  operation: "like" | "dislike",
+  type: ReactionType,
   targetId: number
 ): Promise<APIReaction | null> {
   const config = useRuntimeConfig();
   const response = <APIResponse<APIReaction>>(
-    await $fetch(
+    await APIClient.getInstance().fetch(
       `${config.public.apiBaseUrl}/${target}s/${targetId}/reactions`,
       {
         method: "POST",
         body: {
-          operation,
-        },
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          type,
         },
       }
     )
@@ -79,14 +78,11 @@ async function createCommentOrReview(
 ): Promise<APIComment | APIReview | null> {
   const config = useRuntimeConfig();
   const response = <APIResponse<APIReview | APIComment>>(
-    await $fetch(
+    await APIClient.getInstance().fetch(
       `${config.public.apiBaseUrl}/course-feedbacks/${classNo}/${target}s`,
       {
         method: "POST",
         body: { content: content },
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
       }
     )
   );
@@ -129,13 +125,13 @@ async function editCommentOrReview(
 ): Promise<APIComment | APIReview | null> {
   const config = useRuntimeConfig();
   const response = <APIResponse<APIReview | APIComment>>(
-    await $fetch(`${config.public.apiBaseUrl}/${target}s/${targetId}`, {
-      method: "PUT",
-      body: { content: newContent },
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
+    await APIClient.getInstance().fetch(
+      `${config.public.apiBaseUrl}/${target}s/${targetId}`,
+      {
+        method: "PUT",
+        body: { content: newContent },
+      }
+    )
   );
   if (!response.data) {
     let message = "未知錯誤";
@@ -160,13 +156,11 @@ async function deleteCommentOrReview(
   targetId: number
 ): Promise<boolean> {
   const config = useRuntimeConfig();
-  const response = <APIResponse<any>>(
-    await $fetch(`${config.public.apiBaseUrl}/${target}s/${targetId}`, {
+  const response = <APIResponse<any>>await APIClient.getInstance().fetch(
+    `${config.public.apiBaseUrl}/${target}s/${targetId}`,
+    {
       method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
+    }
   );
   if (response.statusCode !== 200) {
     let message = "未知錯誤";
@@ -211,14 +205,11 @@ export async function createPastExam(
   formdata.append("year", uploadData.year);
   formdata.append("description", uploadData.description);
   const response = <APIResponse<APIPastExam>>(
-    await $fetch(
+    await APIClient.getInstance().fetch(
       `${config.public.apiBaseUrl}/course-feedbacks/${classNo}/past-exams`,
       {
         method: "POST",
         body: formdata,
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
       }
     )
   );
@@ -243,13 +234,10 @@ export async function createPastExam(
 export async function downloadPastExam(id: number): Promise<boolean> {
   const config = useRuntimeConfig();
 
-  const response = <FetchResponse<any>>await $fetch.raw(
+  const response = <FetchResponse<any>>await APIClient.getInstance().fetchRaw(
     `${config.public.apiBaseUrl}/past-exam/${id}`,
     {
       responseType: "blob",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
     }
   );
 
@@ -279,13 +267,11 @@ export async function downloadPastExam(id: number): Promise<boolean> {
 
 export async function deletePastExam(id: number) {
   const config = useRuntimeConfig();
-  const response = <APIResponse<any>>(
-    await $fetch(`${config.public.apiBaseUrl}/past-exam/${id}`, {
+  const response = <APIResponse<any>>await APIClient.getInstance().fetch(
+    `${config.public.apiBaseUrl}/past-exam/${id}`,
+    {
       method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
+    }
   );
 
   if (response.statusCode !== 200) {

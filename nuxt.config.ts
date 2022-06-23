@@ -28,4 +28,14 @@ export default defineNuxtConfig({
       apiBaseUrl: "",
     },
   },
+  vue: {
+    compilerOptions: {
+      directiveTransforms: {
+        "click-outside": () => ({
+          props: [],
+          needRuntime: true,
+        }),
+      },
+    },
+  },
 });

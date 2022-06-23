@@ -29,7 +29,12 @@
         <div class="flex space-x-2">
           <div
             class="cursor-pointer"
-            @click="emits('reaction', { operation: 'like', id: reviewData.id })"
+            @click="
+              emits('reaction', {
+                operation: ReactionType.LIKE,
+                id: reviewData.id,
+              })
+            "
           >
             <font-awesome-icon :icon="['fas', 'thumbs-up']" />
             {{ reviewData.likes.length }}
@@ -37,7 +42,10 @@
           <div
             class="cursor-pointer"
             @click="
-              emits('reaction', { operation: 'dislike', id: reviewData.id })
+              emits('reaction', {
+                operation: ReactionType.DISLIKE,
+                id: reviewData.id,
+              })
             "
           >
             <font-awesome-icon :icon="['fas', 'thumbs-down']" />
@@ -96,15 +104,13 @@ import { ref, watch } from "vue";
 import { DropdownMenuOptions } from "./CoursesDropdownMenuOptions";
 import { getUsernameById } from "@/helpers/user";
 import { toDatetimeString } from "@/helpers/time";
+import { ReactionType } from "~~/types/ReactionType";
 
 const emits = defineEmits<{
   (event: "openDropdownMenu", data: DropdownMenuOptions): void;
   (event: "closeDropdownMenu"): void;
   (event: "add", data: { content: string }): void;
-  (
-    event: "reaction",
-    data: { operation: "like" | "dislike"; id: number }
-  ): void;
+  (event: "reaction", data: { operation: ReactionType; id: number }): void;
   (
     event: "completeEdit",
     data: {

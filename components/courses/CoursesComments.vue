@@ -60,19 +60,23 @@
                 class="cursor-pointer flex items-center"
                 @click="
                   emits('reaction', {
-                    operation: 'like',
+                    operation: ReactionType.LIKE,
                     id: commentData.id,
                   })
                 "
               >
                 <font-awesome-icon :icon="['fas', 'thumbs-up']" class="mr-1" />
-                {{ commentData.likes.length }}
+                {{
+                  commentData.reactions.filter(
+                    (e) => e.type === ReactionType.LIKE
+                  ).length
+                }}
               </div>
               <div
                 class="cursor-pointer flex items-center"
                 @click="
                   emits('reaction', {
-                    operation: 'dislike',
+                    operation: ReactionType.DISLIKE,
                     id: commentData.id,
                   })
                 "
@@ -81,7 +85,11 @@
                   :icon="['fas', 'thumbs-down']"
                   class="mr-1"
                 />
-                {{ commentData.dislikes.length }}
+                {{
+                  commentData.reactions.filter(
+                    (e) => e.type === ReactionType.DISLIKE
+                  ).length
+                }}
               </div>
             </div>
           </div>
@@ -91,11 +99,11 @@
           />
         </div>
       </div>
-      <!-- @keypress.shift.enter="emits('add', { content: content });content = ''"  -->
       <textarea
         class="mx-8 my-4 w-4/5 outline outline-gray-200 rounded-sm resize-none"
         placeholder="留言... (Shift + Enter來發送訊息)"
         v-model="content"
+        @keypress.shift.enter="createComment()"
         maxlength="255"
       ></textarea>
     </div>
@@ -106,16 +114,15 @@ import { ref, watch } from "vue";
 import { DropdownMenuOptions } from "./CoursesDropdownMenuOptions";
 import { getUsernameById } from "@/helpers/user";
 import { toDatetimeString } from "@/helpers/time";
+import { APIComment } from "~~/types/APIComment";
+import { ReactionType } from "~/types/ReactionType";
 
-const props = defineProps<{ commentsData: any[]; editing: number }>();
+const props = defineProps<{ commentsData: APIComment[]; editing: number }>();
 const emits = defineEmits<{
   (event: "openDropdownMenu", data: DropdownMenuOptions): void;
   (event: "closeDropdownMenu"): void;
   (event: "add", data: { content: string }): void;
-  (
-    event: "reaction",
-    data: { operation: "like" | "dislike"; id: number }
-  ): void;
+  (event: "reaction", data: { operation: ReactionType; id: number }): void;
   (
     event: "completeEdit",
     data: {
@@ -142,13 +149,18 @@ function openDropdownMenu(id: number, event: MouseEvent) {
   });
 }
 
+function createComment() {
+  emits("add", { content: content.value });
+  content.value = "";
+}
+
 watch(
   () => props.editing,
   (newValue, oldValue) => {
     if (oldValue === 0 && newValue !== 0) {
       editingContent.value = props.commentsData.find(
         (commentData) => commentData.id === newValue
-      ).content;
+      )!.content;
     }
   }
 );
