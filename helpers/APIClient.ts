@@ -1,6 +1,6 @@
 import { RuntimeConfig } from "@nuxt/schema";
 import { NitroFetchRequest } from "nitropack";
-import { FetchOptions, FetchResponse } from "ohmyfetch";
+import { FetchError, FetchOptions, FetchResponse } from "ohmyfetch";
 import { APIResponse } from "~~/types/APIResponse";
 
 export class APIClient {
@@ -28,38 +28,46 @@ export class APIClient {
     return resp.data!.token;
   }
   public async refreshToken() {
-    this._token = await this.getToken();
+    const token = await this.getToken();
+    this._token = token;
+    localStorage.setItem("token", token);
   }
 
-  public async fetch(
+  public async fetch<T = unknown>(
     request: NitroFetchRequest,
     opts?: FetchOptions | undefined
-  ): Promise<unknown> {
-    const resp = <APIResponse<any>>await $fetch(request, {
-      ...opts,
-      headers: { Authorization: `Bearer ${this._token}` },
-    }).catch((e) => e.data);
-    if (resp.statusCode === 401) {
-      await this.refreshToken();
-      return await this.fetch(request, opts);
-    }
-    return resp;
+  ): Promise<T> {
+    return (await this._fetch<T>($fetch, request, opts)) as T;
   }
 
-  public async fetchRaw(
+  public async fetchRaw<T = unknown>(
     request: NitroFetchRequest,
     opts?: FetchOptions | undefined
-  ): Promise<FetchResponse<unknown>> {
-    const resp = <FetchResponse<any>>await $fetch
-      .raw(request, {
+  ): Promise<FetchResponse<T>> {
+    return (await this._fetch<T>(
+      $fetch.raw,
+      request,
+      opts
+    )) as FetchResponse<T>;
+  }
+
+  private async _fetch<T = unknown>(
+    fetchFn: typeof $fetch | typeof $fetch.raw,
+    request: NitroFetchRequest,
+    opts?: FetchOptions | undefined
+  ): Promise<FetchResponse<T> | T | unknown> {
+    try {
+      return await fetchFn(request, {
         ...opts,
-        headers: { Authorization: `Bearer ${this._token}` },
-      })
-      .catch((e) => e.data);
-    if (resp.status === 401) {
-      await this.refreshToken();
-      return await this.fetchRaw(request, opts);
+        headers: { ...opts?.headers, Authorization: `Bearer ${this._token}` },
+      });
+    } catch (e) {
+      if ((e as FetchError).response?.status === 401) {
+        await this.refreshToken();
+        return await this._fetch<T>(fetchFn, request, opts);
+      }
+
+      return (e as FetchError).data;
     }
-    return resp;
   }
 }

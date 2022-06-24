@@ -234,14 +234,11 @@ export async function createPastExam(
 export async function downloadPastExam(id: number): Promise<boolean> {
   const config = useRuntimeConfig();
 
-  const response = <FetchResponse<any>>await APIClient.getInstance().fetchRaw(
-    `${config.public.apiBaseUrl}/past-exam/${id}`,
-    {
-      responseType: "blob",
-    }
+  const response = await APIClient.getInstance().fetchRaw<Blob>(
+    `${config.public.apiBaseUrl}/past-exams/${id}`
   );
 
-  if (!response.blob()) {
+  if (!response._data) {
     let message = "下載時發生錯誤";
     if (response.status === 401) message = "尚未登入";
     store.dispatch("pushToast", {
@@ -252,13 +249,15 @@ export async function downloadPastExam(id: number): Promise<boolean> {
   }
 
   // save file to local
-  const url = window.URL.createObjectURL(new Blob([await response.blob()]));
+  const url = window.URL.createObjectURL(response._data);
   const link = document.createElement("a");
   link.href = url;
   const savedFilename = response.headers
     .get("content-disposition")!
     .substring(response.headers.get("content-disposition")!.indexOf("=") + 1);
-  link.download = savedFilename ? savedFilename : "pastexam";
+  link.download = savedFilename
+    ? decodeURIComponent(savedFilename)
+    : "pastexam";
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
@@ -268,7 +267,7 @@ export async function downloadPastExam(id: number): Promise<boolean> {
 export async function deletePastExam(id: number) {
   const config = useRuntimeConfig();
   const response = <APIResponse<any>>await APIClient.getInstance().fetch(
-    `${config.public.apiBaseUrl}/past-exam/${id}`,
+    `${config.public.apiBaseUrl}/past-exams/${id}`,
     {
       method: "DELETE",
     }
