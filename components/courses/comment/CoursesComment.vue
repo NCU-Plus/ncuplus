@@ -32,7 +32,7 @@
       </div>
       <div
         v-else
-        class="flex justify-between md:justify-start space-x-2 items-center mx-2 md:mx-8 text-gray-600"
+        class="flex justify-start space-x-2 items-center mx-2 md:mx-8 text-gray-600"
       >
         <p v-if="comment.createdAt === comment.updatedAt">
           {{ toDatetimeString(new Date(comment.createdAt)) }}
