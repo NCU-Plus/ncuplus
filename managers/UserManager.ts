@@ -4,16 +4,18 @@ import { APIUser } from "~~/types/APIUser";
 export class UserManager {
   private static _instance: UserManager;
   public cache: Map<number, User> = new Map();
-  private constructor() {
-    $fetch<APIUser[]>("/api/users").then((users) => {
-      if (users)
-        for (const user of users) this.cache.set(user.id, new User(user));
-    });
-  }
+  private constructor() {}
   public static getInstance() {
     if (!this._instance) this._instance = new UserManager();
     return UserManager._instance;
   }
+
+  public async refreshCache() {
+    const users = await $fetch<APIUser[]>("/api/users");
+    if (users)
+      for (const user of users) this.cache.set(user.id, new User(user));
+  }
+
   public async fetch(id: number): Promise<User | null> {
     const cachedUser = this.cache.get(id);
     if (cachedUser) return cachedUser;
