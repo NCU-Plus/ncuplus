@@ -4,7 +4,7 @@
       <font-awesome-icon :icon="['fa', 'book']" size="lg" />
       <strong class="text-2xl">課程資訊</strong>
     </h3>
-    <table class="w-full md:w-1/3 h-24">
+    <table class="w-full h-24">
       <tbody>
         <tr>
           <td>
