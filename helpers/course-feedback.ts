@@ -1,5 +1,4 @@
 import { store, ToastType } from "@/plugins/store";
-import { FetchResponse } from "ohmyfetch";
 import { APIComment } from "~~/types/APIComment";
 import { APIPastExam } from "~~/types/APIPastExam";
 import { APIReaction } from "~~/types/APIReaction";
@@ -44,13 +43,13 @@ export async function createReaction(
       )
         message = "你已經為這篇內容推噓過了!";
     }
-    await store.dispatch("pushToast", {
+    store.dispatch("pushToast", {
       type: ToastType.ERROR,
       message: message,
     });
     return null;
   }
-  await store.dispatch("pushToast", {
+  store.dispatch("pushToast", {
     type: ToastType.SUCCESS,
     message: "操作成功",
   });
@@ -90,14 +89,14 @@ async function createCommentOrReview(
   if (!response.data) {
     let message = "未知錯誤";
     if (response.statusCode === 401) message = "尚未登入";
-    await store.dispatch("pushToast", {
+    store.dispatch("pushToast", {
       type: ToastType.ERROR,
       message: message,
     });
     return null;
   }
 
-  await store.dispatch("pushToast", {
+  store.dispatch("pushToast", {
     type: ToastType.SUCCESS,
     message: "操作成功",
   });
@@ -138,13 +137,13 @@ async function editCommentOrReview(
     if (response.statusCode === 401) message = "尚未登入";
     else if (response.statusCode === 403) message = "無此權限";
 
-    await store.dispatch("pushToast", {
+    store.dispatch("pushToast", {
       type: ToastType.ERROR,
       message: message,
     });
     return null;
   }
-  await store.dispatch("pushToast", {
+  store.dispatch("pushToast", {
     type: ToastType.SUCCESS,
     message: "操作成功",
   });
@@ -168,14 +167,14 @@ async function deleteCommentOrReview(
     else if (response.statusCode === 403) message = "無此權限";
     else if (response.statusCode === 404) message = "找不到該資料";
 
-    await store.dispatch("pushToast", {
+    store.dispatch("pushToast", {
       type: ToastType.ERROR,
       message: message,
     });
     return false;
   }
 
-  await store.dispatch("pushToast", {
+  store.dispatch("pushToast", {
     type: ToastType.SUCCESS,
     message: "操作成功",
   });

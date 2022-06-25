@@ -5,4 +5,7 @@
   .center-container {
     @apply h-full ml-auto mr-auto;
   }
+  .button {
+    @apply px-4 py-2 bg-sky-400 hover:bg-sky-500 text-white rounded-md;
+  }
 }
