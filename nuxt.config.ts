@@ -1,5 +1,7 @@
 import { defineNuxtConfig } from "nuxt";
 import tailwindForms from "@tailwindcss/forms";
+// @ts-ignore
+import tailwindScrollbarHide from "tailwind-scrollbar-hide";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -20,7 +22,7 @@ export default defineNuxtConfig({
   tailwindcss: {
     cssPath: "~/assets/tailwind.css",
     config: {
-      plugins: [tailwindForms],
+      plugins: [tailwindForms, tailwindScrollbarHide],
     },
   },
   runtimeConfig: {

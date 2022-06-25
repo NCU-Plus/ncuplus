@@ -42,7 +42,7 @@
         "
       />
       <!--past exams-->
-      <CoursesPastExams
+      <CoursesPastExamList
         :pastExamsData="courseFeedback.pastExams"
         @upload="
           add(courseFeedback.pastExams, createPastExam(course.classNo, $event))
@@ -56,7 +56,6 @@
 
 <script setup lang="ts">
 import { Course } from "~/types/Course";
-import { reactive, ref } from "vue";
 import {
   createComment,
   createReaction,
