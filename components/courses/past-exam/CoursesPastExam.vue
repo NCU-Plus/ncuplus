@@ -37,7 +37,7 @@ const emits = defineEmits<{
   (event: "download", data: { id: number }): void;
   (event: "delete", data: { id: number }): void;
 }>();
-const uploader = await UserManager.getInstance().fetch(
-  props.pastExam.uploaderId
+const uploader = ref(
+  await UserManager.getInstance().fetch(props.pastExam.uploaderId)
 );
 </script>

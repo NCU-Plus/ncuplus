@@ -115,7 +115,9 @@ const openDropdownMenuButton = ref<InstanceType<
   typeof CoursesOpenDropdownMenuButton
 > | null>(null);
 const showOpenDropdownMenuButton = ref(false);
-const author = await UserManager.getInstance().fetch(props.review.authorId);
+const author = ref(
+  await UserManager.getInstance().fetch(props.review.authorId)
+);
 
 function completeEdit() {
   editing.value = false;
