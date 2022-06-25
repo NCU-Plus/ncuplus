@@ -7,10 +7,11 @@
     >
     <div class="lg:mr-48 w-full lg:inline-flex lg:flex-grow">
       <div class="flex flex-row-reverse w-full">
-        <NavbarLinkButton to="/courses">課程</NavbarLinkButton>
         <ClientOnly>
+          <NavbarUserDropdown />
           <NavbarLoginButton />
         </ClientOnly>
+        <NavbarLinkButton to="/courses">課程</NavbarLinkButton>
       </div>
     </div>
   </nav>

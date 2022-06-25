@@ -42,6 +42,11 @@ export class APIClient {
     localStorage.setItem("token", token);
   }
 
+  public resetToken() {
+    this._token = null;
+    localStorage.removeItem("token");
+  }
+
   public async fetch<T = unknown>(
     request: NitroFetchRequest,
     opts?: FetchOptions | undefined
@@ -75,7 +80,6 @@ export class APIClient {
         await this.refreshToken();
         return await this._fetch<T>(fetchFn, request, opts);
       }
-
       return (e as FetchError).data;
     }
   }
