@@ -47,8 +47,10 @@
         @upload="
           add(courseFeedback.pastExams, createPastExam(course.classNo, $event))
         "
-        @download="downloadPastExam($event.id)"
-        @delete="deletePastExam($event.id)"
+        @download="download($event.id, downloadPastExam($event.id))"
+        @delete="
+          del(courseFeedback.pastExams, $event.id, deletePastExam($event.id))
+        "
       />
     </div>
   </div>
@@ -71,6 +73,7 @@ import {
 import { APICourseFeedback } from "~~/types/APICourseFeedback";
 import { APIComment } from "~~/types/APIComment";
 import { APIReview } from "~~/types/APIReview";
+import { APIPastExam } from "~~/types/APIPastExam";
 
 const route = useRoute();
 
@@ -98,7 +101,7 @@ async function edit(
 }
 
 async function del(
-  target: APIComment[] | APIReview[],
+  target: APIComment[] | APIReview[] | APIPastExam[],
   entryId: number,
   successPromise: Promise<boolean>
 ) {
@@ -107,5 +110,12 @@ async function del(
       target.findIndex((e) => e.id === entryId),
       1
     );
+}
+
+async function download(entryId: number, successPromise: Promise<boolean>) {
+  if (await successPromise)
+    courseFeedback.value.pastExams.find(
+      (e) => e.id === entryId
+    )!.downloadCount += 1;
 }
 </script>
