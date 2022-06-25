@@ -13,7 +13,7 @@
       {{ formatFilesize(pastExam.size) }}
     </td>
     <td class="py-2 text-center">
-      {{ getUsernameById(pastExam.uploaderId) }}
+      {{ uploader?.name ?? "此使用者不存在" }}
     </td>
     <td class="py-2 text-center">
       {{ toDatetimeString(pastExam.createdAt) }}
@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import { APIPastExam } from "~/types/APIPastExam";
 import { toDatetimeString } from "~/helpers/time";
-import { getUsernameById } from "~/helpers/user";
+import { UserManager } from "~/managers/UserManager";
 import { formatFilesize } from "~/helpers/file";
 
 const props = defineProps<{ pastExam: APIPastExam }>();
@@ -37,4 +37,7 @@ const emits = defineEmits<{
   (event: "download", data: { id: number }): void;
   (event: "delete", data: { id: number }): void;
 }>();
+const uploader = await UserManager.getInstance().fetch(
+  props.pastExam.uploaderId
+);
 </script>

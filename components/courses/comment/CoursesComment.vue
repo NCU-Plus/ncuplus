@@ -21,7 +21,7 @@
           v-else
           class="flex space-x-2 justify-center mx-2 md:mx-8 mt-4 my-auto"
         >
-          <a class="text-sky-600">{{ getUsernameById(comment.authorId) }}</a>
+          <a class="text-sky-600">{{ author?.name ?? "此使用者不存在" }}</a>
           <pre class="align-middle text-left whitespace-pre-wrap">{{
             comment.content
           }}</pre>
@@ -100,7 +100,7 @@
 <script setup lang="ts">
 import { APIComment } from "~~/types/APIComment";
 import { ReactionType } from "~~/types/ReactionType";
-import { getUsernameById } from "~/helpers/user";
+import { UserManager } from "~/managers/UserManager";
 import { toDatetimeString } from "~/helpers/time";
 import CoursesOpenDropdownMenuButton from "~/components/courses/CoursesOpenDropdownMenuButton.vue";
 
@@ -126,6 +126,7 @@ const openDropdownMenuButton = ref<InstanceType<
   typeof CoursesOpenDropdownMenuButton
 > | null>(null);
 const showOpenDropdownMenuButton = ref(false);
+const author = await UserManager.getInstance().fetch(props.comment.authorId);
 
 function completeEdit() {
   editing.value = false;

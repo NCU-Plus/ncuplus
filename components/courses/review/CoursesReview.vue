@@ -8,7 +8,7 @@
     class="flex flex-col pl-5 mb-4 border-l-4 border-green-400"
   >
     <div class="flex flex-col space-y-2 text-gray-600 mb-6">
-      <a class="text-sky-600">{{ getUsernameById(review.authorId) }}</a>
+      <a class="text-sky-600">{{ author?.name ?? "此使用者不存在" }}</a>
       <p v-if="review.createdAt === review.updatedAt">
         {{ toDatetimeString(new Date(review.createdAt)) }}
       </p>
@@ -90,7 +90,7 @@
 <script setup lang="ts">
 import { APIReview } from "~/types/APIReview";
 import { ReactionType } from "~/types/ReactionType";
-import { getUsernameById } from "@/helpers/user";
+import { UserManager } from "~/managers/UserManager";
 import { toDatetimeString } from "@/helpers/time";
 import CoursesOpenDropdownMenuButton from "~/components/courses/CoursesOpenDropdownMenuButton.vue";
 const props = defineProps<{
@@ -115,6 +115,7 @@ const openDropdownMenuButton = ref<InstanceType<
   typeof CoursesOpenDropdownMenuButton
 > | null>(null);
 const showOpenDropdownMenuButton = ref(false);
+const author = await UserManager.getInstance().fetch(props.review.authorId);
 
 function completeEdit() {
   editing.value = false;
