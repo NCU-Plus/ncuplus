@@ -1,36 +1,48 @@
 <template>
   <div
-    id="dropdown-menu"
-    class="absolute top-0 left-0 shadow-md"
-    :style="{
-      transform: `translate(${position.x + (opts?.xOffset ?? 0)}px, ${
-        position.y + (opts?.yOffset ?? 0)
-      }px)`,
-    }"
+    class="w-6 h-full mx-2 md:mx-8 cursor-pointer open-dropdown-menu"
+    @click="showDropdownMenu = true"
+    v-click-outside="listener"
   >
-    <div
-      class="w-0 h-0 ml-1 border-l-8 border-r-8 border-b-8 border-b-white border-r-transparent border-l-transparent"
-    ></div>
-    <div class="flex flex-col">
-      <CoursesDropdownMenuItem v-for="item of items" @action="item.action()">
-        {{ item.label }}
-      </CoursesDropdownMenuItem>
+    <font-awesome-icon
+      class="hover:scale-110"
+      :icon="['fas', 'ellipsis-v']"
+      size="lg"
+    />
+    <div v-if="showDropdownMenu" id="dropdown-menu" class="absolute shadow-md">
+      <div
+        class="w-0 h-0 ml-1 border-l-8 border-r-8 border-b-8 border-b-white border-r-transparent border-l-transparent"
+      ></div>
+      <div class="flex flex-col">
+        <div v-for="item of items">
+          <CoursesDropdownMenuItem v-if="item.show" @action="item.action()">
+            {{ item.label }}
+          </CoursesDropdownMenuItem>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
+const showDropdownMenu = ref(false);
+
 const props = defineProps<{
   items: {
     label: string;
     action: () => void;
+    show: boolean;
   }[];
-  position: {
-    x: number;
-    y: number;
-  };
-  opts?: {
-    xOffset?: number;
-    yOffset?: number;
-  };
 }>();
+
+function listener(el: Element) {
+  return (event: MouseEvent) => {
+    if (
+      !(event.target as Element).isEqualNode(el) &&
+      !(event.target as Element).parentElement?.isEqualNode(el) &&
+      !(event.target as Element).parentElement?.parentElement?.isEqualNode(el)
+    ) {
+      showDropdownMenu.value = false;
+    }
+  };
+}
 </script>

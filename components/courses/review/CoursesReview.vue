@@ -1,10 +1,7 @@
 <template>
   <div
-    @mouseenter="showOpenDropdownMenuButton = true"
-    @mouseleave="
-      showOpenDropdownMenuButton = false;
-      showDropdownMenu = false;
-    "
+    @mouseenter="showDropdownMenu = true"
+    @mouseleave="showDropdownMenu = false"
     class="flex flex-col pl-5 mb-4 border-l-4 border-green-400"
   >
     <div class="flex flex-col space-y-2 text-gray-600 mb-6">
@@ -58,17 +55,14 @@
         <button @click="editing = false" class="button">取消</button>
         <button @click="completeEdit()" class="button">送出</button>
       </div>
-      <CoursesOpenDropdownMenuButton
-        v-show="!editing && showOpenDropdownMenuButton"
-        @openDropdownMenu="showDropdownMenu = true"
-        @closeDropdownMenu="showDropdownMenu = false"
-        ref="openDropdownMenuButton"
-      />
       <CoursesDropdownMenu
-        v-if="!editing && showOpenDropdownMenuButton && showDropdownMenu"
+        v-show="!editing && showDropdownMenu"
         :items="[
           {
             label: '編輯',
+            show:
+              loggedInUser?.id === review.authorId ||
+              loggedInUser?.role === UserRole.ADMIN,
             action: () => {
               editing = true;
               editingContent = review.content;
@@ -76,12 +70,19 @@
           },
           {
             label: '刪除',
+            show:
+              loggedInUser?.id === review.authorId ||
+              loggedInUser?.role === UserRole.ADMIN,
             action: () => {
               emits('delete', { id: review.id });
             },
           },
+          {
+            label: '檢舉',
+            show: true,
+            action: () => {},
+          },
         ]"
-        :position="{ x: (openDropdownMenuButton?.$el as HTMLElement).offsetLeft, y: (openDropdownMenuButton?.$el as HTMLElement).offsetTop + (openDropdownMenuButton?.$el as HTMLElement).offsetHeight}"
       />
     </div>
   </div>
@@ -92,7 +93,8 @@ import { APIReview } from "~/types/APIReview";
 import { ReactionType } from "~/types/ReactionType";
 import { UserManager } from "~/managers/UserManager";
 import { toDatetimeString } from "@/helpers/time";
-import CoursesOpenDropdownMenuButton from "~/components/courses/CoursesOpenDropdownMenuButton.vue";
+import { UserRole } from "~~/types/UserRole";
+
 const props = defineProps<{
   review: APIReview;
 }>();
@@ -111,13 +113,10 @@ const emits = defineEmits<{
 const editingContent = ref("");
 const editing = ref(false);
 const showDropdownMenu = ref(false);
-const openDropdownMenuButton = ref<InstanceType<
-  typeof CoursesOpenDropdownMenuButton
-> | null>(null);
-const showOpenDropdownMenuButton = ref(false);
 const author = ref(
   await UserManager.getInstance().fetch(props.review.authorId)
 );
+const loggedInUser = useLoggedInUser();
 
 function completeEdit() {
   editing.value = false;
