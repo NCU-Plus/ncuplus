@@ -1,4 +1,3 @@
-import { faCropSimple } from "@fortawesome/free-solid-svg-icons";
 import { RuntimeConfig } from "@nuxt/schema";
 import { NitroFetchRequest } from "nitropack";
 import { FetchError, FetchOptions, FetchResponse } from "ohmyfetch";
@@ -18,6 +17,17 @@ export class APIClient {
     }
     return this.instance;
   }
+
+  public get token(): string | null {
+    return this._token;
+  }
+
+  public set token(token: string | null) {
+    this._token = token;
+    if (token) localStorage.setItem("token", token);
+    else localStorage.removeItem("token");
+  }
+
   public async getToken(
     opts: {
       autoNagvigate: boolean;
@@ -37,9 +47,7 @@ export class APIClient {
     }
   }
   public async refreshToken() {
-    const token = await this.getToken();
-    this._token = token;
-    localStorage.setItem("token", token);
+    this.token = await this.getToken();
   }
 
   public resetToken() {

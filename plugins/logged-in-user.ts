@@ -8,6 +8,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       const resp = await APIClient.getInstance().getToken({
         autoNagvigate: false,
       });
+      APIClient.getInstance().token = resp;
       loggedInUser.value = await UserManager.getInstance().fetch(
         JSON.parse(atob(resp.split(".")[1])).sub
       );
