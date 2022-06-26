@@ -12,7 +12,7 @@
     ]"
     v-if="loggedInUser"
   >
-    {{ loggedInUser?.name }}
+    {{ loggedInUser?.profile.name }}
   </NavbarDropdown>
 </template>
 

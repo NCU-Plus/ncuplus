@@ -1,4 +1,6 @@
+import { APIProfile } from "./APIProfiile";
+
 export interface APIUser {
   id: number;
-  name: string;
+  profile: APIProfile;
 }

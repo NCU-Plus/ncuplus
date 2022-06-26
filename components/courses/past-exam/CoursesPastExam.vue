@@ -13,7 +13,7 @@
       {{ formatFilesize(pastExam.size) }}
     </td>
     <td class="py-2 text-center">
-      {{ uploader?.name ?? "此使用者不存在" }}
+      {{ uploader?.profile.name ?? "此使用者不存在" }}
     </td>
     <td class="py-2 text-center">
       {{ toDatetimeString(pastExam.createdAt) }}
