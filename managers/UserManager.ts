@@ -10,10 +10,15 @@ export class UserManager {
     return UserManager._instance;
   }
 
-  public async refreshCache() {
-    const users = await $fetch<APIUser[]>("/api/users");
-    if (users)
-      for (const user of users) this.cache.set(user.id, new User(user));
+  public async refreshCache(id: number | undefined) {
+    if (id) {
+      const user = await $fetch<APIUser>(`/api/users/${id}`);
+      if (user) this.cache.set(id, new User(user));
+    } else {
+      const users = await $fetch<APIUser[]>("/api/users");
+      if (users)
+        for (const user of users) this.cache.set(user.id, new User(user));
+    }
   }
 
   public async fetch(id: number): Promise<User | null> {
