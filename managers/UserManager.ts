@@ -10,7 +10,7 @@ export class UserManager {
     return UserManager._instance;
   }
 
-  public async refreshCache(id: number | undefined) {
+  public async refreshCache(id: number | undefined = undefined) {
     if (id) {
       const user = await $fetch<APIUser>(`/api/users/${id}`);
       if (user) this.cache.set(id, new User(user));
