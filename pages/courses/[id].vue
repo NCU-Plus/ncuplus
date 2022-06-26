@@ -1,8 +1,8 @@
 <template>
-  <div class="md:container mx-auto min-h-screen">
-    <div class="w-3/4 h-full mx-auto mt-12 mb-12 flex flex-col space-y-10">
+  <div class="page-wrapper">
+    <div class="page">
       <!--Title-->
-      <section class="mt-10">
+      <section>
         <h1 class="text-3xl">{{ course.title }} - {{ course.teachers }}</h1>
       </section>
       <!--info-->

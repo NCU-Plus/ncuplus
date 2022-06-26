@@ -1,8 +1,6 @@
 <template>
-  <div class="md:container mx-auto min-h-screen">
-    <div
-      class="w-11/12 md:w-3/4 h-full mx-auto mt-20 md:mt-12 mb-12 flex flex-col items-center"
-    >
+  <div class="page-wrapper">
+    <div class="page items-center">
       <CoursesSearch :courses-data="coursesData" @search="onSearch" />
       <CoursesList :courses-data="filteredCoursesData" />
     </div>
