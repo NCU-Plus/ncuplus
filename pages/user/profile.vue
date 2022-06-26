@@ -12,6 +12,7 @@
                 </dt>
                 <dd>
                   <input
+                    @keypress.enter.prevent
                     id="name"
                     type="text"
                     class="form-input"
