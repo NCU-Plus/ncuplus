@@ -10,7 +10,13 @@
           v-for="item of items"
           class="flex flex-col border-b-[1px] border-white"
         >
-          <button class="py-1 text-left" @click="item.action()">
+          <button
+            class="py-1 text-left"
+            @click="
+              item.action();
+              openDropdown = !openDropdown;
+            "
+          >
             <span class="pl-4">{{ item.label }}</span>
           </button>
         </li>
