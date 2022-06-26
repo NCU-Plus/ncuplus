@@ -3,11 +3,11 @@
     <div class="page">
       <section>
         <h1 class="text-3xl">個人檔案</h1>
-        <div class="mt-4">
-          <form @submit.prevent="submit" class="space-y-2">
-            <div>
-              <dl>
-                <dt>
+        <div class="clearfix mt-4">
+          <form @submit.prevent="submit" class="my-2 space-y-2">
+            <div class="space-y-2">
+              <dl class="space-y-1">
+                <dt class="font-semibold">
                   <label for="name">名稱</label>
                 </dt>
                 <dd>
@@ -21,8 +21,21 @@
                 </dd>
               </dl>
             </div>
-            <button class="button">送出</button>
+            <button class="button">更新個人檔案</button>
           </form>
+        </div>
+      </section>
+      <section>
+        <h1 class="text-3xl">其他資訊</h1>
+        <div class="clearfix mt-4">
+          <div class="my-2 space-y-2">
+            <dl class="space-y-1">
+              <dt class="font-semibold">帳號類型</dt>
+              <dd>
+                {{ loggedInUser?.getRoleString() }}
+              </dd>
+            </dl>
+          </div>
         </div>
       </section>
     </div>
