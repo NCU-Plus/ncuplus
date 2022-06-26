@@ -1,6 +1,6 @@
 <template>
   <table class="bg-white mb-6 w-full text-left">
-    <tbody>
+    <thead>
       <tr>
         <th class="p-2 pl-3 align-middle border-t-gray-400">學期</th>
         <th class="p-2 pl-3 align-middle border-t-gray-400">課名</th>
@@ -8,7 +8,7 @@
         <th class="p-2 pl-3 align-middle border-t-gray-400">系所</th>
         <th class="p-2 pl-3 align-middle border-t-gray-400">時間</th>
       </tr>
-    </tbody>
+    </thead>
     <tbody>
       <tr
         :id="`c${courseData.year}-${courseData.semester}-${courseData.serialNo}`"

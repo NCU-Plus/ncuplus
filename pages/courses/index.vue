@@ -1,57 +1,42 @@
 <template>
   <div class="page-wrapper">
     <div class="page items-center">
-      <CoursesSearch :courses-data="coursesData" @search="onSearch" />
+      <CoursesSearch :courses-data="coursesData" />
       <CoursesList :courses-data="filteredCoursesData" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { SearchOptions } from "~/components/courses/CoursesSearchOptions";
 import { Course } from "~/types/Course";
-import { reactive, Ref, ref, watch } from "vue";
+import { formatSemester } from "~/helpers/course";
 
-const { data: coursesData } = await useFetch(`/api/courses`);
-const filteredCoursesData = ref([] as Course[]);
+const { data: coursesData } = await useFetch<Course[]>(`/api/courses`);
+const searchOptions = useSearchOptions();
 
-filteredCoursesData.value = coursesData.value.slice();
-
-const searchOptions = reactive({
-  query: "",
-  semester: "",
-  department: "",
-} as SearchOptions);
-
-watch(
-  () => ({ ...searchOptions }),
-  () => {
-    filteredCoursesData.value = coursesData.value
-      .filter((course: Course) => {
-        if (searchOptions.semester !== "")
-          return course.year + "-" + course.semester === searchOptions.semester;
-        else return true;
-      })
-      .filter((course: Course) => {
-        if (searchOptions.department !== "")
-          return course.departmentName === searchOptions.department;
-        else return true;
-      })
-      .filter((course: Course) => {
-        if (searchOptions.query !== "")
-          return (
-            course.title.includes(searchOptions.query) ||
-            course.teachers.includes(searchOptions.query) ||
-            course.classNo.includes(searchOptions.query)
-          );
-        else return true;
-      });
-  }
+const filteredCoursesData = computed(() =>
+  coursesData.value
+    .filter((course: Course) => {
+      if (searchOptions.value.semester !== "")
+        return (
+          course.year + "-" + formatSemester(course.semester) ===
+          searchOptions.value.semester
+        );
+      else return true;
+    })
+    .filter((course: Course) => {
+      if (searchOptions.value.department !== "")
+        return course.departmentName === searchOptions.value.department;
+      else return true;
+    })
+    .filter((course: Course) => {
+      if (searchOptions.value.query !== "")
+        return (
+          course.title.includes(searchOptions.value.query) ||
+          course.teachers.includes(searchOptions.value.query) ||
+          course.classNo.includes(searchOptions.value.query)
+        );
+      else return true;
+    })
 );
-
-const onSearch = (options: SearchOptions) => {
-  searchOptions.query = options.query;
-  searchOptions.department = options.department;
-  searchOptions.semester = options.semester;
-};
 </script>

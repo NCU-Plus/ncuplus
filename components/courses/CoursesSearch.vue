@@ -7,15 +7,20 @@
         placeholder="課名/課號/老師"
         class="rounded-md pl-4 w-56 h-8"
       />
-      <!-- <button class="display-block bg-sky-500 rounded-r-md">
-        <font-awesome-icon class="text-white" :icon="['fa', 'search']" />
-      </button> -->
       <div class="mx-4 flex items-center">
-        <input id="advanceSearch" v-model="advanceSearch" type="checkbox" />
+        <input
+          id="advanceSearch"
+          v-model="searchOptions.advanceSearch"
+          type="checkbox"
+        />
         <label>進階搜尋</label>
       </div>
     </div>
-    <div id="searchOptions" v-show="advanceSearch" class="flex my-6 space-x-2">
+    <div
+      id="searchOptions"
+      v-show="searchOptions.advanceSearch"
+      class="flex my-6 space-x-2"
+    >
       <div class="w-2/5 md:w-32 h-10">
         <select
           v-model="searchOptions.semester"
@@ -51,25 +56,19 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref, watch } from "vue";
 import { Course } from "~/types/Course";
-import { SearchOptions } from "./CoursesSearchOptions";
-const advanceSearch = ref(false);
-const searchOptions = reactive(<SearchOptions>{
-  query: "",
-  semester: "",
-  department: "",
-});
+import { formatSemester } from "~/helpers/course";
+
+const searchOptions = useSearchOptions();
 
 const props = defineProps<{
   coursesData: Course[];
 }>();
-const emit = defineEmits(["search"]);
 
 const semesters = computed(() => {
   const semesters = new Set<string>();
   for (const courseData of props.coursesData) {
-    semesters.add(courseData.year + "-" + courseData.semester);
+    semesters.add(courseData.year + "-" + formatSemester(courseData.semester));
   }
   return Array.from(semesters).sort();
 });
@@ -81,11 +80,4 @@ const departments = computed(() => {
   }
   return Array.from(departments).sort();
 });
-
-watch(
-  () => ({ ...searchOptions }),
-  () => {
-    emit("search", { ...searchOptions });
-  }
-);
 </script>
