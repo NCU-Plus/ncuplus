@@ -41,7 +41,7 @@
           v-model="searchOptions.department"
           class="pl-4 pr-9 py-0 w-full h-full"
         >
-          <option value="">系所</option>
+          <option value="">開課單位</option>
           <option
             :class="department"
             v-for="department in departments"

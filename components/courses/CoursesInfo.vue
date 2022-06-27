@@ -49,7 +49,7 @@
       <tbody>
         <tr class="border-t-[1px] border-slate-300">
           <td class="p-2">學期</td>
-          <td class="p-2">系所</td>
+          <td class="p-2">開課單位</td>
           <td class="p-2">編號</td>
           <td class="p-2">選別</td>
           <td class="p-2">修課上限</td>

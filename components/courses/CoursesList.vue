@@ -5,7 +5,7 @@
         <th class="p-2 pl-3 align-middle border-t-gray-400">學期</th>
         <th class="p-2 pl-3 align-middle border-t-gray-400">課名</th>
         <th class="p-2 pl-3 align-middle border-t-gray-400">教師</th>
-        <th class="p-2 pl-3 align-middle border-t-gray-400">系所</th>
+        <th class="p-2 pl-3 align-middle border-t-gray-400">開課單位</th>
         <th class="p-2 pl-3 align-middle border-t-gray-400">時間</th>
       </tr>
     </thead>
