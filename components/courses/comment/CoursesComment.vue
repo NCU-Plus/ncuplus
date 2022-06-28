@@ -75,7 +75,7 @@
           label: '編輯',
           show:
             loggedInUser?.id === comment.authorId ||
-            loggedInUser?.role === UserRole.ADMIN,
+            (loggedInUser?.roles.includes(UserRole.ADMIN) ?? false),
           action: () => {
             editing = true;
             editingContent = comment.content;
@@ -85,7 +85,7 @@
           label: '刪除',
           show:
             loggedInUser?.id === comment.authorId ||
-            loggedInUser?.role === UserRole.ADMIN,
+            (loggedInUser?.roles.includes(UserRole.ADMIN) ?? false),
           action: () => {
             emits('delete', { id: comment.id });
           },

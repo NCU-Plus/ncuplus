@@ -62,7 +62,7 @@
             label: '編輯',
             show:
               loggedInUser?.id === review.authorId ||
-              loggedInUser?.role === UserRole.ADMIN,
+              (loggedInUser?.roles.includes(UserRole.ADMIN) ?? false),
             action: () => {
               editing = true;
               editingContent = review.content;
@@ -72,7 +72,7 @@
             label: '刪除',
             show:
               loggedInUser?.id === review.authorId ||
-              loggedInUser?.role === UserRole.ADMIN,
+              (loggedInUser?.roles.includes(UserRole.ADMIN) ?? false),
             action: () => {
               emits('delete', { id: review.id });
             },

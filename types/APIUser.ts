@@ -3,6 +3,6 @@ import { UserRole } from "./UserRole";
 
 export interface APIUser {
   id: number;
-  role: UserRole;
+  roles: UserRole[];
   profile: APIProfile;
 }

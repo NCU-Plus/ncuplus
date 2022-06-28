@@ -32,7 +32,7 @@
             <dl class="space-y-1">
               <dt class="font-semibold">帳號類型</dt>
               <dd>
-                {{ loggedInUser?.getRoleString() }}
+                {{ loggedInUser?.getRolesString().join(", ") }}
               </dd>
             </dl>
           </div>
@@ -61,7 +61,7 @@ async function submit() {
     `${config.public.apiBaseUrl}/profiles/${loggedInUser.value?.profile.id}`,
     {
       method: "PUT",
-      body: { profile: form.value },
+      body: form.value,
     }
   );
   if (resp.statusCode === 200) {
