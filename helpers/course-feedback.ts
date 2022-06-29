@@ -1,4 +1,4 @@
-import { store, ToastType } from "@/plugins/store";
+import { ToastType, useToast } from "~~/stores/toast";
 import { APIComment } from "~~/types/APIComment";
 import { APIPastExam } from "~~/types/APIPastExam";
 import { APIReaction } from "~~/types/APIReaction";
@@ -15,6 +15,7 @@ export async function createReaction(
   targetId: number
 ): Promise<APIReaction | null> {
   const config = useRuntimeConfig();
+  const toast = useToast();
   const response = <APIResponse<APIReaction>>(
     await APIClient.getInstance().fetch(
       `${config.public.apiBaseUrl}/${target}s/${targetId}/reactions`,
@@ -27,7 +28,7 @@ export async function createReaction(
     )
   );
   if (!response.data) {
-    let message;
+    let message = "未知錯誤";
     if (response.statusCode === 401) message = "尚未登入";
     else if (response.statusCode === 403) {
       if (
@@ -43,13 +44,13 @@ export async function createReaction(
       )
         message = "你已經為這篇內容推噓過了!";
     }
-    store.dispatch("pushToast", {
+    toast.pushToast({
       type: ToastType.ERROR,
       message: message,
     });
     return null;
   }
-  store.dispatch("pushToast", {
+  toast.pushToast({
     type: ToastType.SUCCESS,
     message: "操作成功",
   });
@@ -76,6 +77,7 @@ async function createCommentOrReview(
   content: string
 ): Promise<APIComment | APIReview | null> {
   const config = useRuntimeConfig();
+  const toast = useToast();
   const response = <APIResponse<APIReview | APIComment>>(
     await APIClient.getInstance().fetch(
       `${config.public.apiBaseUrl}/course-feedbacks/${classNo}/${target}s`,
@@ -89,14 +91,14 @@ async function createCommentOrReview(
   if (!response.data) {
     let message = "未知錯誤";
     if (response.statusCode === 401) message = "尚未登入";
-    store.dispatch("pushToast", {
+    toast.pushToast({
       type: ToastType.ERROR,
       message: message,
     });
     return null;
   }
 
-  store.dispatch("pushToast", {
+  toast.pushToast({
     type: ToastType.SUCCESS,
     message: "操作成功",
   });
@@ -123,6 +125,7 @@ async function editCommentOrReview(
   newContent: string
 ): Promise<APIComment | APIReview | null> {
   const config = useRuntimeConfig();
+  const toast = useToast();
   const response = <APIResponse<APIReview | APIComment>>(
     await APIClient.getInstance().fetch(
       `${config.public.apiBaseUrl}/${target}s/${targetId}`,
@@ -137,13 +140,13 @@ async function editCommentOrReview(
     if (response.statusCode === 401) message = "尚未登入";
     else if (response.statusCode === 403) message = "無此權限";
 
-    store.dispatch("pushToast", {
+    toast.pushToast({
       type: ToastType.ERROR,
       message: message,
     });
     return null;
   }
-  store.dispatch("pushToast", {
+  toast.pushToast({
     type: ToastType.SUCCESS,
     message: "操作成功",
   });
@@ -155,6 +158,7 @@ async function deleteCommentOrReview(
   targetId: number
 ): Promise<boolean> {
   const config = useRuntimeConfig();
+  const toast = useToast();
   const response = <APIResponse<any>>await APIClient.getInstance().fetch(
     `${config.public.apiBaseUrl}/${target}s/${targetId}`,
     {
@@ -167,14 +171,14 @@ async function deleteCommentOrReview(
     else if (response.statusCode === 403) message = "無此權限";
     else if (response.statusCode === 404) message = "找不到該資料";
 
-    store.dispatch("pushToast", {
+    toast.pushToast({
       type: ToastType.ERROR,
       message: message,
     });
     return false;
   }
 
-  store.dispatch("pushToast", {
+  toast.pushToast({
     type: ToastType.SUCCESS,
     message: "操作成功",
   });
@@ -198,6 +202,7 @@ export async function createPastExam(
   }
 ): Promise<APIPastExam | null> {
   const config = useRuntimeConfig();
+  const toast = useToast();
   const formdata = new FormData();
   formdata.append("classNo", classNo);
   formdata.append("file", uploadData.file);
@@ -217,13 +222,13 @@ export async function createPastExam(
     let message = "上傳時發生錯誤";
     if (response.statusCode === 401) message = "尚未登入";
     else if (response.statusCode === 400) message = "檔案不合法";
-    store.dispatch("pushToast", {
+    toast.pushToast({
       type: ToastType.ERROR,
       message: message,
     });
     return null;
   }
-  store.dispatch("pushToast", {
+  toast.pushToast({
     type: ToastType.SUCCESS,
     message: "上傳成功",
   });
@@ -232,6 +237,7 @@ export async function createPastExam(
 
 export async function downloadPastExam(id: number): Promise<boolean> {
   const config = useRuntimeConfig();
+  const toast = useToast();
 
   const response = await APIClient.getInstance().fetchRaw<Blob>(
     `${config.public.apiBaseUrl}/past-exams/${id}`
@@ -240,7 +246,7 @@ export async function downloadPastExam(id: number): Promise<boolean> {
   if (!response._data) {
     let message = "下載時發生錯誤";
     if (response.status === 401) message = "尚未登入";
-    store.dispatch("pushToast", {
+    toast.pushToast({
       type: ToastType.ERROR,
       message: message,
     });
@@ -265,6 +271,7 @@ export async function downloadPastExam(id: number): Promise<boolean> {
 
 export async function deletePastExam(id: number) {
   const config = useRuntimeConfig();
+  const toast = useToast();
   const response = <APIResponse<any>>await APIClient.getInstance().fetch(
     `${config.public.apiBaseUrl}/past-exams/${id}`,
     {
@@ -277,14 +284,14 @@ export async function deletePastExam(id: number) {
     if (response.statusCode === 401) message = "尚未登入";
     else if (response.statusCode === 403) message = "無此權限";
 
-    store.dispatch("pushToast", {
+    toast.pushToast({
       type: ToastType.ERROR,
       message: message,
     });
     return false;
   }
 
-  store.dispatch("pushToast", {
+  toast.pushToast({
     type: ToastType.SUCCESS,
     message: "刪除成功",
   });

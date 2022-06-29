@@ -45,11 +45,12 @@
 <script setup lang="ts">
 import { APIClient } from "~~/helpers/APIClient";
 import { UserManager } from "~~/managers/UserManager";
-import { store, ToastType } from "~~/plugins/store";
+import { ToastType, useToast } from "~~/stores/toast";
 import { APIProfile } from "~~/types/APIProfiile";
 import { APIResponse } from "~~/types/APIResponse";
 
 const loggedInUser = useLoggedInUser();
+const toast = useToast();
 
 const form = ref({
   name: loggedInUser.value?.profile.name ?? "",
@@ -69,7 +70,7 @@ async function submit() {
     loggedInUser.value = await UserManager.getInstance().fetch(
       loggedInUser.value!.id
     );
-    store.dispatch("pushToast", {
+    toast.pushToast({
       type: ToastType.SUCCESS,
       message: "操作成功",
     });
