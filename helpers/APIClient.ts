@@ -18,6 +18,19 @@ export class APIClient {
     return this.instance;
   }
 
+  public async init() {
+    if (!useCookie("X-CSRF-TOKEN").value) {
+      // prevent csrf token was not initialized
+      try {
+        await this.getToken({ autoNagvigate: false });
+      } catch (e) {}
+    }
+    const resp = await this.getToken({
+      autoNagvigate: false,
+    });
+    this.token = resp;
+  }
+
   public get token(): string | null {
     return this._token;
   }
@@ -37,7 +50,9 @@ export class APIClient {
   ): Promise<string> {
     try {
       const resp = <APIResponse<{ token: string }>>(
-        await $fetch(`${this._config.public.apiBaseUrl}/auth/token`)
+        await $fetch(`${this._config.public.apiBaseUrl}/auth/token`, {
+          headers: { "csrf-token": useCookie("X-CSRF-TOKEN").value },
+        })
       );
       return resp.data!.token;
     } catch (e) {
@@ -81,7 +96,11 @@ export class APIClient {
     try {
       return await fetchFn(request, {
         ...opts,
-        headers: { ...opts?.headers, Authorization: `Bearer ${this._token}` },
+        headers: {
+          ...opts?.headers,
+          Authorization: `Bearer ${this._token}`,
+          "csrf-token": useCookie("X-CSRF-TOKEN").value,
+        },
       });
     } catch (e) {
       if ((e as FetchError).response?.status === 401) {
