@@ -37,8 +37,8 @@ export class APIClient {
 
   public set token(token: string | null) {
     this._token = token;
-    if (token) localStorage.setItem("token", token);
-    else localStorage.removeItem("token");
+    if (token) sessionStorage.setItem("token", token);
+    else sessionStorage.removeItem("token");
   }
 
   public async getToken(
@@ -67,7 +67,7 @@ export class APIClient {
 
   public resetToken() {
     this._token = null;
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
   }
 
   public async fetch<T = unknown>(
