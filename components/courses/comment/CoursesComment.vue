@@ -93,9 +93,21 @@
         {
           label: '檢舉',
           show: true,
-          action: () => {},
+          action: () => report?.show(),
         },
       ]"
+    />
+    <ReportFrame
+      ref="report"
+      @close="report?.close()"
+      @submit="
+        createReport(
+          $event.type,
+          TargetType.COMMENT,
+          comment.id,
+          $event.description
+        )
+      "
     />
   </div>
 </template>
@@ -106,6 +118,9 @@ import { ReactionType } from "~~/types/ReactionType";
 import { UserManager } from "~/managers/UserManager";
 import { toDatetimeString } from "~/helpers/time";
 import { UserRole } from "~~/types/UserRole";
+import ReportFrame from "../../report/ReportFrame.vue";
+import { createReport } from "~/helpers/report";
+import { TargetType } from "~~/types/APIReport";
 
 const props = defineProps<{
   comment: APIComment;
@@ -129,6 +144,7 @@ const author = ref(
   await UserManager.getInstance().fetch(props.comment.authorId)
 );
 const loggedInUser = useLoggedInUser();
+const report = ref<InstanceType<typeof ReportFrame> | null>(null);
 
 function completeEdit() {
   editing.value = false;

@@ -18,12 +18,25 @@
     <td class="py-2 text-center">
       {{ toDatetimeString(pastExam.createdAt) }}
     </td>
-    <td class="py-2 text-center flex space-x-2 justify-center">
+    <td class="py-2 text-center flex flex-col space-y-1 items-center">
+      <button @click="report?.show()" class="button">檢舉</button>
       <button @click="emits('delete', { id: pastExam.id })" class="button">
         刪除
       </button>
     </td>
   </tr>
+  <ReportFrame
+    ref="report"
+    @close="report?.close()"
+    @submit="
+      createReport(
+        $event.type,
+        TargetType.PAST_EXAM,
+        pastExam.id,
+        $event.description
+      )
+    "
+  />
 </template>
 
 <script setup lang="ts">
@@ -31,6 +44,9 @@ import { APIPastExam } from "~/types/APIPastExam";
 import { toDatetimeString } from "~/helpers/time";
 import { UserManager } from "~/managers/UserManager";
 import { formatFilesize } from "~/helpers/file";
+import ReportFrame from "~/components/report/ReportFrame.vue";
+import { TargetType } from "~~/types/APIReport";
+import { createReport } from "~~/helpers/report";
 
 const props = defineProps<{ pastExam: APIPastExam }>();
 const emits = defineEmits<{
@@ -40,4 +56,5 @@ const emits = defineEmits<{
 const uploader = ref(
   await UserManager.getInstance().fetch(props.pastExam.uploaderId)
 );
+const report = ref<InstanceType<typeof ReportFrame> | null>(null);
 </script>
