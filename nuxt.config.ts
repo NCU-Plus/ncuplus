@@ -26,6 +26,7 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
+    gaId: "",
     public: {
       apiBaseUrl: "",
       deployDomain: "",
