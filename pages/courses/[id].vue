@@ -74,6 +74,7 @@ import { APICourseFeedback } from "~~/types/APICourseFeedback";
 import { APIComment } from "~~/types/APIComment";
 import { APIReview } from "~~/types/APIReview";
 import { APIPastExam } from "~~/types/APIPastExam";
+import { MetaBuilder } from "~~/helpers/MetaBuilder";
 
 const route = useRoute();
 
@@ -118,4 +119,11 @@ async function download(entryId: number, successPromise: Promise<boolean>) {
       (e) => e.id === entryId
     )!.downloadCount += 1;
 }
+
+const title = `${course.value.title} - ${course.value.teachers}`;
+
+useHead({
+  title,
+  meta: new MetaBuilder().addTitle(title).build(),
+});
 </script>

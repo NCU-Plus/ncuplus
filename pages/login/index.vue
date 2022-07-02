@@ -23,6 +23,18 @@
 <script setup lang="ts">
 // @ts-ignore
 import loginBg from "~/assets/background/操場.jpg";
+import { MetaBuilder } from "~~/helpers/MetaBuilder";
 const config = useRuntimeConfig();
 const loginUrl = `${config.public.apiBaseUrl}/auth/oauth`;
+
+const title = "登入";
+useHead({
+  title,
+  meta: new MetaBuilder()
+    .addTitle(title)
+    .addImage(loginBg)
+    .addDescription("中央大學學生請使用中央大學Portal單一簽入來登入")
+    .addTwitterCard("summary_large_image")
+    .build(),
+});
 </script>

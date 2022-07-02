@@ -10,6 +10,7 @@
 <script setup lang="ts">
 import { Course } from "~/types/Course";
 import { formatSemester } from "~/helpers/course";
+import { MetaBuilder } from "~~/helpers/MetaBuilder";
 
 const { data: coursesData } = await useFetch<Course[]>(`/api/courses`);
 const searchOptions = useSearchOptions();
@@ -39,4 +40,14 @@ const filteredCoursesData = computed(() =>
       else return true;
     })
 );
+
+const title = "課程列表";
+
+useHead({
+  title,
+  meta: new MetaBuilder()
+    .addTitle(title)
+    .addDescription("在此搜尋並篩選想觀看的課程心得與考古題。")
+    .build(),
+});
 </script>

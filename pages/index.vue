@@ -35,7 +35,9 @@
                 <div class="flex flex-col space-y-2 text-left px-8 pb-4">
                   <h3 class="text-center font-bold text-xl">大量選課心得</h3>
                   <p class="text-left">
-                    能夠藉由宛如選課系統般的查找方式，尋找到目標課程。
+                    是否厭倦在CTRL+F社團中不斷下拉載入尋找課程心得了？
+                    <br />
+                    NCU+能夠藉由宛如選課系統般的查找方式，尋找到目標課程，並一次觀看所有心得與考古！
                     <br />
                     現在不用再CTRL+F了，在網站中一次找出所有你想要的!
                   </p>
@@ -55,7 +57,7 @@
             <br />
             發想於排課過程中查找資訊的困難，因而期望有彙整資訊的網頁。
             <br />
-            期望獲得portal簽入的權限，以降低切換使用學校網頁與NCU+的成本。
+            未來會繼續強化網站功能，以期能建立真正的智慧校園。
           </p>
         </div>
       </div>
@@ -76,8 +78,19 @@ import bgImg4 from "~/assets/background/男十三.jpg";
 import bgImg5 from "~/assets/background/操場.jpg";
 // @ts-ignore
 import bgImg6 from "~/assets/background/櫻花.png";
+import { MetaBuilder } from "~~/helpers/MetaBuilder";
 
 const backgroundImages = [bgImg1, bgImg2, bgImg3, bgImg4, bgImg5, bgImg6].sort(
   () => Math.random() - 0.5
 );
+
+useHead({
+  meta: new MetaBuilder()
+    .addDescription(
+      "NCU+是中大非官方的資訊網站，發想於排課過程中查找資訊的困難，因而期望有彙整資訊的網頁。未來會繼續強化網站功能，以期能建立真正的智慧校園。"
+    )
+    .addImage(bgImg5)
+    .addTwitterCard("summary_large_image")
+    .build(),
+});
 </script>

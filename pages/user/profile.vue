@@ -44,11 +44,13 @@
 
 <script setup lang="ts">
 import { APIClient } from "~~/helpers/APIClient";
+import { MetaBuilder } from "~~/helpers/MetaBuilder";
 import { UserManager } from "~~/managers/UserManager";
 import { ToastType, useToast } from "~~/stores/toast";
 import { APIProfile } from "~~/types/APIProfiile";
 import { APIResponse } from "~~/types/APIResponse";
 
+const title = "個人檔案";
 const loggedInUser = useLoggedInUser();
 const toast = useToast();
 
@@ -78,4 +80,9 @@ async function submit() {
     throw new Error(resp.message);
   }
 }
+
+useHead({
+  title,
+  meta: new MetaBuilder().addTitle(title).build(),
+});
 </script>
