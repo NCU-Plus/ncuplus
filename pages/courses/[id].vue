@@ -3,7 +3,7 @@
     <div class="page">
       <!--Title-->
       <section>
-        <h1 class="text-3xl">{{ course.title }} - {{ course.teachers }}</h1>
+        <h1 class="text-3xl">{{ title }}</h1>
       </section>
       <!--info-->
       <CoursesInfo :course="course" />
@@ -120,7 +120,9 @@ async function download(entryId: number, successPromise: Promise<boolean>) {
     )!.downloadCount += 1;
 }
 
-const title = `${course.value.title} - ${course.value.teachers}`;
+const title = `${course.value.title}${
+  course.value.teachers === "" ? "" : ` - ${course.value.teachers}`
+}`;
 
 useHead({
   title,
