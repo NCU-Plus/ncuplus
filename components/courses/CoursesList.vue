@@ -11,10 +11,11 @@
     </thead>
     <tbody>
       <tr
-        :id="`c${courseData.year}-${courseData.semester}-${courseData.serialNo}`"
         v-for="courseData of pageCoursesData"
-        @click="navigateTo(`/courses/${courseData.id}`)"
+        :id="`c${courseData.year}-${courseData.semester}-${courseData.serialNo}`"
+        :key="courseData.id"
         class="cursor-pointer hover:bg-gray-50"
+        @click="navigateTo(`/courses/${courseData.id}`)"
       >
         <th class="p-2 pl-3 align-middle border-t-gray-400">
           {{ courseData.year }}-{{ formatSemester(courseData.semester) }}
@@ -38,35 +39,35 @@
     <ul class="my-5 flex">
       <li
         id="go-first-page"
-        @click="page = 1"
         class="px-4 py-1 text-sky-600 hover:text-white hover:bg-sky-600 bg-white rounded-l-md cursor-pointer"
+        @click="page = 1"
       >
         First
       </li>
       <li
         id="go-prev-page"
-        @click="decreasePage"
         class="px-4 py-1 text-sky-600 hover:text-white hover:bg-sky-600 bg-white cursor-pointer"
+        @click="decreasePage"
       >
         Prev
       </li>
       <input
-        type="number"
         id="page-input"
         v-model="page"
+        type="number"
         class="w-14 py-1 text-center"
       />
       <li
         id="go-next-page"
-        @click="increasePage"
         class="px-4 py-1 text-sky-600 hover:text-white hover:bg-sky-600 bg-white cursor-pointer"
+        @click="increasePage"
       >
         Next
       </li>
       <li
         id="go-last-page"
-        @click="page = Math.floor(coursesData.length / 25 + 1)"
         class="px-4 py-1 text-sky-600 hover:text-white hover:bg-sky-600 bg-white rounded-r-md cursor-pointer"
+        @click="page = Math.floor(coursesData.length / 25 + 1)"
       >
         Last
       </li>
@@ -93,14 +94,14 @@ watch(
     } else if (page.value > Math.floor(props.coursesData.length / 25 + 1)) {
       page.value = Math.floor(props.coursesData.length / 25 + 1);
     }
-  }
+  },
 );
 
 watch(
   () => props.coursesData,
   () => {
     page.value = 1;
-  }
+  },
 );
 
 const pageCoursesData = computed(() => {

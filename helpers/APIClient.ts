@@ -46,7 +46,7 @@ export class APIClient {
       autoNagvigate: boolean;
     } = {
       autoNagvigate: true,
-    }
+    },
   ): Promise<string> {
     try {
       const resp = <APIResponse<{ token: string }>>(
@@ -54,7 +54,7 @@ export class APIClient {
           headers: { "csrf-token": useCookie("X-CSRF-TOKEN").value },
         })
       );
-      return resp.data!.token;
+      return (resp.data as { token: string }).token;
     } catch (e) {
       if ((e as FetchError).response?.status === 403 && opts.autoNagvigate)
         navigateTo("/login");
@@ -72,26 +72,26 @@ export class APIClient {
 
   public async fetch<T = unknown>(
     request: NitroFetchRequest,
-    opts?: FetchOptions | undefined
+    opts?: FetchOptions | undefined,
   ): Promise<T> {
     return (await this._fetch<T>($fetch, request, opts)) as T;
   }
 
   public async fetchRaw<T = unknown>(
     request: NitroFetchRequest,
-    opts?: FetchOptions | undefined
+    opts?: FetchOptions | undefined,
   ): Promise<FetchResponse<T>> {
     return (await this._fetch<T>(
       $fetch.raw,
       request,
-      opts
+      opts,
     )) as FetchResponse<T>;
   }
 
   private async _fetch<T = unknown>(
     fetchFn: typeof $fetch | typeof $fetch.raw,
     request: NitroFetchRequest,
-    opts?: FetchOptions | undefined
+    opts?: FetchOptions | undefined,
   ): Promise<FetchResponse<T> | T | unknown> {
     try {
       return await fetchFn(request, {

@@ -4,7 +4,7 @@ import { APICollege } from "~/types/APICollege";
 import { APICourse } from "~/types/APICourse";
 import { APIDepartment } from "~/types/APIDepartment";
 
-export default defineEventHandler(async (event): Promise<Course[]> => {
+export default defineEventHandler(async (): Promise<Course[]> => {
   const config = useRuntimeConfig();
   const mappedCoursesData: Course[] = [];
   const departmentMap = new Map<string, string>();

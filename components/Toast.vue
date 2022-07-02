@@ -19,20 +19,20 @@
       }"
     >
       <font-awesome-icon
-        :icon="['fas', 'check']"
         v-if="toast.type === ToastType.SUCCESS"
+        :icon="['fas', 'check']"
         size="lg"
         class="mr-2"
       />
       <font-awesome-icon
-        :icon="['fas', 'exclamation-triangle']"
         v-if="toast.type === ToastType.WARNING"
+        :icon="['fas', 'exclamation-triangle']"
         size="lg"
         class="mr-2"
       />
       <font-awesome-icon
-        :icon="['fas', 'times']"
         v-if="toast.type === ToastType.ERROR"
+        :icon="['fas', 'times']"
         size="lg"
         class="mr-2"
       />

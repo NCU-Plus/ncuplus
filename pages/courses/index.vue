@@ -38,7 +38,7 @@ const filteredCoursesData = computed(() =>
           course.classNo.includes(searchOptions.value.query)
         );
       else return true;
-    })
+    }),
 );
 
 const title = "課程列表";

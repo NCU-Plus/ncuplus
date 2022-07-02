@@ -29,7 +29,8 @@
           </tr>
           <CoursesPastExam
             v-for="pastExam of pastExamsData"
-            :pastExam="pastExam"
+            :key="pastExam.id"
+            :past-exam="pastExam"
             @download="emits('download', $event)"
             @delete="emits('delete', $event)"
           />
@@ -54,21 +55,21 @@
             placeholder="檔案說明"
             required
           />
-          <input @change="setUploadFile" type="file" required />
-          <button @click="upload" class="button">送出</button>
+          <input type="file" required @change="setUploadFile" />
+          <button class="button" @click="upload">送出</button>
         </div>
       </transition>
-      <button @click="uploading = !uploading" class="button">我要上傳</button>
+      <button class="button" @click="uploading = !uploading">我要上傳</button>
     </div>
     <CoursesPastExamDescription />
   </section>
 </template>
 <script setup lang="ts">
-const props = defineProps<{ pastExamsData: any[] }>();
+defineProps<{ pastExamsData: any[] }>();
 const emits = defineEmits<{
   (
     event: "upload",
-    data: { year: string; description: string; file: File }
+    data: { year: string; description: string; file: File },
   ): void;
   (event: "download", data: { id: number }): void;
   (event: "delete", data: { id: number }): void;
@@ -76,7 +77,7 @@ const emits = defineEmits<{
 
 const uploading = ref(false);
 const uploadData = reactive(
-  {} as { year: string; description: string; file: File }
+  {} as { year: string; description: string; file: File },
 );
 
 function setUploadFile(event: any) {

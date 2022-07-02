@@ -11,19 +11,20 @@
       <div v-else>
         <CoursesComment
           v-for="commentData of commentsData"
+          :key="commentData.id"
           :comment="commentData"
           @reaction="emits('reaction', $event)"
-          @completeEdit="emits('completeEdit', $event)"
+          @complete-edit="emits('complete-edit', $event)"
           @delete="emits('delete', $event)"
         />
       </div>
       <textarea
+        v-model="content"
         class="mx-8 my-4 w-4/5 outline outline-gray-200 rounded-sm resize-none"
         placeholder="留言... (Shift + Enter來發送訊息)"
-        v-model="content"
-        @keypress.shift.enter="createComment()"
         maxlength="255"
-      ></textarea>
+        @keypress.shift.enter="createComment()"
+      />
     </div>
   </section>
 </template>
@@ -31,16 +32,16 @@
 import { APIComment } from "~~/types/APIComment";
 import { ReactionType } from "~/types/ReactionType";
 
-const props = defineProps<{ commentsData: APIComment[] }>();
+defineProps<{ commentsData: APIComment[] }>();
 const emits = defineEmits<{
   (event: "add", data: { content: string }): void;
   (event: "reaction", data: { operation: ReactionType; id: number }): void;
   (
-    event: "completeEdit",
+    event: "complete-edit",
     data: {
       id: number;
       content: string;
-    }
+    },
   ): void;
   (event: "delete", data: { id: number }): void;
 }>();

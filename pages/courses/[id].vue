@@ -3,22 +3,32 @@
     <div class="page">
       <!--Title-->
       <section>
-        <h1 class="text-3xl">{{ title }}</h1>
+        <h1 class="text-3xl">
+          {{ title }}
+        </h1>
       </section>
       <!--info-->
       <CoursesInfo :course="course" />
       <!--comment-->
       <CoursesCommentList
-        :commentsData="courseFeedback.comments"
+        :comments-data="courseFeedback.comments"
         @add="
           add(
             courseFeedback.comments,
-            createComment(course.classNo, $event.content)
+            createComment(course.classNo, $event.content),
           )
         "
-        @reaction="add(courseFeedback.comments.find((e) => e.id === $event.id)!.reactions, createReaction('comment', $event.operation, $event.id))"
-        @completeEdit="
-          edit(courseFeedback.comments.find((e) => e.id === $event.id)! , editComment($event.id, $event.content))
+        @reaction="
+          add(
+            courseFeedback.comments.find((e) => e.id === $event.id)!.reactions,
+            createReaction('comment', $event.operation, $event.id),
+          )
+        "
+        @complete-edit="
+          edit(
+            courseFeedback.comments.find((e) => e.id === $event.id)!,
+            editComment($event.id, $event.content),
+          )
         "
         @delete="
           del(courseFeedback.comments, $event.id, deleteComment($event.id))
@@ -26,16 +36,24 @@
       />
       <!--review-->
       <CoursesReviewList
-        :reviewsData="courseFeedback.reviews"
+        :reviews-data="courseFeedback.reviews"
         @add="
           add(
             courseFeedback.reviews,
-            createReview(course.classNo, $event.content)
+            createReview(course.classNo, $event.content),
           )
         "
-        @reaction="add(courseFeedback.reviews.find((e) => e.id === $event.id)!.reactions, createReaction('review', $event.operation, $event.id))"
-        @completeEdit="
-          edit(courseFeedback.reviews.find((e) => e.id === $event.id)!, editReview($event.id, $event.content))
+        @reaction="
+          add(
+            courseFeedback.reviews.find((e) => e.id === $event.id)!.reactions,
+            createReaction('review', $event.operation, $event.id),
+          )
+        "
+        @complete-edit="
+          edit(
+            courseFeedback.reviews.find((e) => e.id === $event.id)!,
+            editReview($event.id, $event.content),
+          )
         "
         @delete="
           del(courseFeedback.reviews, $event.id, deleteReview($event.id))
@@ -43,7 +61,7 @@
       />
       <!--past exams-->
       <CoursesPastExamList
-        :pastExamsData="courseFeedback.pastExams"
+        :past-exams-data="courseFeedback.pastExams"
         @upload="
           add(courseFeedback.pastExams, createPastExam(course.classNo, $event))
         "
@@ -79,10 +97,10 @@ import { MetaBuilder } from "~~/helpers/MetaBuilder";
 const route = useRoute();
 
 const { data: course } = await useFetch<Course>(
-  `/api/courses/${route.params.id}`
+  `/api/courses/${route.params.id}`,
 );
 const { data: courseFeedback } = await useFetch<APICourseFeedback>(
-  `/api/course-feedbacks/${(course.value as unknown as Course).classNo}`
+  `/api/course-feedbacks/${(course.value as unknown as Course).classNo}`,
 );
 
 async function add<T>(target: T[], newEntryPromise: Promise<T | null>) {
@@ -92,7 +110,7 @@ async function add<T>(target: T[], newEntryPromise: Promise<T | null>) {
 
 async function edit(
   target: APIComment | APIReview,
-  editedEntryPromise: Promise<APIComment | APIReview | null>
+  editedEntryPromise: Promise<APIComment | APIReview | null>,
 ) {
   const editedEntry = await editedEntryPromise;
   if (editedEntry) {
@@ -104,20 +122,22 @@ async function edit(
 async function del(
   target: APIComment[] | APIReview[] | APIPastExam[],
   entryId: number,
-  successPromise: Promise<boolean>
+  successPromise: Promise<boolean>,
 ) {
   if (await successPromise)
     target.splice(
       target.findIndex((e) => e.id === entryId),
-      1
+      1,
     );
 }
 
 async function download(entryId: number, successPromise: Promise<boolean>) {
   if (await successPromise)
-    courseFeedback.value.pastExams.find(
-      (e) => e.id === entryId
-    )!.downloadCount += 1;
+    (
+      courseFeedback.value.pastExams.find(
+        (e) => e.id === entryId,
+      ) as APIPastExam
+    ).downloadCount += 1;
 }
 
 const title = `${course.value.title}${

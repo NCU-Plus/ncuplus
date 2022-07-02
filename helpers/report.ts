@@ -20,7 +20,7 @@ export async function createReport(
   type: ReportType,
   targetType: TargetType,
   targetId: number,
-  description: string
+  description: string,
 ): Promise<APIReport | null> {
   const config = useRuntimeConfig();
   const toast = useToast();
@@ -29,11 +29,11 @@ export async function createReport(
     {
       method: "POST",
       body: { type, targetType, targetId, description },
-    }
+    },
   );
 
   if (!response.data) {
-    let message = "未知錯誤";
+    const message = "未知錯誤";
     toast.pushToast({
       type: ToastType.ERROR,
       message: message,

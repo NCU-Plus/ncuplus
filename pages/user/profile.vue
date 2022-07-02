@@ -4,7 +4,7 @@
       <section>
         <h1 class="text-3xl">個人檔案</h1>
         <div class="clearfix mt-4">
-          <form @submit.prevent="submit" class="my-2 space-y-2">
+          <form class="my-2 space-y-2" @submit.prevent="submit">
             <div class="space-y-2">
               <dl class="space-y-1">
                 <dt class="font-semibold">
@@ -12,11 +12,11 @@
                 </dt>
                 <dd>
                   <input
-                    @keypress.enter.prevent
                     id="name"
+                    v-model="form.name"
                     type="text"
                     class="form-input"
-                    v-model="form.name"
+                    @keypress.enter.prevent
                   />
                 </dd>
               </dl>
@@ -47,6 +47,7 @@ import { APIClient } from "~~/helpers/APIClient";
 import { MetaBuilder } from "~~/helpers/MetaBuilder";
 import { UserManager } from "~~/managers/UserManager";
 import { ToastType, useToast } from "~~/stores/toast";
+import { User } from "~~/structures/User";
 import { APIProfile } from "~~/types/APIProfiile";
 import { APIResponse } from "~~/types/APIResponse";
 
@@ -65,12 +66,14 @@ async function submit() {
     {
       method: "PUT",
       body: form.value,
-    }
+    },
   );
   if (resp.statusCode === 200) {
-    await UserManager.getInstance().refreshCache(loggedInUser.value!.id);
+    await UserManager.getInstance().refreshCache(
+      (loggedInUser.value as User).id,
+    );
     loggedInUser.value = await UserManager.getInstance().fetch(
-      loggedInUser.value!.id
+      (loggedInUser.value as User).id,
     );
     toast.pushToast({
       type: ToastType.SUCCESS,

@@ -3,7 +3,7 @@
     <fullpage-header class="bg-black">
       <ClientOnly>
         <animation-background
-          :backgroundImages="backgroundImages"
+          :background-images="backgroundImages"
           :duration="{ enter: 1200, leave: 2000, stay: 8000, transfer: 200 }"
         />
       </ClientOnly>
@@ -16,7 +16,7 @@
               A new hope at the place where Nobody Care U.
             </h4>
           </div>
-          <div class="h-full w-1/2"></div>
+          <div class="h-full w-1/2" />
         </div>
       </div>
     </fullpage-header>
@@ -82,13 +82,13 @@ import bgImg6 from "~/assets/background/櫻花.png";
 import { MetaBuilder } from "~~/helpers/MetaBuilder";
 
 const backgroundImages = [bgImg1, bgImg2, bgImg3, bgImg4, bgImg5, bgImg6].sort(
-  () => Math.random() - 0.5
+  () => Math.random() - 0.5,
 );
 
 useHead({
   meta: new MetaBuilder()
     .addDescription(
-      "NCU+是中大非官方的資訊網站，發想於排課過程中查找資訊的困難，因而期望有彙整資訊的網頁。未來會繼續強化網站功能，以期能建立真正的智慧校園。"
+      "NCU+是中大非官方的資訊網站，發想於排課過程中查找資訊的困難，因而期望有彙整資訊的網頁。未來會繼續強化網站功能，以期能建立真正的智慧校園。",
     )
     .addImage(bgImg5)
     .addTwitterCard("summary_large_image")

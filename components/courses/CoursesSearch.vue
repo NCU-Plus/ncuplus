@@ -2,10 +2,10 @@
   <form class="w-full flex flex-col items-center">
     <div class="flex my-6 justify-center">
       <input
-        @keypress.enter.prevent
         v-model="searchOptions.query"
         placeholder="課名/課號/老師"
         class="rounded-md pl-4 w-56 h-8"
+        @keypress.enter.prevent
       />
       <div class="mx-4 flex items-center">
         <input
@@ -17,8 +17,8 @@
       </div>
     </div>
     <div
-      id="searchOptions"
       v-show="searchOptions.advanceSearch"
+      id="searchOptions"
       class="flex my-6 space-x-2"
     >
       <div class="w-2/5 md:w-32 h-10">
@@ -28,8 +28,9 @@
         >
           <option value="">所有學期</option>
           <option
-            :class="'s' + semester"
             v-for="semester in semesters"
+            :key="semester"
+            :class="'s' + semester"
             :value="semester"
           >
             {{ semester }}
@@ -43,8 +44,9 @@
         >
           <option value="">開課單位</option>
           <option
-            :class="department"
             v-for="department in departments"
+            :key="department"
+            :class="department"
             :value="department"
           >
             {{ department }}

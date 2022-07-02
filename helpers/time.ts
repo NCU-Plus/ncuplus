@@ -11,8 +11,8 @@ export function toDatetimeString(timeFormatable: Date | string) {
       ? new Date(timeFormatable)
       : (timeFormatable as Date);
   return `${time.getFullYear()}-${formatTime(time.getMonth() + 1)}-${formatTime(
-    time.getDate()
+    time.getDate(),
   )} ${formatTime(time.getHours())}:${formatTime(
-    time.getMinutes()
+    time.getMinutes(),
   )}:${formatTime(time.getSeconds())}`;
 }

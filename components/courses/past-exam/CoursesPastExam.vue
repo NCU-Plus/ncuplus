@@ -1,14 +1,20 @@
 <template>
   <tr class="border-t-[1px] border-slate-300">
-    <td class="py-2 text-center">{{ pastExam.downloadCount }}</td>
+    <td class="py-2 text-center">
+      {{ pastExam.downloadCount }}
+    </td>
     <td
       class="py-2 text-center text-sky-600 hover:text-sky-800 cursor-pointer"
       @click="emits('download', { id: pastExam.id })"
     >
       {{ pastExam.originFilename }}
     </td>
-    <td class="py-2 text-center">{{ pastExam.year }}</td>
-    <td class="py-2 text-center">{{ pastExam.description }}</td>
+    <td class="py-2 text-center">
+      {{ pastExam.year }}
+    </td>
+    <td class="py-2 text-center">
+      {{ pastExam.description }}
+    </td>
     <td class="py-2 text-center">
       {{ formatFilesize(pastExam.size) }}
     </td>
@@ -19,8 +25,8 @@
       {{ toDatetimeString(pastExam.createdAt) }}
     </td>
     <td class="py-2 text-center flex flex-col space-y-1 items-center">
-      <button @click="report?.show()" class="button">檢舉</button>
-      <button @click="emits('delete', { id: pastExam.id })" class="button">
+      <button class="button" @click="report?.show()">檢舉</button>
+      <button class="button" @click="emits('delete', { id: pastExam.id })">
         刪除
       </button>
     </td>
@@ -33,7 +39,7 @@
         $event.type,
         TargetType.PAST_EXAM,
         pastExam.id,
-        $event.description
+        $event.description,
       )
     "
   />
@@ -54,7 +60,7 @@ const emits = defineEmits<{
   (event: "delete", data: { id: number }): void;
 }>();
 const uploader = ref(
-  await UserManager.getInstance().fetch(props.pastExam.uploaderId)
+  await UserManager.getInstance().fetch(props.pastExam.uploaderId),
 );
 const report = ref<InstanceType<typeof ReportFrame> | null>(null);
 </script>

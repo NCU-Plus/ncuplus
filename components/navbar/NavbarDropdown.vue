@@ -1,13 +1,14 @@
 <template>
   <div class="flex px-3 py-2 rounded items-center justify-center">
     <button ref="openDropdownButton" @click="openDropdown = !openDropdown">
-      <slot></slot>
+      <slot />
       <font-awesome-icon class="ml-2" :icon="['fas', 'caret-down']" />
     </button>
     <transition name="dropdown">
       <ul v-if="openDropdown" class="absolute top-full w-32 bg-blue-400">
         <li
           v-for="item of items"
+          :key="item.label"
           class="flex flex-col border-b-[1px] border-white"
         >
           <button
@@ -26,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
   items: {
     label: string;
     action: () => void;
@@ -34,22 +35,6 @@ const props = defineProps<{
 }>();
 const openDropdown = ref(false);
 const openDropdownButton = ref<HTMLButtonElement | null>(null);
-
-const dropdownPosition = computed(() => {
-  if (!openDropdownButton.value) {
-    return {
-      x: 0,
-      y: 0,
-    };
-  }
-  return {
-    x: openDropdownButton.value.offsetLeft,
-    y:
-      openDropdownButton.value.offsetTop +
-      openDropdownButton.value.offsetHeight +
-      40,
-  };
-});
 </script>
 
 <style scoped>

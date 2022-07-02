@@ -1,19 +1,19 @@
 <template>
   <div
+    class="flex justify-between items-center w-full"
     @mouseenter="showDropdownMenu = true"
     @mouseleave="showDropdownMenu = false"
-    class="flex justify-between items-center w-full"
   >
     <div class="flex flex-col w-full">
       <div class="flex justify-between w-full">
         <textarea
           v-if="editing"
+          v-model="editingContent"
           class="mx-8 mt-4 w-full outline outline-gray-200 rounded-sm resize-none"
           maxlength="255"
-          v-model="editingContent"
           @keypress.shift.enter="completeEdit()"
           @keydown.esc="editing = false"
-        ></textarea>
+        />
         <div
           v-else
           class="flex space-x-2 justify-center mx-2 md:mx-8 mt-4 my-auto"
@@ -26,7 +26,7 @@
           }}</pre>
         </div>
       </div>
-      <div class="flex mx-8 text-sm text-gray-600" v-if="editing">
+      <div v-if="editing" class="flex mx-8 text-sm text-gray-600">
         按Shift+Enter送出，或按Esc取消
       </div>
       <div
@@ -105,7 +105,7 @@
           $event.type,
           TargetType.COMMENT,
           comment.id,
-          $event.description
+          $event.description,
         )
       "
     />
@@ -128,11 +128,11 @@ const props = defineProps<{
 const emits = defineEmits<{
   (event: "reaction", data: { operation: ReactionType; id: number }): void;
   (
-    event: "completeEdit",
+    event: "complete-edit",
     data: {
       id: number;
       content: string;
-    }
+    },
   ): void;
   (event: "delete", data: { id: number }): void;
 }>();
@@ -141,14 +141,14 @@ const editingContent = ref("");
 const editing = ref(false);
 const showDropdownMenu = ref(false);
 const author = ref(
-  await UserManager.getInstance().fetch(props.comment.authorId)
+  await UserManager.getInstance().fetch(props.comment.authorId),
 );
 const loggedInUser = useLoggedInUser();
 const report = ref<InstanceType<typeof ReportFrame> | null>(null);
 
 function completeEdit() {
   editing.value = false;
-  emits("completeEdit", {
+  emits("complete-edit", {
     id: props.comment.id,
     content: editingContent.value,
   });

@@ -6,21 +6,21 @@
     </h3>
     <CoursesReview
       v-for="review of reviewsData"
+      :key="review.id"
       :review="review"
       @reaction="emits('reaction', $event)"
-      @completeEdit="emits('completeEdit', $event)"
+      @complete-edit="emits('complete-edit', $event)"
       @delete="emits('delete', $event)"
     />
     <div class="flex flex-col pl-5 mb-4 border-l-4 border-green-400 space-y-2">
       <textarea
+        v-model="content"
         class="px-5 py-1 h-60 outline outline-gray-200 rounded-sm resize-none"
         placeholder="我要發文..."
-        v-model="content"
         maxlength="100000"
-      >
-      </textarea>
+      />
       <div class="flex justify-end">
-        <button @click="createReview()" class="button">送出</button>
+        <button class="button" @click="createReview()">送出</button>
       </div>
     </div>
   </section>
@@ -34,15 +34,15 @@ const emits = defineEmits<{
   (event: "add", data: { content: string }): void;
   (event: "reaction", data: { operation: ReactionType; id: number }): void;
   (
-    event: "completeEdit",
+    event: "complete-edit",
     data: {
       id: number;
       content: string;
-    }
+    },
   ): void;
   (event: "delete", data: { id: number }): void;
 }>();
-const props = defineProps<{ reviewsData: APIReview[] }>();
+defineProps<{ reviewsData: APIReview[] }>();
 const content = ref("");
 
 function createReview() {

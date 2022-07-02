@@ -1,5 +1,6 @@
 <template>
   <NavbarDropdown
+    v-if="loggedInUser"
     :items="[
       {
         label: '個人檔案',
@@ -10,7 +11,6 @@
         action: () => logout(),
       },
     ]"
-    v-if="loggedInUser"
   >
     {{ loggedInUser?.profile.name }}
   </NavbarDropdown>
@@ -29,7 +29,7 @@ async function logout() {
     `${config.public.apiBaseUrl}/auth/logout`,
     {
       method: "POST",
-    }
+    },
   );
   if (resp.statusCode === 200) {
     client.resetToken();

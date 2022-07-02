@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="w-full h-screen">
-      <slot></slot>
+      <slot />
     </div>
   </header>
 </template>

@@ -5,7 +5,7 @@
       'background-image': 'url(' + backgroundImages[backgroundIndex] + ')',
       opacity: backgroundOpacity,
     }"
-  ></div>
+  />
 </template>
 
 <script setup lang="ts">

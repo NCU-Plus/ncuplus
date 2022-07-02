@@ -28,8 +28,8 @@
             >
           </td>
           <td
-            @click="showingPastCourses = !showingPastCourses"
             class="text-slate-800 cursor-pointer"
+            @click="showingPastCourses = !showingPastCourses"
           >
             查看歷年相同課程<font-awesome-icon
               v-if="!showingPastCourses"
@@ -58,18 +58,27 @@
         </tr>
         <tr
           v-for="pastCourse of courses"
+          :key="pastCourse.id"
           class="border-t-[1px] border-slate-300"
         >
           <td class="p-2">
             {{ pastCourse.year }}-{{ formatSemester(pastCourse.semester) }}
           </td>
-          <td class="p-2">{{ pastCourse.departmentName }}</td>
-          <td class="p-2">{{ pastCourse.serialNo }}</td>
+          <td class="p-2">
+            {{ pastCourse.departmentName }}
+          </td>
+          <td class="p-2">
+            {{ pastCourse.serialNo }}
+          </td>
           <td class="p-2">
             {{ formatCourseType(pastCourse.courseType) }}
           </td>
-          <td class="p-2">{{ pastCourse.limitCnt }}</td>
-          <td class="p-2">{{ pastCourse.classTimes }}</td>
+          <td class="p-2">
+            {{ pastCourse.limitCnt }}
+          </td>
+          <td class="p-2">
+            {{ pastCourse.classTimes }}
+          </td>
           <td class="p-2">
             {{ formatPasswordCard(pastCourse.passwordCard) }}
           </td>

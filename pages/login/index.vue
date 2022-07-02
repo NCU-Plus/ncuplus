@@ -1,9 +1,9 @@
 <template>
-  <FullpageHeader
-    ><div
+  <FullpageHeader>
+    <div
       class="h-full w-full bg-local bg-center bg-cover blur absolute"
       :style="{ 'background-image': `url(${loginBg})` }"
-    ></div>
+    />
     <div
       class="w-11/12 md:w-1/2 h-1/2 absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 flex flex-col justify-around items-center bg-white rounded-xl"
     >
@@ -16,8 +16,8 @@
           中大Portal單一簽入
         </button>
       </a>
-    </div></FullpageHeader
-  >
+    </div>
+  </FullpageHeader>
 </template>
 
 <script setup lang="ts">

@@ -12,18 +12,21 @@
         <div class="flex space-x-2 items-center">
           <label class="text-lg">檢舉類別</label>
           <select v-model="report.type" class="">
-            <option v-for="reportType of ReportType" :value="reportType">
+            <option
+              v-for="reportType of ReportType"
+              :key="reportType"
+              :value="reportType"
+            >
               {{ formatReportType(reportType) }}
             </option>
           </select>
         </div>
         <textarea
+          v-model="report.description"
           class="outline outline-gray-200 rounded-sm resize-none"
           placeholder="請輸入檢舉原由或其他描述，若無可填空"
           maxlength="255"
-          v-model="report.description"
-        >
-        </textarea>
+        />
         <div class="flex justify-between">
           <button class="button">取消</button>
           <button class="button" @click="emits('submit', report)">送出</button>
@@ -46,7 +49,7 @@ const emits = defineEmits<{
     data: {
       type: ReportType;
       description: string;
-    }
+    },
   ): void;
 }>();
 

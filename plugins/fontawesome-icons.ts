@@ -17,7 +17,6 @@ import {
   faCaretUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { App } from "vue";
 
 library.add(faGithubSquare);
 library.add(faSearch);

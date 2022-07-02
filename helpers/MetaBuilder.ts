@@ -54,7 +54,7 @@ export class MetaBuilder {
   public build(): Record<string, any>[] {
     this.addOg(
       "og:url",
-      "https://" + this._config.public.deployDomain + this._route.fullPath
+      "https://" + this._config.public.deployDomain + this._route.fullPath,
     );
     return this._meta;
   }

@@ -12,7 +12,7 @@ type CourseFeedbackType = "comment" | "review";
 export async function createReaction(
   target: CourseFeedbackType,
   type: ReactionType,
-  targetId: number
+  targetId: number,
 ): Promise<APIReaction | null> {
   const config = useRuntimeConfig();
   const toast = useToast();
@@ -24,7 +24,7 @@ export async function createReaction(
         body: {
           type,
         },
-      }
+      },
     )
   );
   if (!response.data) {
@@ -33,13 +33,13 @@ export async function createReaction(
     else if (response.statusCode === 403) {
       if (
         (response.message as string).startsWith(
-          "You cannot like or dislike your own"
+          "You cannot like or dislike your own",
         )
       )
         message = "你不能推噓自己的內容!";
       else if (
         (response.message as string).startsWith(
-          "You have already liked or disliked"
+          "You have already liked or disliked",
         )
       )
         message = "你已經為這篇內容推噓過了!";
@@ -59,14 +59,14 @@ export async function createReaction(
 
 export async function createComment(
   classNo: string,
-  content: string
+  content: string,
 ): Promise<APIComment | null> {
   return createCommentOrReview("comment", classNo, content);
 }
 
 export async function createReview(
   classNo: string,
-  content: string
+  content: string,
 ): Promise<APIComment | null> {
   return createCommentOrReview("review", classNo, content);
 }
@@ -74,7 +74,7 @@ export async function createReview(
 async function createCommentOrReview(
   target: CourseFeedbackType,
   classNo: string,
-  content: string
+  content: string,
 ): Promise<APIComment | APIReview | null> {
   const config = useRuntimeConfig();
   const toast = useToast();
@@ -84,7 +84,7 @@ async function createCommentOrReview(
       {
         method: "POST",
         body: { content: content },
-      }
+      },
     )
   );
 
@@ -107,14 +107,14 @@ async function createCommentOrReview(
 
 export async function editComment(
   id: number,
-  content: string
+  content: string,
 ): Promise<APIComment | null> {
   return editCommentOrReview("comment", id, content);
 }
 
 export async function editReview(
   id: number,
-  content: string
+  content: string,
 ): Promise<APIReview | null> {
   return editCommentOrReview("review", id, content);
 }
@@ -122,7 +122,7 @@ export async function editReview(
 async function editCommentOrReview(
   target: CourseFeedbackType,
   targetId: number,
-  newContent: string
+  newContent: string,
 ): Promise<APIComment | APIReview | null> {
   const config = useRuntimeConfig();
   const toast = useToast();
@@ -132,7 +132,7 @@ async function editCommentOrReview(
       {
         method: "PUT",
         body: { content: newContent },
-      }
+      },
     )
   );
   if (!response.data) {
@@ -155,7 +155,7 @@ async function editCommentOrReview(
 
 async function deleteCommentOrReview(
   target: CourseFeedbackType,
-  targetId: number
+  targetId: number,
 ): Promise<boolean> {
   const config = useRuntimeConfig();
   const toast = useToast();
@@ -163,7 +163,7 @@ async function deleteCommentOrReview(
     `${config.public.apiBaseUrl}/${target}s/${targetId}`,
     {
       method: "DELETE",
-    }
+    },
   );
   if (response.statusCode !== 200) {
     let message = "未知錯誤";
@@ -199,7 +199,7 @@ export async function createPastExam(
     year: string;
     description: string;
     file: File;
-  }
+  },
 ): Promise<APIPastExam | null> {
   const config = useRuntimeConfig();
   const toast = useToast();
@@ -214,7 +214,7 @@ export async function createPastExam(
       {
         method: "POST",
         body: formdata,
-      }
+      },
     )
   );
 
@@ -240,7 +240,7 @@ export async function downloadPastExam(id: number): Promise<boolean> {
   const toast = useToast();
 
   const response = await APIClient.getInstance().fetchRaw<Blob>(
-    `${config.public.apiBaseUrl}/past-exams/${id}`
+    `${config.public.apiBaseUrl}/past-exams/${id}`,
   );
 
   if (!response._data) {
@@ -257,9 +257,8 @@ export async function downloadPastExam(id: number): Promise<boolean> {
   const url = window.URL.createObjectURL(response._data);
   const link = document.createElement("a");
   link.href = url;
-  const savedFilename = response.headers
-    .get("content-disposition")!
-    .substring(response.headers.get("content-disposition")!.indexOf("=") + 1);
+  const header = response.headers.get("content-disposition") as string;
+  const savedFilename = header.substring(header.indexOf("=") + 1);
   link.download = savedFilename
     ? decodeURIComponent(savedFilename)
     : "pastexam";
@@ -276,7 +275,7 @@ export async function deletePastExam(id: number) {
     `${config.public.apiBaseUrl}/past-exams/${id}`,
     {
       method: "DELETE",
-    }
+    },
   );
 
   if (response.statusCode !== 200) {
