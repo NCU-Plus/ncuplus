@@ -1,5 +1,15 @@
+import { RuntimeConfig } from "@nuxt/schema";
+import { RouteLocationNormalizedLoaded } from "vue-router";
+
 export class MetaBuilder {
   private readonly _meta: Record<string, any>[] = [];
+  private readonly _config: RuntimeConfig;
+  private readonly _route: RouteLocationNormalizedLoaded;
+
+  constructor() {
+    this._config = useRuntimeConfig();
+    this._route = useRoute();
+  }
 
   public add(name: string, content: string) {
     this._meta.push({ name, content });
@@ -22,8 +32,11 @@ export class MetaBuilder {
   }
 
   public addImage(image: any) {
-    this.addOg("og:image", image);
-    this.add("twitter:image", image);
+    let imageUrl: string = image;
+    if (!(image as string).startsWith("http"))
+      imageUrl = "https://" + this._config.public.deployDomain + image;
+    this.addOg("og:image", imageUrl);
+    this.add("twitter:image", imageUrl);
     return this;
   }
 
@@ -41,7 +54,7 @@ export class MetaBuilder {
   public build(): Record<string, any>[] {
     this.addOg(
       "og:url",
-      "https://" + useRuntimeConfig().public.deployDomain + useRoute().fullPath
+      "https://" + this._config.public.deployDomain + this._route.fullPath
     );
     return this._meta;
   }
