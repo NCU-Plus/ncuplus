@@ -5,7 +5,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     VueGtag,
     {
       config: {
-        id: useRuntimeConfig().gaId,
+        id: useRuntimeConfig().public.gaId,
       },
     },
     nuxtApp.$router,

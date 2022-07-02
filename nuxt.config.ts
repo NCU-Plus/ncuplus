@@ -26,11 +26,7 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
-    gaId: "",
-    public: {
-      apiBaseUrl: "",
-      deployDomain: "",
-    },
+    public: { gaId: "", apiBaseUrl: "", deployDomain: "" },
   },
   vue: {
     compilerOptions: {
