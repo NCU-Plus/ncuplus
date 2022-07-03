@@ -76,15 +76,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from "vue";
+import { computed, watch } from "vue";
 import { Course } from "~/types/Course";
 import { formatSemester } from "@/helpers/course";
+import { useCoursePage } from "~~/composables/useCoursePage";
 
 const props = defineProps<{
   coursesData: Course[];
 }>();
 
-const page = ref(1);
+const page = useCoursePage();
 
 watch(
   () => page.value,
