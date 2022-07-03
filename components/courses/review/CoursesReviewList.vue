@@ -13,6 +13,11 @@
       @delete="emits('delete', $event)"
     />
     <div class="flex flex-col pl-5 mb-4 border-l-4 border-green-400 space-y-2">
+      <div class="flex justify-end">
+        <button class="button" @click="insertTemplate()">
+          插入樣板課程心得
+        </button>
+      </div>
       <textarea
         v-model="content"
         class="px-5 py-1 h-60 outline outline-gray-200 rounded-sm resize-none"
@@ -29,6 +34,7 @@
 <script setup lang="ts">
 import { ReactionType } from "~~/types/ReactionType";
 import { APIReview } from "~~/types/APIReview";
+import { courseReviewTemplate } from "~/assets/course-review-template";
 
 const emits = defineEmits<{
   (event: "add", data: { content: string }): void;
@@ -48,5 +54,9 @@ const content = ref("");
 function createReview() {
   emits("add", { content: content.value });
   content.value = "";
+}
+
+function insertTemplate() {
+  content.value += courseReviewTemplate;
 }
 </script>
