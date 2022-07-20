@@ -2,7 +2,27 @@
   <div class="page-wrapper">
     <div class="page items-center">
       <CoursesSearch :courses-data="coursesData" />
-      <CoursesList :courses-data="filteredCoursesData" />
+      <TableList
+        :titles="['學期', '課名', '教師', '開課單位', '時間']"
+        :rows="
+          pageCoursesData.map((element) => {
+            return {
+              columns: {
+                semester: `${element.year}-${formatSemester(element.semester)}`,
+                title: element.title,
+                teachers: element.teachers,
+                departmentName: element.departmentName,
+                classTimes: element.classTimes,
+              },
+              linkUrl: `/courses/${element.id}`,
+            };
+          })
+        "
+      />
+      <Pagenator
+        :get-state="useCoursePage"
+        :max-page="Math.floor(filteredCoursesData.length / 25 + 1)"
+      />
     </div>
   </div>
 </template>
@@ -14,6 +34,7 @@ import { MetaBuilder } from "~~/helpers/MetaBuilder";
 
 const { data: coursesData } = await useFetch<Course[]>(`/api/courses`);
 const searchOptions = useSearchOptions();
+const page = useCoursePage();
 
 const filteredCoursesData = computed(() =>
   coursesData.value
@@ -39,6 +60,14 @@ const filteredCoursesData = computed(() =>
         );
       else return true;
     }),
+);
+const pageCoursesData = computed(() =>
+  filteredCoursesData.value.slice((page.value - 1) * 25, page.value * 25),
+);
+
+watch(
+  () => filteredCoursesData.value,
+  () => (page.value = 1),
 );
 
 const title = "課程列表";
