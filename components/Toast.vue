@@ -1,7 +1,8 @@
 <template>
   <div v-if="store.toasts.length > 0" class="fixed w-full h-11 z-50 top-36">
     <div
-      v-for="toast of store.toasts"
+      v-for="(toast, i) of store.toasts"
+      :key="i"
       :class="{
         flex: true,
         'w-[300px]': true,

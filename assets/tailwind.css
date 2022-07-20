@@ -8,6 +8,9 @@
   .button {
     @apply px-4 py-2 bg-sky-400 hover:bg-sky-500 text-white rounded-md;
   }
+  .pagenator-button {
+    @apply px-4 py-1 text-sky-600 hover:text-white hover:bg-sky-600 bg-white cursor-pointer;
+  }
   .page-wrapper {
     @apply container mx-auto min-h-screen;
   }
