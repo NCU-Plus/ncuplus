@@ -16,7 +16,7 @@
         v-for="(row, i) of rows"
         :key="i"
         class="cursor-pointer hover:bg-gray-50"
-        @click="navigateTo(row.linkUrl)"
+        @click="row.onClick()"
       >
         <th
           v-for="(column, j) of row.columns"
@@ -33,6 +33,6 @@
 <script setup lang="ts">
 defineProps<{
   titles: string[];
-  rows: { columns: Record<string, string>; linkUrl: string }[];
+  rows: { columns: Record<string, string>; onClick: () => void }[];
 }>();
 </script>

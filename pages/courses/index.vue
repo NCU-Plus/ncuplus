@@ -14,7 +14,7 @@
                 departmentName: element.departmentName,
                 classTimes: element.classTimes,
               },
-              linkUrl: `/courses/${element.id}`,
+              onClick: () => navigateTo(`/courses/${element.id}`),
             };
           })
         "
