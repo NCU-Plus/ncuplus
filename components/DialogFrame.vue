@@ -1,6 +1,8 @@
 <template>
-  <dialog ref="dialog" class="dialog rounded-md" @click="onClick">
-    <slot />
+  <dialog ref="dialog" class="dialog rounded-md m-0 p-0" @click="onClick">
+    <div class="w-full h-full p-6">
+      <slot />
+    </div>
   </dialog>
 </template>
 
