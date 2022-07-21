@@ -29,24 +29,29 @@ const reviewFrame = ref<InstanceType<typeof ReviewFrame> | null>(null);
 const viewingReviewId = ref(reviews.value[0].id);
 const mappedReviews = ref(
   await Promise.all(
-    reviews.value.map(async (element) => {
-      return {
-        columns: {
-          courseFeedbackClassNo: element.courseFeedbackClassNo,
-          author:
-            (await UserManager.getInstance().fetch(element.authorId))?.profile
-              .name ?? "未知使用者",
-          likes: element.reactions
-            .filter((e) => e.type === ReactionType.LIKE)
-            .length.toString(),
-          time: toDatetimeString(element.updatedAt),
-        },
-        onClick: () => {
-          viewingReviewId.value = element.id;
-          reviewFrame.value?.show();
-        },
-      };
-    }),
+    reviews.value
+      .sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+      )
+      .map(async (element) => {
+        return {
+          columns: {
+            courseFeedbackClassNo: element.courseFeedbackClassNo,
+            author:
+              (await UserManager.getInstance().fetch(element.authorId))?.profile
+                .name ?? "未知使用者",
+            likes: element.reactions
+              .filter((e) => e.type === ReactionType.LIKE)
+              .length.toString(),
+            time: toDatetimeString(element.createdAt),
+          },
+          onClick: () => {
+            viewingReviewId.value = element.id;
+            reviewFrame.value?.show();
+          },
+        };
+      }),
   ),
 );
 
