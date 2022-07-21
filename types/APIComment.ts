@@ -5,6 +5,7 @@ export interface APIComment {
   authorId: number;
   content: string;
   reactions: APIReaction[];
-  createdAt: Date;
-  updatedAt: Date;
+  courseFeedbackClassNo: string;
+  createdAt: string;
+  updatedAt: string;
 }

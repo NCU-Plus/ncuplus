@@ -33,7 +33,6 @@
   </tr>
   <ReportFrame
     ref="report"
-    @close="report?.close()"
     @submit="
       createReport(
         $event.type,

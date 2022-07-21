@@ -1,6 +1,10 @@
 <template>
-  <div class="flex px-3 py-2 rounded items-center justify-center">
-    <button ref="openDropdownButton" @click="openDropdown = !openDropdown">
+  <div
+    class="flex px-3 py-5 rounded items-center justify-center"
+    @mouseenter="openDropdown = true"
+    @mouseleave="openDropdown = false"
+  >
+    <button ref="openDropdownButton">
       <slot />
       <font-awesome-icon class="ml-2" :icon="['fas', 'caret-down']" />
     </button>
