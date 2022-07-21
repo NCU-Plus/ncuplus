@@ -18,12 +18,7 @@
           插入樣板課程心得
         </button>
       </div>
-      <textarea
-        v-model="content"
-        class="px-5 py-1 h-60 outline outline-gray-200 rounded-sm resize-none"
-        placeholder="我要發文..."
-        maxlength="100000"
-      />
+      <MarkdownEditor ref="mdEditor" placeholder="我要發文..." />
       <div class="flex justify-end">
         <button class="button" @click="createReview()">送出</button>
       </div>
@@ -35,6 +30,7 @@
 import { ReactionType } from "~~/types/ReactionType";
 import { APIReview } from "~~/types/APIReview";
 import { courseReviewTemplate } from "~/assets/course-review-template";
+import MarkdownEditor from "~~/components/markdown/MarkdownEditor.vue";
 
 const emits = defineEmits<{
   (event: "add", data: { content: string }): void;
@@ -49,14 +45,19 @@ const emits = defineEmits<{
   (event: "delete", data: { id: number }): void;
 }>();
 defineProps<{ reviewsData: APIReview[] }>();
-const content = ref("");
+const mdEditor = ref<InstanceType<typeof MarkdownEditor> | null>(null);
 
 function createReview() {
-  emits("add", { content: content.value });
-  content.value = "";
+  const content = mdEditor.value?.getMdeInstance().value();
+  if (content === undefined) throw new Error("editor is not ready");
+  emits("add", { content });
+  console.log(content);
+  mdEditor.value?.getMdeInstance().value("");
 }
 
 function insertTemplate() {
-  content.value += courseReviewTemplate;
+  const content = mdEditor.value?.getMdeInstance().value();
+  if (content === undefined) throw new Error("editor is not ready");
+  mdEditor.value?.getMdeInstance().value(content + courseReviewTemplate);
 }
 </script>
