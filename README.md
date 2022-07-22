@@ -49,3 +49,7 @@ Locally preview production build:
 ```bash
 npm run preview
 ```
+
+## License
+
+NCU Plus is [AGPL licensed](LICENSE).
