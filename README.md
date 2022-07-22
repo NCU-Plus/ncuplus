@@ -30,6 +30,8 @@ cp .env.example .env
 
 Start the development server on http://localhost:3000
 
+> You must run [backend server](https://github.com/NCU-Plus/ncuplus-backend) before below command.
+
 ```bash
 npm run dev
 ```
