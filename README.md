@@ -1,23 +1,32 @@
-# Nuxt 3 Minimal Starter
+# NCU+ Frontend V2
 
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+## Introduction
 
-## Setup
+NCU+ Frontend V2 is a course feedback website for National Central University students. Allow students to view or submit their course feedbacks.
 
-Make sure to install the dependencies:
+## Features
+
+- Course Search
+- Anonymous
+- Course Feedbacks
+- Course Comments
+- NCU Portal Login
+- Markdown Support
+
+## Development
+
+Install dependencies:
 
 ```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
-pnpm install --shamefully-hoist
+npm ci
 ```
 
-## Development Server
+Set environment variables:
+
+```bash
+cp .env.example .env
+# Edit .env file to fit your environment
+```
 
 Start the development server on http://localhost:3000
 
@@ -38,5 +47,3 @@ Locally preview production build:
 ```bash
 npm run preview
 ```
-
-Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.
