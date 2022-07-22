@@ -18,12 +18,10 @@
           v-else
           class="flex space-x-2 justify-center mx-2 md:mx-8 mt-4 my-auto"
         >
-          <a class="text-sky-600">{{
-            author?.profile.name ?? "此使用者不存在"
-          }}</a>
-          <pre class="align-middle text-left whitespace-pre-wrap">{{
-            comment.content
-          }}</pre>
+          <a class="text-sky-600">
+            {{ author?.profile.name ?? "此使用者不存在" }}
+          </a>
+          <MarkdownRenderer :content="comment.content" />
         </div>
       </div>
       <div v-if="editing" class="flex mx-8 text-sm text-gray-600">

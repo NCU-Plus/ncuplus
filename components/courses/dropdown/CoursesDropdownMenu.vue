@@ -9,7 +9,11 @@
       :icon="['fas', 'ellipsis-v']"
       size="lg"
     />
-    <div v-if="showDropdownMenu" id="dropdown-menu" class="absolute shadow-md">
+    <div
+      v-if="showDropdownMenu"
+      id="dropdown-menu"
+      class="absolute shadow-md z-50"
+    >
       <div
         class="w-0 h-0 ml-1 border-l-8 border-r-8 border-b-8 border-b-white border-r-transparent border-l-transparent"
       />

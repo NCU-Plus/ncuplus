@@ -23,7 +23,6 @@ module.exports = {
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-empty-function": "off",
-    "@typescript-eslint/ban-ts-comment": "off",
     "vue/multi-word-component-names": "off",
     "vue/require-v-for-key": "warn",
     "vue/valid-v-for": "warn",

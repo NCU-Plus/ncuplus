@@ -35,6 +35,7 @@ library.add(faCaretDown);
 library.add(faCaretUp);
 
 export default defineNuxtPlugin((nuxtApp) => {
+  // eslint-disable-next-line
   //@ts-ignore
   nuxtApp.vueApp.component("FontAwesomeIcon", FontAwesomeIcon);
 });

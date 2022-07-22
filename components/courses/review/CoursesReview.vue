@@ -11,13 +11,8 @@
       </p>
       <p v-else>{{ toDatetimeString(new Date(review.updatedAt)) }} 編輯</p>
     </div>
-    <textarea
-      v-if="editing"
-      v-model="editingContent"
-      class="px-5 py-1 h-60 outline outline-gray-200 rounded-sm resize-none"
-      maxlength="100000"
-    />
-    <pre v-else class="whitespace-pre-wrap">{{ review.content }}</pre>
+    <MarkdownEditor v-if="editing" ref="mdEditor" :initial-value="oldContent" />
+    <MarkdownRenderer v-if="!editing" :content="review.content" />
     <div class="flex justify-between space-x-2 pr-5 py-2 text-gray-600">
       <div class="flex space-x-2">
         <div
@@ -51,7 +46,15 @@
         </div>
       </div>
       <div v-if="editing" class="flex space-x-2">
-        <button class="button" @click="editing = false">取消</button>
+        <button
+          class="button"
+          @click="
+            editing = false;
+            mdEditor?.getMdeInstance().toTextArea();
+          "
+        >
+          取消
+        </button>
         <button class="button" @click="completeEdit()">送出</button>
       </div>
       <CoursesDropdownMenu
@@ -64,7 +67,7 @@
               (loggedInUser?.roles.includes(UserRole.ADMIN) ?? false),
             action: () => {
               editing = true;
-              editingContent = review.content;
+              oldContent = review.content;
             },
           },
           {
@@ -107,6 +110,7 @@ import { UserRole } from "~~/types/UserRole";
 import ReportFrame from "~~/components/report/ReportFrame.vue";
 import { TargetType } from "~~/types/APIReport";
 import { createReport } from "~~/helpers/report";
+import MarkdownEditor from "~~/components/markdown/MarkdownEditor.vue";
 
 const props = defineProps<{
   review: APIReview;
@@ -122,8 +126,9 @@ const emits = defineEmits<{
   ): void;
   (event: "delete", data: { id: number }): void;
 }>();
+const mdEditor = ref<InstanceType<typeof MarkdownEditor> | null>(null);
 
-const editingContent = ref("");
+const oldContent = ref("");
 const editing = ref(false);
 const showDropdownMenu = ref(false);
 const author = ref(
@@ -133,10 +138,14 @@ const loggedInUser = useLoggedInUser();
 const report = ref<InstanceType<typeof ReportFrame> | null>(null);
 
 function completeEdit() {
+  const content = mdEditor.value?.getMdeInstance().value();
+  if (content === undefined)
+    throw new Error("MarkdownEditor is not initialized");
   editing.value = false;
+  mdEditor.value?.getMdeInstance().toTextArea();
   emits("complete-edit", {
     id: props.review.id,
-    content: editingContent.value,
+    content,
   });
 }
 </script>

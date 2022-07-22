@@ -67,6 +67,7 @@
 </template>
 
 <script setup lang="ts">
+/* eslint-disable */
 // @ts-ignore
 import bgImg1 from "~/assets/background/中大湖.png";
 // @ts-ignore
@@ -79,6 +80,7 @@ import bgImg4 from "~/assets/background/男十三.jpg";
 import bgImg5 from "~/assets/background/操場.jpg";
 // @ts-ignore
 import bgImg6 from "~/assets/background/櫻花.png";
+/* eslint-enable */
 import { MetaBuilder } from "~~/helpers/MetaBuilder";
 
 const backgroundImages = [bgImg1, bgImg2, bgImg3, bgImg4, bgImg5, bgImg6].sort(

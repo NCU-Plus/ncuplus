@@ -21,6 +21,7 @@
 </template>
 
 <script setup lang="ts">
+// eslint-disable-next-line
 // @ts-ignore
 import loginBg from "~/assets/background/操場.jpg";
 import { MetaBuilder } from "~~/helpers/MetaBuilder";
