@@ -21,6 +21,10 @@
               label: '心得總覽',
               action: () => navigateTo('/reviews'),
             },
+            {
+              label: '模擬排課',
+              action: () => navigateTo('/courses/simulation'),
+            },
           ]"
         >
           全校課程
