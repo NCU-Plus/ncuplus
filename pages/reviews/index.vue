@@ -17,19 +17,20 @@
             add(
               reviews.find((e) => e.id === $event.id)!.reactions,
               createReaction('review', $event.operation, $event.id),
-            );
-            mapReviews();
+            ).then(() => mapReviews())
           "
           @complete-edit="
             edit(
               reviews.find((e) => e.id === $event.id)!,
               editReview($event.id, $event.content),
-            );
-            mapReviews();
+            ).then(() => mapReviews())
           "
           @delete="
-            del(reviews, $event.id, deleteReview($event.id));
-            mapReviews();
+            reviewFrame?.close();
+            viewingReviewId = null;
+            del(reviews, $event.id, deleteReview($event.id)).then(() =>
+              mapReviews(),
+            );
           "
         />
       </ClientOnly>
@@ -55,17 +56,15 @@ import ReviewFrame from "~~/components/review/ReviewFrame.vue";
 const { data: reviews } = await useFetch("/api/reviews");
 const page = useReviewPage();
 const reviewFrame = ref<InstanceType<typeof ReviewFrame> | null>(null);
-const viewingReviewId = ref(reviews.value[0].id);
+const viewingReviewId = ref<number | null>(null);
 const mappedReviews = ref(await getMappedReviews());
 
 const pageReviews = computed(() =>
   mappedReviews.value.slice((page.value - 1) * 25, page.value * 25),
 );
-const viewingReview = computed(() => {
-  const review = reviews.value.find((e) => e.id === viewingReviewId.value);
-  if (review) return review;
-  throw new Error("Review not found");
-});
+const viewingReview = computed(() =>
+  reviews.value.find((e) => e.id === viewingReviewId.value),
+);
 
 async function getMappedReviews() {
   return await Promise.all(

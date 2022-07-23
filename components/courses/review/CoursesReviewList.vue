@@ -51,7 +51,6 @@ function createReview() {
   const content = mdEditor.value?.getMdeInstance().value();
   if (content === undefined) throw new Error("editor is not ready");
   emits("add", { content });
-  console.log(content);
   mdEditor.value?.getMdeInstance().value("");
 }
 
