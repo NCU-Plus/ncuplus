@@ -1,6 +1,6 @@
 <template>
   <DialogFrame ref="dialog" class="w-11/12 md:w-3/4 h-3/4">
-    <div :key="review.id" class="flex flex-col space-y-4 p-4">
+    <div class="flex flex-col space-y-4 p-4">
       <div>
         <div
           class="text-slate-800 cursor-pointer"
@@ -33,6 +33,7 @@
         </div>
       </div>
       <CoursesReview
+        v-if="review"
         :review="review"
         @reaction="emits('reaction', $event)"
         @complete-edit="emits('complete-edit', $event)"
@@ -50,7 +51,7 @@ import { formatSemester } from "~~/helpers/course";
 import { ReactionType } from "~~/types/ReactionType";
 
 const props = defineProps<{
-  review: APIReview;
+  review?: APIReview;
 }>();
 const emits = defineEmits<{
   (event: "reaction", data: { operation: ReactionType; id: number }): void;
@@ -64,7 +65,7 @@ const emits = defineEmits<{
   (event: "delete", data: { id: number }): void;
 }>();
 const apiUrl = computed(
-  () => `/api/past-courses/${props.review.courseFeedbackClassNo}`,
+  () => `/api/past-courses/${props.review?.courseFeedbackClassNo}`,
 );
 
 const { pending, data: pastCourses } = useLazyFetch<Course[]>(apiUrl);
