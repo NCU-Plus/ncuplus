@@ -10,7 +10,28 @@
         :max-page="Math.floor(reviews.length / 25 + 1)"
       />
       <ClientOnly>
-        <ReviewFrame ref="reviewFrame" :review="viewingReview" />
+        <ReviewFrame
+          ref="reviewFrame"
+          :review="viewingReview"
+          @reaction="
+            add(
+              reviews.find((e) => e.id === $event.id)!.reactions,
+              createReaction('review', $event.operation, $event.id),
+            );
+            mapReviews();
+          "
+          @complete-edit="
+            edit(
+              reviews.find((e) => e.id === $event.id)!,
+              editReview($event.id, $event.content),
+            );
+            mapReviews();
+          "
+          @delete="
+            del(reviews, $event.id, deleteReview($event.id));
+            mapReviews();
+          "
+        />
       </ClientOnly>
     </div>
   </div>
@@ -21,14 +42,33 @@ import { MetaBuilder } from "~~/helpers/MetaBuilder";
 import { UserManager } from "~~/managers/UserManager";
 import { ReactionType } from "~~/types/ReactionType";
 import { toDatetimeString } from "~~/helpers/time";
+import {
+  createReaction,
+  editReview,
+  deleteReview,
+  add,
+  del,
+  edit,
+} from "~/helpers/course-feedback";
 import ReviewFrame from "~~/components/review/ReviewFrame.vue";
 
 const { data: reviews } = await useFetch("/api/reviews");
 const page = useReviewPage();
 const reviewFrame = ref<InstanceType<typeof ReviewFrame> | null>(null);
 const viewingReviewId = ref(reviews.value[0].id);
-const mappedReviews = ref(
-  await Promise.all(
+const mappedReviews = ref(await getMappedReviews());
+
+const pageReviews = computed(() =>
+  mappedReviews.value.slice((page.value - 1) * 25, page.value * 25),
+);
+const viewingReview = computed(() => {
+  const review = reviews.value.find((e) => e.id === viewingReviewId.value);
+  if (review) return review;
+  throw new Error("Review not found");
+});
+
+async function getMappedReviews() {
+  return await Promise.all(
     reviews.value
       .sort(
         (a, b) =>
@@ -52,17 +92,12 @@ const mappedReviews = ref(
           },
         };
       }),
-  ),
-);
+  );
+}
 
-const pageReviews = computed(() =>
-  mappedReviews.value.slice((page.value - 1) * 25, page.value * 25),
-);
-const viewingReview = computed(() => {
-  const review = reviews.value.find((e) => e.id === viewingReviewId.value);
-  if (review) return review;
-  throw new Error("Review not found");
-});
+async function mapReviews() {
+  mappedReviews.value = await getMappedReviews();
+}
 
 const title = "心得列表";
 

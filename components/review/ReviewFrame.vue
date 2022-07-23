@@ -32,7 +32,12 @@
           </ul>
         </div>
       </div>
-      <CoursesReview :review="review" />
+      <CoursesReview
+        :review="review"
+        @reaction="emits('reaction', $event)"
+        @complete-edit="emits('complete-edit', $event)"
+        @delete="emits('delete', $event)"
+      />
     </div>
   </DialogFrame>
 </template>
@@ -42,9 +47,21 @@ import DialogFrame from "~~/components/DialogFrame.vue";
 import { APIReview } from "~~/types/APIReview";
 import { Course } from "~~/types/Course";
 import { formatSemester } from "~~/helpers/course";
+import { ReactionType } from "~~/types/ReactionType";
 
 const props = defineProps<{
   review: APIReview;
+}>();
+const emits = defineEmits<{
+  (event: "reaction", data: { operation: ReactionType; id: number }): void;
+  (
+    event: "complete-edit",
+    data: {
+      id: number;
+      content: string;
+    },
+  ): void;
+  (event: "delete", data: { id: number }): void;
 }>();
 const apiUrl = computed(
   () => `/api/past-courses/${props.review.courseFeedbackClassNo}`,

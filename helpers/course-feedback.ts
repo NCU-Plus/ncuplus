@@ -296,3 +296,31 @@ export async function deletePastExam(id: number) {
   });
   return true;
 }
+
+export async function add<T>(target: T[], newEntryPromise: Promise<T | null>) {
+  const newEntry = await newEntryPromise;
+  if (newEntry) target.push(newEntry);
+}
+
+export async function edit(
+  target: APIComment | APIReview,
+  editedEntryPromise: Promise<APIComment | APIReview | null>,
+) {
+  const editedEntry = await editedEntryPromise;
+  if (editedEntry) {
+    target.content = editedEntry.content;
+    target.updatedAt = editedEntry.updatedAt;
+  }
+}
+
+export async function del(
+  target: APIComment[] | APIReview[] | APIPastExam[],
+  entryId: number,
+  successPromise: Promise<boolean>,
+) {
+  if (await successPromise)
+    target.splice(
+      target.findIndex((e) => e.id === entryId),
+      1,
+    );
+}
