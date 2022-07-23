@@ -87,10 +87,11 @@ import {
   deleteReview,
   deletePastExam,
   downloadPastExam,
+  add,
+  del,
+  edit,
 } from "~/helpers/course-feedback";
 import { APICourseFeedback } from "~~/types/APICourseFeedback";
-import { APIComment } from "~~/types/APIComment";
-import { APIReview } from "~~/types/APIReview";
 import { APIPastExam } from "~~/types/APIPastExam";
 import { MetaBuilder } from "~~/helpers/MetaBuilder";
 
@@ -102,34 +103,6 @@ const { data: course } = await useFetch<Course>(
 const { data: courseFeedback } = await useFetch<APICourseFeedback>(
   `/api/course-feedbacks/${(course.value as unknown as Course).classNo}`,
 );
-
-async function add<T>(target: T[], newEntryPromise: Promise<T | null>) {
-  const newEntry = await newEntryPromise;
-  if (newEntry) target.push(newEntry);
-}
-
-async function edit(
-  target: APIComment | APIReview,
-  editedEntryPromise: Promise<APIComment | APIReview | null>,
-) {
-  const editedEntry = await editedEntryPromise;
-  if (editedEntry) {
-    target.content = editedEntry.content;
-    target.updatedAt = editedEntry.updatedAt;
-  }
-}
-
-async function del(
-  target: APIComment[] | APIReview[] | APIPastExam[],
-  entryId: number,
-  successPromise: Promise<boolean>,
-) {
-  if (await successPromise)
-    target.splice(
-      target.findIndex((e) => e.id === entryId),
-      1,
-    );
-}
 
 async function download(entryId: number, successPromise: Promise<boolean>) {
   if (await successPromise)
