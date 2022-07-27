@@ -1,15 +1,8 @@
 import { defineNuxtConfig } from "nuxt";
-import tailwindForms from "@tailwindcss/forms";
-/* eslint-disable */
-// @ts-ignore
-import tailwindTypography from "@tailwindcss/typography";
-// @ts-ignore
-import tailwindScrollbarHide from "tailwind-scrollbar-hide";
-/* eslint-enable */
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  modules: ["@nuxtjs/tailwindcss"],
+  modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt"],
   build: {
     transpile: [
       "@fortawesome/fontawesome-svg-core",
@@ -25,9 +18,6 @@ export default defineNuxtConfig({
   },
   tailwindcss: {
     cssPath: "~/assets/tailwind.css",
-    config: {
-      plugins: [tailwindForms, tailwindScrollbarHide, tailwindTypography],
-    },
   },
   runtimeConfig: {
     public: { gaId: "", apiBaseUrl: "", deployDomain: "" },
@@ -42,6 +32,5 @@ export default defineNuxtConfig({
       },
     },
   },
-  buildModules: ["@pinia/nuxt"],
   css: ["easymde/dist/easymde.min.css", "highlight.js/styles/default.css"],
 });
