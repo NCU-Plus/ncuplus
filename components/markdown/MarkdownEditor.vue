@@ -5,7 +5,6 @@
 <script setup lang="ts">
 import DOMPurify from "isomorphic-dompurify";
 import { marked } from "marked";
-import hljs from "highlight.js";
 
 const props = defineProps<{
   initialValue?: string;
@@ -14,14 +13,6 @@ const props = defineProps<{
 const editor = ref<HTMLTextAreaElement | null>(null);
 // ref EasyMDE instance would cause serious problems
 let mdeInstance: EasyMDE | null = null;
-marked.setOptions({
-  highlight: (code, lang) => {
-    const language = hljs.getLanguage(lang) ? lang : "plaintext";
-    return hljs.highlight(code, { language }).value;
-  },
-  langPrefix: "hljs language-",
-  breaks: true,
-});
 
 watchEffect(async () => {
   if (editor.value) {
