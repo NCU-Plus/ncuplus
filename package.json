@@ -21,7 +21,7 @@
     "highlight.js": "^11.6.0",
     "isomorphic-dompurify": "^0.20.0",
     "marked": "^4.0.18",
-    "pinia": "^2.0.17",
+    "pinia": "^2.0.18",
     "vue-gtag": "^2.0.1"
   },
   "devDependencies": {
