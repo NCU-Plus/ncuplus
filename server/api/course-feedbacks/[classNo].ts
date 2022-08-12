@@ -3,10 +3,8 @@ import { APICourseFeedback } from "~~/types/APICourseFeedback";
 
 export default defineEventHandler(async (event): Promise<APICourseFeedback> => {
   const config = useRuntimeConfig();
-  const { data: courseFeedback } = <APIResponse<APICourseFeedback>>(
-    await $fetch(
-      `${config.public.apiBaseUrl}/course-feedbacks/${event.context.params.classNo}`,
-    )
+  const { data: courseFeedback } = await $fetch<APIResponse<APICourseFeedback>>(
+    `${config.public.apiBaseUrl}/course-feedbacks/${event.context.params.classNo}`,
   );
   if (!courseFeedback)
     throw new Error(

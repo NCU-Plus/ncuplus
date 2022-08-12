@@ -15,13 +15,13 @@
     "@fortawesome/free-regular-svg-icons": "^6.1.2",
     "@fortawesome/free-solid-svg-icons": "^6.1.2",
     "@fortawesome/vue-fontawesome": "^3.0.1",
-    "@pinia/nuxt": "^0.3.1",
+    "@pinia/nuxt": "^0.4.0",
     "@tweenjs/tween.js": "^18.6.4",
     "easymde": "^2.16.1",
     "highlight.js": "^11.6.0",
     "isomorphic-dompurify": "^0.20.0",
     "marked": "^4.0.18",
-    "pinia": "^2.0.17",
+    "pinia": "^2.0.18",
     "vue-gtag": "^2.0.1"
   },
   "devDependencies": {
@@ -36,8 +36,8 @@
     "eslint-plugin-vue": "^9.3.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
-    "nuxi": "^3.0.0-rc.6",
-    "nuxt": "^3.0.0-rc.6",
+    "nuxi": "^3.0.0-rc.8",
+    "nuxt": "^3.0.0-rc.8",
     "tailwind-scrollbar-hide": "^1.1.7",
     "typescript": "^4.7.4",
     "vue-eslint-parser": "^9.0.3"
