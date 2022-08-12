@@ -12,14 +12,14 @@ export default defineEventHandler(async (): Promise<Course[]> => {
 
   const [{ data: courses }, { data: colleges }, { data: departments }] =
     await Promise.all([
-      <APIResponse<APICourse[]>>(
-        await $fetch(`${config.public.apiBaseUrl}/courses`)
+      await $fetch<APIResponse<APICourse[]>>(
+        `${config.public.apiBaseUrl}/courses`,
       ),
-      <APIResponse<APICollege[]>>(
-        await $fetch(`${config.public.apiBaseUrl}/colleges`)
+      await $fetch<APIResponse<APICollege[]>>(
+        `${config.public.apiBaseUrl}/colleges`,
       ),
-      <APIResponse<APIDepartment[]>>(
-        await $fetch(`${config.public.apiBaseUrl}/departments`)
+      await $fetch<APIResponse<APIDepartment[]>>(
+        `${config.public.apiBaseUrl}/departments`,
       ),
     ]);
 

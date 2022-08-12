@@ -49,10 +49,11 @@ export class APIClient {
     },
   ): Promise<string> {
     try {
-      const resp = <APIResponse<{ token: string }>>(
-        await $fetch(`${this._config.public.apiBaseUrl}/auth/token`, {
+      const resp = await $fetch<APIResponse<{ token: string }>>(
+        `${this._config.public.apiBaseUrl}/auth/token`,
+        {
           headers: { "csrf-token": useCookie("X-CSRF-TOKEN").value },
-        })
+        },
       );
       return (resp.data as { token: string }).token;
     } catch (e) {
