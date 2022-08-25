@@ -19,7 +19,7 @@
     "@tweenjs/tween.js": "^18.6.4",
     "easymde": "^2.16.1",
     "highlight.js": "^11.6.0",
-    "isomorphic-dompurify": "^0.20.0",
+    "isomorphic-dompurify": "^0.21.0",
     "marked": "^4.0.18",
     "pinia": "^2.0.18",
     "vue-gtag": "^2.0.1"
