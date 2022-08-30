@@ -20,7 +20,7 @@
     "easymde": "^2.17.0",
     "highlight.js": "^11.6.0",
     "isomorphic-dompurify": "^0.21.0",
-    "marked": "^4.0.19",
+    "marked": "^4.1.0",
     "pinia": "^2.0.18",
     "vue-gtag": "^2.0.1"
   },
