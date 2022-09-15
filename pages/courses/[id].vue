@@ -98,10 +98,12 @@ import { MetaBuilder } from "~~/helpers/MetaBuilder";
 const route = useRoute();
 
 const { data: course } = await useFetch<Course>(
-  `/api/courses/${route.params.id}`,
+  () => `/api/courses/${route.params.id}`,
+  { key: `/api/courses/${route.params.id}` },
 );
 const { data: courseFeedback } = await useFetch<APICourseFeedback>(
-  `/api/course-feedbacks/${(course.value as unknown as Course).classNo}`,
+  () => `/api/course-feedbacks/${course.value.classNo}`,
+  { key: `/api/course-feedbacks/${course.value.classNo}` },
 );
 
 async function download(entryId: number, successPromise: Promise<boolean>) {
