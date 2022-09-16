@@ -1,14 +1,19 @@
-name: CI
+name: CD
 
 on:
-  push:
-    branches: [ master ]
+  release:
+    types: [released]
 
 jobs:
   docker:
     runs-on: ubuntu-latest
     name: "Build Docker image and push to Docker Hub"
     steps:
+    - name: Get version string
+      id: get-version
+      run: |
+        tag=${{github.event.release.tag_name}}
+        echo "::set-output name=version::${tag:1}"
     - uses: actions/checkout@v2
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
@@ -21,4 +26,4 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: ppodds/ncuplus-frontend:latest
+        tags: ppodds/ncuplus-frontend:latest,ppodds/ncuplus-frontend:${{ steps.get-version.outputs.version }}
