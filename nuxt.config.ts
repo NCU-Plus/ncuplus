@@ -32,5 +32,9 @@ export default defineNuxtConfig({
       },
     },
   },
-  css: ["easymde/dist/easymde.min.css", "highlight.js/styles/default.css"],
+  css: [
+    "easymde/dist/easymde.min.css",
+    "highlight.js/styles/default.css",
+    "@fortawesome/fontawesome-svg-core/styles.css",
+  ],
 });
