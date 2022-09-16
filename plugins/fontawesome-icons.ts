@@ -1,4 +1,4 @@
-import { library } from "@fortawesome/fontawesome-svg-core";
+import { library, config } from "@fortawesome/fontawesome-svg-core";
 import { faGithubSquare } from "@fortawesome/free-brands-svg-icons";
 import {
   faBook,
@@ -17,6 +17,8 @@ import {
   faCaretUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+config.autoAddCss = false;
 
 library.add(faGithubSquare);
 library.add(faSearch);
@@ -37,5 +39,5 @@ library.add(faCaretUp);
 export default defineNuxtPlugin((nuxtApp) => {
   // eslint-disable-next-line
   //@ts-ignore
-  nuxtApp.vueApp.component("FontAwesomeIcon", FontAwesomeIcon);
+  nuxtApp.vueApp.component("FontAwesomeIcon", FontAwesomeIcon, {});
 });
