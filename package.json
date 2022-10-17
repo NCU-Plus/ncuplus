@@ -30,7 +30,7 @@
     "@nuxt/test-utils": "^3.0.0-rc.8",
     "@nuxtjs/tailwindcss": "^5.3.1",
     "@tailwindcss/forms": "^0.5.2",
-    "@tailwindcss/typography": "^0.5.4",
+    "@tailwindcss/typography": "^0.5.7",
     "@typescript-eslint/eslint-plugin": "^5.31.0",
     "@typescript-eslint/parser": "^5.31.0",
     "@vue/test-utils": "^2.1.0",
