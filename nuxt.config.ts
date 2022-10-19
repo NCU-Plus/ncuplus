@@ -32,6 +32,17 @@ export default defineNuxtConfig({
       },
     },
   },
+  vite: {
+    server: {
+      proxy: {
+        "/open-api": {
+          target: "http://localhost:3000",
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/open-api/, ""),
+        },
+      },
+    },
+  },
   css: [
     "easymde/dist/easymde.min.css",
     "highlight.js/styles/default.css",
