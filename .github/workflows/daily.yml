@@ -7,3 +7,6 @@ on:
 jobs:
   e2e-tests:
     uses: ./.github/workflows/e2e-test.yml
+    secrets:
+      cypress-record-key: ${{ secrets.CYPRESS_RECORD_KEY }}
+
