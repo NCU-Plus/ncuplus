@@ -17,25 +17,5 @@ jobs:
     - run: npx nuxt prepare
     - name: Run unit tests
       run: npm run test 
-  install:
-    runs-on: ubuntu-latest
-    container: cypress/browsers:node16.17.0-chrome106
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Disable husky install
-        run: npm pkg delete scripts.prepare
-      - name: Cypress install
-        uses: cypress-io/github-action@v4
-        with:
-          # Disable running of tests within install job
-          runTests: false
-          build: npm run build
-      - name: Save build folder
-        uses: actions/upload-artifact@v3
-        with:
-          name: build
-          if-no-files-found: error
-          path: .output
   e2e-tests:
     uses: ./.github/workflows/e2e-test.yml
