@@ -1,0 +1,69 @@
+name: Unit Tests and Cypress Tests with installation job
+
+on: [push]
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set node version to 16
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: 'npm'
+    - name: Install deps
+      run: npm install
+    - run: npx nuxt prepare
+    - name: Run unit tests
+      run: npm run test 
+  install:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.17.0-chrome106
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Disable husky install
+        run: npm pkg delete scripts.prepare
+      - name: Cypress install
+        uses: cypress-io/github-action@v4
+        with:
+          # Disable running of tests within install job
+          runTests: false
+          build: npm run build
+      - name: Save build folder
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          if-no-files-found: error
+          path: .output
+  ui-chrome-tests:
+    runs-on: ubuntu-latest
+    needs: install
+    container:
+      image: cypress/browsers:node16.17.0-chrome106
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Download the build folders
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: .output
+      - name: Clean tsconfig
+        run: echo '{}' > tsconfig.json
+      - name: Disable husky install
+        run: npm pkg delete scripts.prepare
+      - name: 'UI Tests - Chrome'
+        uses: cypress-io/github-action@v4
+        with:
+          start: node .output/server/index.mjs
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 30
+          browser: chrome
+          record: true
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
