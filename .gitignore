@@ -6,3 +6,7 @@ node_modules
 .output
 .env
 dist
+
+# cypress output files
+cypress/videos
+cypress/screenshots
