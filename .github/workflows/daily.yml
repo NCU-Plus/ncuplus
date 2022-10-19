@@ -1,0 +1,9 @@
+name: "Daily"
+on:
+  schedule:
+    - cron: "0 6,12,18 * * *"
+  workflow_dispatch:
+
+jobs:
+  e2e-tests:
+    uses: ./.github/workflows/e2e-test.yml
