@@ -5,7 +5,16 @@ on:
     types: [released]
 
 jobs:
+  unit-tests:
+    uses: ./.github/workflows/unit-test.yml
+  e2e-test:
+    uses: ./.github/workflows/e2e-test.yml
+    secrets:
+      cypress-record-key: ${{ secrets.CYPRESS_RECORD_KEY }}
+      oauth-client-id: ${{ secrets.OAUTH_CLIENT_ID }}
+      oauth-client-secret: ${{ secrets.OAUTH_CLIENT_SECRET }}
   docker:
+    needs: [unit-test, e2e-test]
     runs-on: ubuntu-latest
     name: "Build Docker image and push to Docker Hub"
     steps:
@@ -22,8 +31,15 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: Build and push
+    - name: Build frontend and push
       uses: docker/build-push-action@v3
       with:
         push: true
         tags: ppodds/ncuplus-frontend:latest,ppodds/ncuplus-frontend:${{ steps.get-version.outputs.version }}
+        file: frontend.dockerfile
+    - name: Build backend and push
+      uses: docker/build-push-action@v3
+      with:
+        push: true
+        tags: ppodds/ncuplus-backend:latest,ppodds/ncuplus-backend:${{ steps.get-version.outputs.version }}
+        file: backend.dockerfile

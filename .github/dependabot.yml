@@ -1,7 +1,17 @@
 version: 2
 updates:
-- package-ecosystem: npm
+- package-ecosystem: pnpm
   directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 20
+- package-ecosystem: pnpm
+  directory: "/frontend"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 20
+- package-ecosystem: pnpm
+  directory: "/backend"
   schedule:
     interval: daily
   open-pull-requests-limit: 20

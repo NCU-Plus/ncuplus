@@ -3,21 +3,11 @@ name: Unit Tests and Cypress Tests with installation job
 on: [push]
 
 jobs:
-  unit-tests:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set node version to 16
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
-        cache: 'npm'
-    - name: Install deps
-      run: npm install
-    - run: npx nuxt prepare
-    - name: Run unit tests
-      run: npm run test 
+  unit-test:
+    uses: ./.github/workflows/unit-test.yml
   e2e-tests:
     uses: ./.github/workflows/e2e-test.yml
     secrets:
       cypress-record-key: ${{ secrets.CYPRESS_RECORD_KEY }}
+      oauth-client-id: ${{ secrets.OAUTH_CLIENT_ID }}
+      oauth-client-secret: ${{ secrets.OAUTH_CLIENT_SECRET }}
