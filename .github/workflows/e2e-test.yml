@@ -5,43 +5,68 @@ on:
     secrets:
       cypress-record-key:
         required: true
+      oauth-client-id:
+        required: true
+      oauth-client-secret:
+        required: true
 
 jobs:
   install:
     runs-on: ubuntu-latest
-    container: cypress/browsers:node16.17.0-chrome106
+    container:
+      image: cypress/browsers:node16.17.0-chrome106
+      options: --user 1001
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7
       - name: Disable husky install
         run: npm pkg delete scripts.prepare
+      - name: Install dependencies
+        run: |
+          pnpm i
+          pnpm install:dep
       - name: Cypress install
         uses: cypress-io/github-action@v4
         with:
           # Disable running of tests within install job
           runTests: false
-          build: npm run build
-      - name: Save build folder
+          build: pnpm build:frontend
+      - name: Save frontend build folder
         uses: actions/upload-artifact@v3
         with:
           name: build
           if-no-files-found: error
-          path: .output
+          path: frontend/.output
   ui-chrome-tests:
     runs-on: ubuntu-latest
     needs: install
     container:
       image: cypress/browsers:node16.17.0-chrome106
+      options: --user 1001
     strategy:
       fail-fast: false
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Download the build folders
+      - name: Download frontend build folder
         uses: actions/download-artifact@v3
         with:
           name: build
-          path: .output
+          path: frontend/.output
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7
+      - name: Disable husky install
+        run: npm pkg delete scripts.prepare
+      - name: Install dependencies
+        run: |
+          pnpm i
+          pnpm install:dep:backend
       - name: Clean tsconfig
         run: echo '{}' > tsconfig.json
       - name: Disable husky install
@@ -49,7 +74,7 @@ jobs:
       - name: 'UI Tests - Chrome'
         uses: cypress-io/github-action@v4
         with:
-          start: node .output/server/index.mjs
+          start: pnpm start:ci
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 30
           browser: chrome
@@ -57,3 +82,34 @@ jobs:
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.cypress-record-key }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+          # frontend env
+          NUXT_PUBLIC_API_BASE_URL: http://localhost:3001/open-api
+          NITRO_PORT: 3001
+
+          # backend env
+          DB_TYPE: mariadb
+          DB_HOST: database
+          DB_PORT: 3306
+          DB_USER: ncuplus
+          DB_PASSWORD: test
+          DB_NAME: ncuplus
+          DB_TIMEZONE: "+08:00"
+          UPLOAD_FILES_PATH: "uploads/"
+          OAUTH_CLIENT_ID: ${{ secrets.oauth-client-id }}
+          OAUTH_CLIENT_SECRET: ${{ secrets.oauth-client-secret }}
+          # TODO: change this later
+          OAUTH_REDIRECT_URL: ""
+          SESSION_SECRET: secret
+          JWT_SECRET: secretKey
+          JWT_EXPIRES_IN: 3600s
+    services:
+      database:
+        image: mariadb
+        env:
+          MARIADB_DATABASE: ncuplus
+          MARIADB_USER: ncuplus
+          MARIADB_PASSWORD: test
+          MARIADB_ROOT_PASSWORD: test
+          TZ: Asia/Taipei
+

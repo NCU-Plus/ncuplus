@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npx lint-staged
-npx nuxi typecheck
-npx vitest run
+pnpm lint-staged
+
+cd frontend && pnpm nuxt typecheck
+pnpm test
