@@ -4,7 +4,7 @@
     "build": "concurrently \"pnpm build:frontend\" \"pnpm build:backend\"",
     "build:frontend": "pnpm -C frontend build",
     "build:backend": "pnpm -C backend build",
-    "start:ci": "concurrently \"cd frontend && node .output/server/index.mjs\" \"pnpm -C backend start\"",
+    "start:ci": "concurrently \"pnpm ts-node proxy.ts\" \"cd frontend && node .output/server/index.mjs\" \"pnpm -C backend start\"",
     "start:prod": "concurrently \"cd frontend && node .output/server/index.mjs\" \"pnpm -C backend start:prod\"",
     "prepare": "husky install",
     "test": "concurrently \"pnpm test:frontend\" \"pnpm test:backend\"",
@@ -21,6 +21,7 @@
     "install:dep:backend": "pnpm i -C backend"
   },
   "devDependencies": {
+    "@types/http-proxy": "^1.17.9",
     "@types/node": "^18.11.2",
     "@typescript-eslint/eslint-plugin": "^5.40.1",
     "@typescript-eslint/parser": "^5.40.1",
@@ -30,9 +31,11 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.6.0",
+    "http-proxy": "^1.18.1",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
+    "ts-node": "^10.9.1",
     "typescript": "^4.8.4",
     "vue-eslint-parser": "^9.1.0"
   },
