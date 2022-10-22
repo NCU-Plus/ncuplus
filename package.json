@@ -16,7 +16,7 @@
     "format": "concurrently \"pnpm format:frontend\" \"pnpm format:backend\"",
     "format:frontend": "prettier -w --config \"./frontend/.prettierrc\" \"./frontend/**/*.{ts,vue}\"",
     "format:backend": "prettier -w --config \"./backend/.prettierrc\" \"./backend/{src,test}/**/*.ts\"",
-    "install:dep": "concurrently \"pnpm install:dep:frontend\" \"pnpm install:dep:backend\"",
+    "install:dep": "pnpm install concurrently && concurrently \"pnpm install:dep:frontend\" \"pnpm install:dep:backend\"",
     "install:dep:frontend": "pnpm i -C frontend",
     "install:dep:backend": "pnpm i -C backend"
   },
