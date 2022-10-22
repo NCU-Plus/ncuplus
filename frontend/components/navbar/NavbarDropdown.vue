@@ -1,5 +1,6 @@
 <template>
   <div
+    id="dropdown"
     class="flex px-3 py-5 rounded items-center justify-center"
     @mouseenter="openDropdown = true"
     @mouseleave="openDropdown = false"
@@ -12,6 +13,7 @@
       <ul v-if="openDropdown" class="absolute top-full w-32 bg-blue-400">
         <li
           v-for="item of items"
+          :id="item.label"
           :key="item.label"
           class="flex flex-col border-b-[1px] border-white"
         >
