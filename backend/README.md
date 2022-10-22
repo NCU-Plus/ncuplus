@@ -9,7 +9,7 @@ NCU Plus website backend. Provide RESTFUL resource api endpoints for frontend. E
 Install dependencies:
 
 ```bash
-npm ci
+pnpm i
 ```
 
 Set environment variables:
@@ -26,12 +26,12 @@ Run test database:
 docker-compose up -d --build
 ```
 
-> Database is bind to port 9487, and Adminer is bind to port 8080 by default.
+> Database is bind to port 3306, and Adminer is bind to port 8080 by default.
 
 Start server:
 
 ```bash
-npm run start:dev
+pnpm start:dev
 ```
 
 ## Production
@@ -39,26 +39,26 @@ npm run start:dev
 Build the application for production:
 
 ```bash
-npm run build
+pnpm build
 ```
 
 Locally preview production build:
 
 ```bash
-npm run start:prod
+pnpm run start:prod
 ```
 
 ## Test
 
 ```bash
 # unit tests
-$ npm run test
+$ pnpm test
 
 # e2e tests
-$ npm run test:e2e
+$ pnpm test:e2e
 
 # test coverage
-$ npm run test:cov
+$ pnpm test:cov
 ```
 
 ## License

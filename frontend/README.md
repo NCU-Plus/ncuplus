@@ -18,7 +18,7 @@ NCU+ Frontend V2 is a course feedback website for National Central University st
 Install dependencies:
 
 ```bash
-npm ci
+pnpm i
 ```
 
 Set environment variables:
@@ -28,12 +28,12 @@ cp .env.example .env
 # Edit .env file to fit your environment
 ```
 
-Start the development server on http://localhost:3000
+Start the development server on http://localhost:3001
 
-> You must run [backend server](https://github.com/NCU-Plus/ncuplus-backend) before below command.
+> You must run [backend server](https://github.com/NCU-Plus/ncuplus/tree/master/backend) before below command.
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 ## Production
@@ -41,13 +41,13 @@ npm run dev
 Build the application for production:
 
 ```bash
-npm run build
+pnpm build
 ```
 
 Locally preview production build:
 
 ```bash
-npm run preview
+pnpm preview
 ```
 
 ## License
