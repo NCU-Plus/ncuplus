@@ -90,6 +90,15 @@ If databasee is started, you can run e2e tests.
 ```bash
 pnpm build:frontend
 pnpm start:ci
+
+# Run the following command if you need to run seeder
+pnpm build:backend
+
+# Open cypress app
+pnpm cypress open
+
+# Run cypress
+pnpm cypress run
 ```
 
 > `pnpm start:ci` will start a proxy server at `http://localhost:4000`. It would proxy all requests which url starts with `/open-api` to backend and other requests to frontend.
