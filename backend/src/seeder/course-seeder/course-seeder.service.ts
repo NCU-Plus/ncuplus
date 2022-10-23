@@ -11,7 +11,8 @@ export class CourseSeederService {
   ) {}
 
   async seedCourse() {
-    // placeholder
+    await this.courseRepository.clear();
+
     const course = new Course();
     course.year = 111;
     course.semester = 0;

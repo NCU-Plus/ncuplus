@@ -71,6 +71,11 @@ describe("home page", () => {
 });
 
 describe("courses page", () => {
+  before(() => {
+    cy.exec('pnpm -C "backend" seed:course')
+    cy.exec('pnpm -C "backend" seed:department')
+  })
+
   it("type 課名搜尋", () => {
     cy.visit("/courses");
     cy.wait(1000);

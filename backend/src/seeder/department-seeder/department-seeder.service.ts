@@ -11,6 +11,8 @@ export class DepartmentSeederService {
   ) {}
 
   async seedDepartment() {
+    await this.departmentRepository.clear();
+
     const department = new Department();
     department.departmentId = 'csie';
     department.departmentName = '資訊工程學系';
