@@ -12,6 +12,7 @@ export class DepartmentSeederService {
 
   async seedDepartment() {
     // placeholder
+    await this.departmentRepository.clear();
     const department1 = this.departmentRepository.create({
       departmentId: 'deptI0I1I0',
       departmentName: '體育室',

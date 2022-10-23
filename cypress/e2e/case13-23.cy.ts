@@ -1,5 +1,11 @@
 describe("courses page", () => {
 
+  before(() => {
+    cy.exec('pnpm -C "backend" seed:course');
+    cy.exec('pnpm -C "backend" seed:department');
+    cy.wait(100);
+  })
+
   it("click 未打勾之進階搜尋的框框", () => {
     cy.visit("/courses");
     cy.wait(1000);

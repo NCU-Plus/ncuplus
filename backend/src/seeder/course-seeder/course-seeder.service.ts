@@ -12,8 +12,8 @@ export class CourseSeederService {
 
   async seedCourse() {
     // placeholder
+    await this.courseRepository.clear();
     const course1 = this.courseRepository.create({
-      id: 1,
       year: 110,
       semester: 1,
       serialNo: 1001,
@@ -33,7 +33,6 @@ export class CourseSeederService {
     await this.courseRepository.save(course1);
 
     const course2 = this.courseRepository.create({
-      id: 2,
       year: 110,
       semester: 1,
       serialNo: 1002,
@@ -53,7 +52,6 @@ export class CourseSeederService {
     await this.courseRepository.save(course2);
 
     const course3 = this.courseRepository.create({
-      id: 3,
       year: 110,
       semester: 1,
       serialNo: 1003,
@@ -73,7 +71,6 @@ export class CourseSeederService {
     await this.courseRepository.save(course3);
 
     const course4 = this.courseRepository.create({
-      id: 4,
       year: 111,
       semester: 0,
       serialNo: 1004,
@@ -94,7 +91,6 @@ export class CourseSeederService {
 
     for (let i = 0; i < 200; i++) {
       const course5 = this.courseRepository.create({
-        id: 5,
         year: 111,
         semester: 0,
         serialNo: 1005,
