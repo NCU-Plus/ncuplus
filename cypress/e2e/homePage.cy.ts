@@ -69,37 +69,3 @@ describe("home page", () => {
     cy.url().should("contain", "/courses/simulation");
   });
 });
-
-describe("courses page", () => {
-  before(() => {
-    cy.exec('pnpm -C "backend" seed:course')
-    cy.exec('pnpm -C "backend" seed:department')
-  })
-
-  it("type 課名搜尋", () => {
-    cy.visit("/courses");
-    cy.wait(1000);
-    cy.get("input:first").click().type("軟體工程實務").trigger("input");
-
-    cy.get("tbody>tr>th").eq(1).should("have.text", "軟體工程實務");
-  });
-
-  it("type 課號搜尋", () => {
-    cy.visit("/courses");
-    cy.wait(1000);
-    cy.get("input:first").click().type("SE6030*").trigger("input");
-
-    cy.get("tbody>tr>th").eq(0).should("have.text", "111-上");
-    cy.get("tbody>tr>th").eq(1).should("have.text", "軟體工程實務");
-    cy.get("tbody>tr>th").eq(2).should("have.text", "梁德容, 王尉任, 鄭永斌");
-    cy.get("tbody>tr>th").eq(3).should("have.text", "資訊工程學系");
-  });
-
-  it("type 老師搜尋", () => {
-    cy.visit("/courses");
-    cy.wait(1000);
-    cy.get("input:first").click().type("梁德容").trigger("input");
-
-    cy.get("tbody>tr>th").eq(2).invoke("text").should("contains", "梁德容");
-  });
-});
