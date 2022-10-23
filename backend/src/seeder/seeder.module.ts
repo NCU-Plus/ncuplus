@@ -3,6 +3,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { configuration } from '../config';
 import { CollegeSeederModule } from './college-seeder/college-seeder.module';
+import { CourseSeederModule } from './course-seeder/course-seeder.module';
+import { DepartmentSeederModule } from './department-seeder/department-seeder.module';
 import { SeederService } from './seeder.service';
 
 @Module({
@@ -20,6 +22,8 @@ import { SeederService } from './seeder.service';
       inject: [ConfigService],
     }),
     CollegeSeederModule,
+    CourseSeederModule,
+    DepartmentSeederModule,
   ],
   providers: [SeederService],
 })
