@@ -1,4 +1,4 @@
-describe("courses index page", () => {
+describe("courses show page", () => {
 
   before(() => {
     cy.exec('pnpm -C "backend" seed:course');
