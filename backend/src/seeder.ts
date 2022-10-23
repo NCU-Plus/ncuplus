@@ -6,6 +6,10 @@ function execSeed(type: string, seederService: SeederService) {
   switch (type) {
     case 'college':
       return seederService.seedCollege();
+    case 'course':
+      return seederService.seedCourse();
+    case 'department':
+      return seederService.seedDepartment();
     default:
       console.error(`No seed found for ${type}`);
   }
@@ -17,7 +21,7 @@ async function bootstrap() {
   const type = process.argv[2];
   if (!type) console.error('Please provide a type of seed to run.');
   console.log(`Running seed for ${type}`);
-  execSeed(type, seederService);
+  await execSeed(type, seederService);
   console.log(`Finished running seed for ${type}`);
   await app.close();
 }
