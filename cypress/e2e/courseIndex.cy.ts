@@ -136,15 +136,15 @@ describe("courses index page", () => {
     cy.wait(1000);
     cy.contains("Last").click();
 
-    cy.get("#page-input").should("have.value", "9");
+    cy.get("#page-input").should("have.value", "3");
   });
   
   it("type 數字框", () => {
     cy.visit("/courses");
     cy.wait(1000);
-    cy.get("#page-input").type("9");
+    cy.get("#page-input").type("2");
 
-    cy.get("#page-input").should("have.value", "9");
+    cy.get("#page-input").should("have.value", "2");
   });
 
   it("click 課程綱要", () => {

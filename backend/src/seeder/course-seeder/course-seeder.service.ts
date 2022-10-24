@@ -105,7 +105,7 @@ export class CourseSeederService {
     course.departmentId = 'csie';
     await this.courseRepository.save(course);
 
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 50; i++) {
       const course5 = this.courseRepository.create({
         year: 111,
         semester: 0,
