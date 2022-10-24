@@ -38,10 +38,10 @@ export class Course {
   passwordCard: string;
 
   @Column('json')
-  teachers: string[];
+  teachers: string;
 
   @Column('json')
-  classTimes: string[];
+  classTimes: string;
 
   @Column()
   limitCnt: number;

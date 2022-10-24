@@ -18,7 +18,9 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "seed:college": "node ./dist/seeder.js college"
+    "seed:college": "node ./dist/seeder.js college",
+    "seed:course": "node ./dist/seeder.js course",
+    "seed:department": "node ./dist/seeder.js department"
   },
   "dependencies": {
     "@casl/ability": "^5.4.4",
