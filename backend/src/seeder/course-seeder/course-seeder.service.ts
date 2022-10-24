@@ -20,8 +20,8 @@ export class CourseSeederService {
       title: '大一體育',
       credit: 0,
       passwordCard: 'OPTIONAL',
-      teachers: ['["沈淑鳳"]'],
-      classTimes: ['["1-3", "1-4"]'],
+      teachers: '["沈淑鳳"]',
+      classTimes: '["1-3", "1-4"]',
       limitCnt: 0,
       admitCnt: 0,
       waitCnt: 47,
@@ -39,8 +39,8 @@ export class CourseSeederService {
       title: '國文（A）經典閱讀：傳統節氣作品選讀',
       credit: 3,
       passwordCard: 'OPTIONAL',
-      teachers: ['["李宜學"]'],
-      classTimes: ['["3-3, 3-4, 1-5"]'],
+      teachers: '["李宜學"]',
+      classTimes: '["3-3, 3-4, 1-5"]',
       limitCnt: 58,
       admitCnt: 0,
       waitCnt: 155,
@@ -58,8 +58,8 @@ export class CourseSeederService {
       title: '程式語言',
       credit: 3,
       passwordCard: 'OPTIONAL',
-      teachers: ['["許富皓"]'],
-      classTimes: ['["2-6", "2-7", "2-8"]'],
+      teachers: '["許富皓"]',
+      classTimes: '["2-6", "2-7", "2-8"]',
       limitCnt: 60,
       admitCnt: 0,
       waitCnt: 140,
@@ -77,8 +77,8 @@ export class CourseSeederService {
       title: '大一體育',
       credit: 0,
       passwordCard: 'OPTIONAL',
-      teachers: ['["姚承義"]'],
-      classTimes: ['["1-5", "1-6"]'],
+      teachers: '["姚承義"]',
+      classTimes: '["1-5", "1-6"]',
       limitCnt: 0,
       admitCnt: 0,
       waitCnt: 0,
@@ -96,8 +96,8 @@ export class CourseSeederService {
     course.title = '軟體工程實務';
     course.credit = 1;
     course.passwordCard = 'passwordCard';
-    course.teachers = ['["梁德容", "王尉任", "鄭永斌"]'];
-    course.classTimes = ['["1-2", "1-3", "1-4"]'];
+    course.teachers = '["梁德容", "王尉任", "鄭永斌"]';
+    course.classTimes = '["1-2", "1-3", "1-4"]';
     course.limitCnt = 456;
     course.admitCnt = 789;
     course.waitCnt = 1011;
@@ -114,8 +114,8 @@ export class CourseSeederService {
         title: '普通化學',
         credit: 3,
         passwordCard: 'OPTIONAL',
-        teachers: ['["劉奕宏"]'],
-        classTimes: ['["2-6", "2-7", "4-2"]'],
+        teachers: '["劉奕宏"]',
+        classTimes: '["2-6", "2-7", "4-2"]',
         limitCnt: 0,
         admitCnt: 0,
         waitCnt: 63,
