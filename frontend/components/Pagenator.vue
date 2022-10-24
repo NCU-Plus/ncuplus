@@ -13,9 +13,13 @@
       </li>
       <input
         id="page-input"
-        v-model="page"
+        v-model="inputPage"
         type="number"
         class="w-14 py-1 text-center"
+        @keydown.enter="
+          if (validatePage(inputPage)) page = inputPage;
+          else inputPage = page;
+        "
       />
       <li id="go-next-page" class="pagenator-button" @click="increasePage">
         Next
@@ -39,6 +43,7 @@ const props = defineProps<{
   maxPage: number;
 }>();
 const page = props.getState();
+const inputPage = ref(page.value);
 
 function increasePage() {
   if (page.value < props.maxPage) page.value++;
@@ -48,12 +53,14 @@ function decreasePage() {
   if (page.value > 1) page.value--;
 }
 
+function validatePage(page: number) {
+  if (page < 1 || page > props.maxPage) return false;
+  return true;
+}
+
 watch(
   () => page.value,
-  () => {
-    if (page.value < 1) page.value = 1;
-    else if (page.value > props.maxPage) page.value = props.maxPage;
-  },
+  () => (inputPage.value = page.value),
 );
 </script>
 
