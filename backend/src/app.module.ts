@@ -31,7 +31,7 @@ import { ReportModule } from './report/report.module';
     CollegeModule,
     DepartmentModule,
     CourseModule,
-    // AuthModule,
+    AuthModule,
     UserModule,
     ReportModule,
     CourseFeedbackModule,
