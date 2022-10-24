@@ -118,6 +118,8 @@ describe("courses index page", () => {
   it("click Prev", () => {
     cy.visit("/courses");
     cy.wait(1000);
+    cy.contains("Next").click();
+    cy.wait(1000);
     cy.contains("Prev").click();
 
     cy.get("#page-input").should("have.value", "1");
@@ -142,7 +144,7 @@ describe("courses index page", () => {
   it("type 數字框", () => {
     cy.visit("/courses");
     cy.wait(1000);
-    cy.get("#page-input").type("2");
+    cy.get("#page-input").type("{backspace}2{enter}");
 
     cy.get("#page-input").should("have.value", "2");
   });
