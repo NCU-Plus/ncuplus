@@ -89,7 +89,7 @@ If databasee is started, you can run e2e tests.
 
 ```bash
 pnpm build:frontend
-pnpm start:ci
+pnpm start:e2e
 
 # Run the following command if you need to run seeder
 pnpm build:backend
