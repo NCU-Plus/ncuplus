@@ -19,8 +19,11 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "seed:college": "node ./dist/seeder.js college",
+    "seed:college:clear": "node ./dist/seeder.js college:clear",
     "seed:course": "node ./dist/seeder.js course",
-    "seed:department": "node ./dist/seeder.js department"
+    "seed:course:clear": "node ./dist/seeder.js course:clear",
+    "seed:department": "node ./dist/seeder.js department",
+    "seed:department:clear": "node ./dist/seeder.js department:clear"
   },
   "dependencies": {
     "@casl/ability": "^5.4.4",

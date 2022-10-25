@@ -13,4 +13,8 @@ export class CollegeSeederService {
   async seedCollege() {
     // placeholder
   }
+
+  async clearCollege() {
+    await this.collegeRepository.clear();
+  }
 }

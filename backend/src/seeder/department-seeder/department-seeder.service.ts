@@ -11,7 +11,6 @@ export class DepartmentSeederService {
   ) {}
 
   async seedDepartment() {
-    await this.departmentRepository.clear();
     const department1 = this.departmentRepository.create({
       departmentId: 'deptI0I1I0',
       departmentName: '體育室',
@@ -46,5 +45,9 @@ export class DepartmentSeederService {
     department.collegeId = 'ncu';
 
     await this.departmentRepository.save(department);
+  }
+
+  async clearDepartment() {
+    await this.departmentRepository.clear();
   }
 }
