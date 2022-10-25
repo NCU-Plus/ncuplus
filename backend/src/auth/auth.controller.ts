@@ -20,7 +20,9 @@ export class AuthController {
 
   @UseGuards(OAuth2AuthGuard)
   @Get('oauth')
-  async oauth() {}
+  async oauth(@Res() res: Response) {
+    res.redirect('/');
+  }
 
   @UseGuards(OAuth2AuthGuard)
   @Get('authorize')
