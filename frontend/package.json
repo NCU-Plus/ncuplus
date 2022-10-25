@@ -29,7 +29,7 @@
     "@tailwindcss/forms": "^0.5.2",
     "@tailwindcss/typography": "^0.5.4",
     "@vue/test-utils": "^2.1.0",
-    "nuxt": "3.0.0-rc.8",
+    "nuxt": "3.0.0-rc.12",
     "tailwind-scrollbar-hide": "^1.1.7",
     "typescript": "^4.7.4",
     "vitest": "^0.24.3"
