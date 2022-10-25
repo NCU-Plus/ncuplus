@@ -6,10 +6,16 @@ function execSeed(type: string, seederService: SeederService) {
   switch (type) {
     case 'college':
       return seederService.seedCollege();
+    case 'college:clear':
+      return seederService.clearCollege();
     case 'course':
       return seederService.seedCourse();
+    case 'course:clear':
+      return seederService.clearCourse();
     case 'department':
       return seederService.seedDepartment();
+    case 'department:clear':
+      return seederService.clearDepartment();
     default:
       console.error(`No seed found for ${type}`);
   }

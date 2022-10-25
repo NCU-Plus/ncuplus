@@ -13,10 +13,19 @@ export class SeederService {
   async seedCollege() {
     await this.collegeSeederService.seedCollege();
   }
+  async clearCollege() {
+    await this.collegeSeederService.clearCollege();
+  }
   async seedCourse() {
     await this.courseSeederService.seedCourse();
   }
+  async clearCourse() {
+    await this.courseSeederService.clearCourse();
+  }
   async seedDepartment() {
     await this.departmentSeederService.seedDepartment();
+  }
+  async clearDepartment() {
+    await this.departmentSeederService.clearDepartment();
   }
 }

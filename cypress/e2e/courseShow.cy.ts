@@ -1,8 +1,10 @@
 describe("courses show page", () => {
 
   before(() => {
-    cy.exec('pnpm -C "backend" seed:course');
+    cy.exec('pnpm -C "backend" seed:department:clear');
     cy.exec('pnpm -C "backend" seed:department');
+    cy.exec('pnpm -C "backend" seed:course:clear');
+    cy.exec('pnpm -C "backend" seed:course');
     cy.wait(100);
   })
 

@@ -11,7 +11,6 @@ export class CourseSeederService {
   ) {}
 
   async seedCourse() {
-    await this.courseRepository.clear();
     const course1 = this.courseRepository.create({
       year: 110,
       semester: 1,
@@ -125,5 +124,9 @@ export class CourseSeederService {
       });
       await this.courseRepository.save(course5);
     }
+  }
+
+  async clearCourse() {
+    await this.courseRepository.clear();
   }
 }
