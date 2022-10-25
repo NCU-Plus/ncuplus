@@ -5,7 +5,7 @@
     "build:frontend": "pnpm -C frontend build",
     "build:backend": "pnpm -C backend build",
     "start:ci": "concurrently \"pnpm ts-node proxy.ts\" \"cd frontend && node .output/server/index.mjs\" \"pnpm -C backend start\"",
-    "start:e2e": "concurrently \"pnpm ts-node proxy.ts\" \"cd frontend && cross-env NUXT_PUBLIC_API_BASE_URL=http://localhost:4000/open-api NITRO_PORT=3001 node .output/server/index.mjs\" \"pnpm -C backend start\"",
+    "start:e2e": "concurrently \"pnpm ts-node proxy.ts\" \"cd frontend && cross-env NUXT_PUBLIC_API_BASE_URL=http://localhost:4000/open-api NITRO_PORT=3001 node .output/server/index.mjs\" \"cross-env NODE_ENV=test pnpm -C backend start\"",
     "start:prod": "concurrently \"cd frontend && node .output/server/index.mjs\" \"pnpm -C backend start:prod\"",
     "prepare": "husky install",
     "test": "concurrently \"pnpm test:frontend\" \"pnpm test:backend\"",
