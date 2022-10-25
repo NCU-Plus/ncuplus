@@ -8,6 +8,7 @@ export class OAuth2AuthGuard extends AuthGuard('oauth2') {
   }
   async canActivate(context: ExecutionContext) {
     const request = context.switchToHttp().getRequest();
+    let result: boolean;
     if (process.env.NODE_ENV === 'test') {
       const testUser = {
         portalId: 123456,
@@ -22,8 +23,7 @@ export class OAuth2AuthGuard extends AuthGuard('oauth2') {
           testUser.studentId,
         );
       request.user = user;
-    }
-    const result = (await super.canActivate(context)) as boolean;
+    } else result = (await super.canActivate(context)) as boolean;
     await super.logIn(request);
     return process.env.NODE_ENV === 'test' ? true : result;
   }
