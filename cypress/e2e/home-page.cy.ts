@@ -68,4 +68,10 @@ describe("home page", () => {
 
     cy.url().should("contain", "/courses/simulation");
   });
+
+  it("check GitHub icon", () => {
+    cy.visit("/");
+
+    cy.get("#github-link").should('have.attr', 'href', 'https://github.com/NCU-Plus/');
+  });
 });
