@@ -16,7 +16,6 @@ import cypress = require("cypress")
 // -- This is a parent command --
 Cypress.Commands.add('login', () => {
     cy.visit('http://localhost:4000/open-api/auth/oauth');
-    cy.visit("/courses/1");
 })
 //
 //

@@ -12,6 +12,7 @@ describe("class information", () => {
     it("case25: type 留言板 & Shift+Enter(送出) ",()=>{
         //given
         cy.login();
+        cy.visit("/courses/1");
         cy.wait(1000);
         //when
         cy.get('textarea[placeholder="留言... (Shift + Enter來發送訊息)"]').type("hello world").type('{shift+enter}');
@@ -31,6 +32,7 @@ describe("class information", () => {
     it("case27: type 課程心得/討論 & 送出(已登入) ",()=>{
         //given
         cy.login();
+        cy.visit("/courses/1");
         //when
         cy.get('pre[role="presentation"]').type('hello world');
         cy.wait(1000);
@@ -53,6 +55,7 @@ describe("class information", () => {
     it("case29: hover 心得右下角 & click 三個點(已登入) ",()=>{
         //given
         cy.login();
+        cy.visit("/courses/1");
         cy.wait(1000);
         cy.get('pre[role="presentation"]').type('hello world');
         cy.wait(1000);
@@ -74,6 +77,7 @@ describe("class information", () => {
     it("case31: click 編輯(送出) ",()=>{
         //given
         cy.login();
+        cy.visit("/courses/1");
         cy.wait(1000);
         cy.get('pre[role="presentation"]').type('hello world');
         cy.wait(1000);
@@ -91,6 +95,7 @@ describe("class information", () => {
     it("case32: click 編輯(取消) ",()=>{
         //given
         cy.login();
+        cy.visit("/courses/1");
         cy.wait(1000);
         cy.get('pre[role="presentation"]').type('hello world');
         cy.wait(1000);
