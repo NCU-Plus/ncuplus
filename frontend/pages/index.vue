@@ -13,7 +13,7 @@
             <h1 class="text-7xl font-bold">NCU+</h1>
             <h3 class="mt-5 text-2xl">中央大學智慧校園系統</h3>
             <h4 class="mt-3 text-base">
-              A new hope at the place where Nobody Care U.
+              A new hope at the place where Nobody Cares U.
             </h4>
           </div>
           <div class="h-full w-1/2" />
