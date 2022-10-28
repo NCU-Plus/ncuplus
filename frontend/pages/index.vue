@@ -16,7 +16,6 @@
               A new hope at the place where Nobody Cares U.
             </h4>
           </div>
-          <div class="h-full w-1/2" />
         </div>
       </div>
     </fullpage-header>

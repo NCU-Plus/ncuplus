@@ -3,6 +3,9 @@
     class="flex items-center justify-between bg-blue-400 text-white fixed w-full z-50 h-50"
   >
     <NuxtLink class="lg:ml-48 p-2 mr-4 inline-flex items-center" to="/">
+      <div class="h-11 w-11 mx-2">
+        <Logo></Logo>
+      </div>
       NCU+
     </NuxtLink>
     <div class="lg:mr-48 w-full lg:inline-flex lg:flex-grow">
