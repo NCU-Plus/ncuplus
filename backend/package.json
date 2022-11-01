@@ -26,7 +26,7 @@
     "seed:department:clear": "node ./dist/seeder.js department:clear"
   },
   "dependencies": {
-    "@casl/ability": "^5.4.4",
+    "@casl/ability": "^6.3.2",
     "@nestjs/axios": "^0.1.0",
     "@nestjs/common": "^9.0.5",
     "@nestjs/config": "^2.2.0",
