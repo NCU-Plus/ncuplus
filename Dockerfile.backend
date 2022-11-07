@@ -28,7 +28,7 @@ FROM node:16.18-bullseye As production
 
 WORKDIR /home/node/app
 COPY --chown=node:node --from=build /app/apps/backend/dist ./dist
-COPY --chown=node:node --from=build /app/apps/backend/node_modules ./node_modules
+COPY --chown=node:node --from=build /app/node_modules ./node_modules
 
 USER node
 
