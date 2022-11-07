@@ -36,10 +36,10 @@ jobs:
       with:
         push: true
         tags: ppodds/ncuplus-frontend:latest,ppodds/ncuplus-frontend:${{ steps.get-version.outputs.version }}
-        file: frontend.dockerfile
+        file: Dockerfile.frontend
     - name: Build backend and push
       uses: docker/build-push-action@v3
       with:
         push: true
         tags: ppodds/ncuplus-backend:latest,ppodds/ncuplus-backend:${{ steps.get-version.outputs.version }}
-        file: backend.dockerfile
+        file: Dockerfile.backend

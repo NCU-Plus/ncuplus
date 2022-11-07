@@ -1,0 +1,34 @@
+FROM node:16.18-bullseye AS build
+
+WORKDIR /app
+COPY --chown=node:node package.json .
+COPY --chown=node:node pnpm-lock.yaml .
+COPY --chown=node:node pnpm-workspace.yaml .
+COPY --chown=node:node .npmrc .
+
+COPY --chown=node:node ./apps/frontend/package.json ./apps/frontend/
+RUN npm pkg delete scripts.prepare
+
+# install pnpm
+RUN npm i -g pnpm
+
+# install dependencies
+RUN pnpm i --frozen-lockfile
+# RUN pnpm i --shamefully-hoist -F frontend --frozen-lockfile
+
+# copy project files
+COPY --chown=node:node ./apps/frontend/ ./apps/frontend/
+
+# build
+RUN pnpm -F frontend build
+
+FROM node:16.18-bullseye As production
+
+WORKDIR /home/node/app/frontend
+COPY --chown=node:node --from=build /app/apps/frontend/.output ./.output
+
+USER node
+
+ENV NODE_ENV production
+EXPOSE 3000
+CMD [ "node", ".output/server/index.mjs" ]

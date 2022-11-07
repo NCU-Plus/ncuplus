@@ -27,8 +27,8 @@ jobs:
         run: npm pkg delete scripts.prepare
       - name: Install dependencies
         run: |
-          pnpm i
-          pnpm install:dep
+          pnpm i -F .
+          pnpm i -F frontend
       - name: Cypress install
         uses: cypress-io/github-action@v4
         with:
@@ -40,7 +40,7 @@ jobs:
         with:
           name: build
           if-no-files-found: error
-          path: frontend/.output
+          path: apps/frontend/.output
   ui-chrome-tests:
     runs-on: ubuntu-latest
     needs: install
@@ -56,7 +56,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: build
-          path: frontend/.output
+          path: apps/frontend/.output
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
@@ -65,8 +65,8 @@ jobs:
         run: npm pkg delete scripts.prepare
       - name: Install dependencies
         run: |
-          pnpm i
-          pnpm install:dep:backend
+          pnpm i -F .
+          pnpm i -F backend
       - name: Clean tsconfig
         run: echo '{}' > tsconfig.json
       - name: Disable husky install

@@ -25,7 +25,6 @@ Install dependencies:
 
 ```bash
 pnpm i
-pnpm install:dep
 ```
 
 Set environment variables:
@@ -34,17 +33,17 @@ Set environment variables:
 # Edit .env file to fit your environment
 
 # frontend
-cp frontend/.env.example frontend/.env
+cp apps/frontend/.env.example apps/frontend/.env
 
 # backend
-cp backend/.env.example backend/.env
-cp backend/db.env.example backend/db.env
+cp apps/backend/.env.example apps/backend/.env
+cp apps/backend/db.env.example apps/backend/db.env
 ```
 
 Run test database:
 
 ```bash
-cd backend && docker-compose up -d --build
+cd backend && docker-Fompose up -d --build
 ```
 
 > Database is bind to port 3306, and Adminer is bind to port 8080 by default.
@@ -69,10 +68,10 @@ Locally preview production build:
 
 ```bash
 # frontend
-pnpm -C frontend preview
+pnpm -F frontend preview
 
 # backend
-pnpm -C backend start:prod
+pnpm -F backend start:prod
 ```
 
 ## Testing

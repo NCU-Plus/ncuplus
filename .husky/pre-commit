@@ -3,5 +3,5 @@
 
 pnpm lint-staged
 
-cd frontend && pnpm nuxt typecheck
+pnpm -F frontend exec nuxt typecheck
 pnpm test

@@ -22,7 +22,6 @@ async function bootstrap() {
       url: process.env.REDIS_URL,
     });
     try {
-      await redisClient.connect();
       const RedisStore = connectRedis(session);
       sessionOptions.store = new RedisStore({ client: redisClient });
     } catch (e) {

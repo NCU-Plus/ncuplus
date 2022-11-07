@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   alias: {
-    types: fileURLToPath(new URL("../types", import.meta.url)),
+    types: fileURLToPath(new URL("types", import.meta.url)),
   },
   modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt"],
   build: {
