@@ -1,12 +1,11 @@
 describe("courses index page", () => {
-
   before(() => {
-    cy.exec('pnpm -C "backend" seed:department:clear');
-    cy.exec('pnpm -C "backend" seed:department');
-    cy.exec('pnpm -C "backend" seed:course:clear');
-    cy.exec('pnpm -C "backend" seed:course');
+    cy.exec('pnpm -F "backend" seed:department:clear');
+    cy.exec('pnpm -F "backend" seed:department');
+    cy.exec('pnpm -F "backend" seed:course:clear');
+    cy.exec('pnpm -F "backend" seed:course');
     cy.wait(100);
-  })
+  });
 
   it("type 課名搜尋", () => {
     cy.visit("/courses");
@@ -62,21 +61,45 @@ describe("courses index page", () => {
     cy.wait(1000);
 
     cy.get("select").first().select("所有學期");
-    cy.get("table>tbody>tr").eq(0).find("th").first().should("contain", "110-下");
+    cy.get("table>tbody>tr")
+      .eq(0)
+      .find("th")
+      .first()
+      .should("contain", "110-下");
     cy.contains("Last").click();
-    cy.get("table>tbody>tr").eq(-1).find("th").first().should("contain", "111-上");
+    cy.get("table>tbody>tr")
+      .eq(-1)
+      .find("th")
+      .first()
+      .should("contain", "111-上");
 
     cy.wait(1000);
     cy.get("select").first().select("110-下");
-    cy.get("table>tbody>tr").eq(0).find("th").first().should("contain", "110-下");
+    cy.get("table>tbody>tr")
+      .eq(0)
+      .find("th")
+      .first()
+      .should("contain", "110-下");
     cy.contains("Last").click();
-    cy.get("table>tbody>tr").eq(-1).find("th").first().should("contain", "110-下");
+    cy.get("table>tbody>tr")
+      .eq(-1)
+      .find("th")
+      .first()
+      .should("contain", "110-下");
 
     cy.wait(1000);
     cy.get("select").first().select("111-上");
-    cy.get("table>tbody>tr").eq(0).find("th").first().should("contain", "111-上");
+    cy.get("table>tbody>tr")
+      .eq(0)
+      .find("th")
+      .first()
+      .should("contain", "111-上");
     cy.contains("Last").click();
-    cy.get("table>tbody>tr").eq(-1).find("th").first().should("contain", "111-上");
+    cy.get("table>tbody>tr")
+      .eq(-1)
+      .find("th")
+      .first()
+      .should("contain", "111-上");
   });
 
   it("選擇 進階搜尋裡面「開課單位」的選項", () => {
@@ -85,19 +108,28 @@ describe("courses index page", () => {
     cy.get("#advanceSearch").check();
     cy.wait(1000);
 
-    cy.get("select").eq(1).find("option").each(($option, index) => {
-      if(index == 0) {
-        cy.get("select").eq(1).select(Cypress.$($option).text());
-        cy.wait(1000);
-        cy.get("table>tbody>tr").eq(0).find("th").eq(3).should("contain", "體育室");
-      }
-      else {
-        cy.get("select").eq(1).select(Cypress.$($option).text());
-        cy.wait(1000);
-        cy.get("table>tbody>tr").eq(-1).find("th").eq(3).should("contain", Cypress.$($option).text());
-      }
-    });
-    
+    cy.get("select")
+      .eq(1)
+      .find("option")
+      .each(($option, index) => {
+        if (index == 0) {
+          cy.get("select").eq(1).select(Cypress.$($option).text());
+          cy.wait(1000);
+          cy.get("table>tbody>tr")
+            .eq(0)
+            .find("th")
+            .eq(3)
+            .should("contain", "體育室");
+        } else {
+          cy.get("select").eq(1).select(Cypress.$($option).text());
+          cy.wait(1000);
+          cy.get("table>tbody>tr")
+            .eq(-1)
+            .find("th")
+            .eq(3)
+            .should("contain", Cypress.$($option).text());
+        }
+      });
   });
 
   it("click 課程", () => {
@@ -142,7 +174,7 @@ describe("courses index page", () => {
 
     cy.get("#page-input").should("have.value", "3");
   });
-  
+
   it("type 數字框", () => {
     cy.visit("/courses");
     cy.wait(1000);
@@ -153,7 +185,10 @@ describe("courses index page", () => {
 
   it("click 課程綱要", () => {
     cy.visit("/courses/1");
-    cy.contains("課程綱要").should('have.attr', 'href', 'https://cis.ncu.edu.tw/Course/main/query/byKeywords?serialNo=1001&outline=1001&semester=1102')
+    cy.contains("課程綱要").should(
+      "have.attr",
+      "href",
+      "https://cis.ncu.edu.tw/Course/main/query/byKeywords?serialNo=1001&outline=1001&semester=1102"
+    );
   });
-
 });
