@@ -27,8 +27,8 @@ jobs:
         run: npm pkg delete scripts.prepare
       - name: Install dependencies
         run: |
-          pnpm i
-          pnpm install:dep
+          pnpm i -F .
+          pnpm i -F frontend
       - name: Cypress install
         uses: cypress-io/github-action@v4
         with:
@@ -65,8 +65,8 @@ jobs:
         run: npm pkg delete scripts.prepare
       - name: Install dependencies
         run: |
-          pnpm i
-          pnpm install:dep:backend
+          pnpm i -F .
+          pnpm i -F backend
       - name: Clean tsconfig
         run: echo '{}' > tsconfig.json
       - name: Disable husky install
