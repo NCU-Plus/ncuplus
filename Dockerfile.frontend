@@ -24,7 +24,7 @@ RUN pnpm -F frontend build
 
 FROM node:16.18-bullseye As production
 
-WORKDIR /home/node/app/frontend
+WORKDIR /home/node/app
 COPY --chown=node:node --from=build /app/apps/frontend/.output ./.output
 
 USER node
