@@ -1,0 +1,37 @@
+FROM node:16.18-bullseye AS build
+
+WORKDIR /app
+COPY --chown=node:node package.json .
+COPY --chown=node:node pnpm-lock.yaml .
+COPY --chown=node:node pnpm-workspace.yaml .
+COPY --chown=node:node .npmrc .
+
+COPY --chown=node:node ./apps/backend/package.json ./apps/backend/
+RUN npm pkg delete scripts.prepare
+
+# install pnpm
+RUN npm i -g pnpm
+
+# install dependencies
+RUN pnpm i -F . --frozen-lockfile
+RUN pnpm i -F backend --frozen-lockfile
+
+# copy project files
+COPY --chown=node:node ./apps/backend/ ./apps/backend/
+
+# build
+RUN pnpm -F backend build
+
+RUN pnpm prune --prod
+
+FROM node:16.18-bullseye As production
+
+WORKDIR /home/node/app/backend
+COPY --chown=node:node --from=build /app/apps/backend/dist ./dist
+COPY --chown=node:node --from=build /app/apps/backend/node_modules ./node_modules
+
+USER node
+
+ENV NODE_ENV production
+EXPOSE 3000
+CMD [ "node", "dist/main.js" ]

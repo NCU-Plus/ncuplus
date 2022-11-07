@@ -18,9 +18,9 @@ jobs:
         cache: 'pnpm'
     - name: Install dependencies
       run: |
-        pnpm i
-        pnpm install:dep:frontend
-    - run: cd frontend && pnpm nuxt prepare
+        pnpm i -F .
+        pnpm i -F frontend
+    - run: pnpm -F frontend exec nuxt prepare
     - name: Run unit tests
       run: pnpm test:frontend
     - name: Run linter
@@ -44,8 +44,8 @@ jobs:
         cache: 'pnpm'
     - name: Install deps
       run: |
-        pnpm i
-        pnpm -C backend i
+        pnpm i -F .
+        pnpm i -F backend
     - name: Run unit tests
       run: pnpm test:backend 
     - name: Run linter

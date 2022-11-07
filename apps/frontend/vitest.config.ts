@@ -11,7 +11,7 @@ export default defineConfig({
       "@@": resolve(__dirname, "."),
       "~": resolve(__dirname, "."),
       "@": resolve(__dirname, "."),
-      types: resolve(__dirname, "../types"),
+      types: resolve(__dirname, "types"),
       assets: resolve(__dirname, "assets"),
       public: resolve(__dirname, "public"),
     },
