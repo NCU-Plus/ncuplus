@@ -31,7 +31,8 @@
             class="text-slate-800 cursor-pointer"
             @click="showingPastCourses = !showingPastCourses"
           >
-            查看歷年相同課程<font-awesome-icon
+            查看歷年相同課程
+            <font-awesome-icon
               v-if="!showingPastCourses"
               class="ml-2"
               :icon="['fas', 'caret-down']"
@@ -90,7 +91,6 @@
 </template>
 
 <script setup lang="ts">
-import { AsyncData } from "#app";
 import { Course } from "types/Course";
 import {
   formatCourseType,
@@ -99,8 +99,9 @@ import {
 } from "~/helpers/course";
 
 const props = defineProps<{ course: Course }>();
-const { pending, data: pastCourses } = <AsyncData<Course[], Error>>(
-  useLazyFetch(`/api/past-courses/${props.course.classNo}`)
+const { pending, data: pastCourses } = useLazyFetch<Course[]>(
+  () => `/api/past-courses/${props.course.classNo}`,
+  { key: `/api/past-courses/${props.course.classNo}` },
 );
 const showingPastCourses = ref(false);
 const courses = computed(() => {
