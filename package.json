@@ -1,4 +1,10 @@
 {
+  "name": "ncuplus",
+  "private": "true",
+  "workspaces": [
+    "apps/*"
+  ],
+  "packageManager": "pnpm@7.16.1",
   "scripts": {
     "dev": "concurrently \"pnpm -F frontend dev\" \"pnpm -F backend start:dev\"",
     "build": "concurrently \"pnpm build:frontend\" \"pnpm build:backend\"",
@@ -32,6 +38,7 @@
     "eslint-plugin-vue": "^9.7.0",
     "http-proxy": "^1.18.1",
     "husky": "^8.0.2",
+    "lerna": "^6.0.3",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "ts-node": "^10.9.1",
@@ -49,6 +56,5 @@
     "apps/backend/{src,test}/**/*.ts": [
       "prettier -w --config \"./apps/backend/.prettierrc\""
     ]
-  },
-  "packageManager": "pnpm@7.16.1"
+  }
 }
