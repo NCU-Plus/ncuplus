@@ -76,7 +76,7 @@ importers:
       csurf: ^1.11.0
       express-session: ^1.17.3
       file-type: ^16.5.4
-      helmet: ^5.1.1
+      helmet: ^6.0.0
       jest: ^27.5.1
       mysql2: ^2.3.3
       nest-casl: ^1.6.16
@@ -111,7 +111,7 @@ importers:
       csurf: 1.11.0
       express-session: 1.17.3
       file-type: 16.5.4
-      helmet: 5.1.1
+      helmet: 6.0.0
       mysql2: 2.3.3
       nest-casl: 1.6.16_mft4zniz4cizagefbe7pzyyvme
       passport: 0.6.0
@@ -5538,9 +5538,9 @@ packages:
   /hash-sum/2.0.0:
     resolution: {integrity: sha512-WdZTbAByD+pHfl/g9QSsBIIwy8IT+EsPiKDs0KNX+zSHhdDLFKdZu0BQHljvO+0QI/BasbMSUa8wYNCZTvhslg==}
 
-  /helmet/5.1.1:
-    resolution: {integrity: sha512-/yX0oVZBggA9cLJh8aw3PPCfedBnbd7J2aowjzsaWwZh7/UFY0nccn/aHAggIgWUFfnykX8GKd3a1pSbrmlcVQ==}
-    engines: {node: '>=12.0.0'}
+  /helmet/6.0.0:
+    resolution: {integrity: sha512-FO9RpR1wNJepH/GbLPQVtkE2eESglXL641p7SdyoT4LngHFJcZheHMoyUcjCZF4qpuMMO1u5q6RK0l9Ux8JBcg==}
+    engines: {node: '>=14.0.0'}
     dev: false
 
   /hexoid/1.0.0:

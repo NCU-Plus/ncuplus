@@ -40,7 +40,7 @@
     "csurf": "^1.11.0",
     "express-session": "^1.17.3",
     "file-type": "^16.5.4",
-    "helmet": "^5.1.1",
+    "helmet": "^6.0.0",
     "mysql2": "^2.3.3",
     "nest-casl": "^1.6.16",
     "passport": "^0.6.0",
