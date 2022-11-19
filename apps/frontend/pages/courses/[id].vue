@@ -8,66 +8,89 @@
         </h1>
       </section>
       <!--info-->
-      <CoursesInfo :course="course" />
+      <CoursesInfo :course="(course as Course)" />
       <!--comment-->
       <CoursesCommentList
-        :comments-data="courseFeedback.comments"
+        :comments-data="(courseFeedback as APICourseFeedback).comments"
         @add="
           add(
-            courseFeedback.comments,
-            createComment(course.classNo, $event.content),
+            (courseFeedback as APICourseFeedback).comments,
+            createComment((course as Course).classNo, $event.content),
           )
         "
         @reaction="
           add(
-            courseFeedback.comments.find((e) => e.id === $event.id)!.reactions,
+            (courseFeedback as APICourseFeedback).comments.find(
+              (e) => e.id === $event.id,
+            )!.reactions,
             createReaction('comment', $event.operation, $event.id),
           )
         "
         @complete-edit="
           edit(
-            courseFeedback.comments.find((e) => e.id === $event.id)!,
+            (courseFeedback as APICourseFeedback).comments.find(
+              (e) => e.id === $event.id,
+            )!,
             editComment($event.id, $event.content),
           )
         "
         @delete="
-          del(courseFeedback.comments, $event.id, deleteComment($event.id))
+          del(
+            (courseFeedback as APICourseFeedback).comments,
+            $event.id,
+            deleteComment($event.id),
+          )
         "
       />
       <!--review-->
       <CoursesReviewList
-        :reviews-data="courseFeedback.reviews"
+        :reviews-data="(courseFeedback as APICourseFeedback).reviews"
         @add="
           add(
-            courseFeedback.reviews,
-            createReview(course.classNo, $event.content),
+            (courseFeedback as APICourseFeedback).reviews,
+            createReview((course as Course).classNo, $event.content),
           )
         "
         @reaction="
           add(
-            courseFeedback.reviews.find((e) => e.id === $event.id)!.reactions,
+            (courseFeedback as APICourseFeedback).reviews.find(
+              (e) => e.id === $event.id,
+            )!.reactions,
             createReaction('review', $event.operation, $event.id),
           )
         "
         @complete-edit="
           edit(
-            courseFeedback.reviews.find((e) => e.id === $event.id)!,
+            (courseFeedback as APICourseFeedback).reviews.find(
+              (e) => e.id === $event.id,
+            )!,
             editReview($event.id, $event.content),
           )
         "
         @delete="
-          del(courseFeedback.reviews, $event.id, deleteReview($event.id))
+          del(
+            (courseFeedback as APICourseFeedback).reviews,
+            $event.id,
+            deleteReview($event.id),
+          )
         "
       />
       <!--past exams-->
       <CoursesPastExamList
-        :past-exams-data="courseFeedback.pastExams"
+        :past-exams-data="(courseFeedback as APICourseFeedback).pastExams"
         @upload="
-          add(courseFeedback.pastExams, createPastExam(course.classNo, $event))
+          add(
+            (courseFeedback as APICourseFeedback).pastExams,
+            createPastExam((course as Course).classNo, $event),
+          )
         "
         @download="download($event.id, downloadPastExam($event.id))"
         @delete="
-          del(courseFeedback.pastExams, $event.id, deletePastExam($event.id))
+          del(
+            (courseFeedback as APICourseFeedback).pastExams,
+            $event.id,
+            deletePastExam($event.id),
+          )
         "
       />
     </div>
@@ -101,15 +124,20 @@ const { data: course } = await useFetch<Course>(
   () => `/api/courses/${route.params.id}`,
   { key: `/api/courses/${route.params.id}` },
 );
+if (!course.value) throw new Error(`Course ${route.params.id} not found.`);
 const { data: courseFeedback } = await useFetch<APICourseFeedback>(
-  () => `/api/course-feedbacks/${course.value.classNo}`,
-  { key: `/api/course-feedbacks/${course.value.classNo}` },
+  () => `/api/course-feedbacks/${(course.value as Course).classNo}`,
+  { key: `/api/course-feedbacks/${(course.value as Course).classNo}` },
 );
+if (!courseFeedback.value)
+  throw new Error(
+    `Course feedback ${(course.value as Course).classNo} not found.`,
+  );
 
 async function download(entryId: number, successPromise: Promise<boolean>) {
   if (await successPromise)
     (
-      courseFeedback.value.pastExams.find(
+      (courseFeedback.value as APICourseFeedback).pastExams.find(
         (e) => e.id === entryId,
       ) as APIPastExam
     ).downloadCount += 1;

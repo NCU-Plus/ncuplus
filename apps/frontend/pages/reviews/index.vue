@@ -7,7 +7,7 @@
       />
       <Pagenator
         :get-state="useReviewPage"
-        :max-page="Math.floor(reviews.length / 25 + 1)"
+        :max-page="Math.floor((reviews ?? []).length / 25 + 1)"
       />
       <ClientOnly>
         <ReviewFrame
@@ -15,20 +15,20 @@
           :review="viewingReview"
           @reaction="
             add(
-              reviews.find((e) => e.id === $event.id)!.reactions,
+              (reviews ?? []).find((e) => e.id === $event.id)!.reactions,
               createReaction('review', $event.operation, $event.id),
             ).then(() => mapReviews())
           "
           @complete-edit="
             edit(
-              reviews.find((e) => e.id === $event.id)!,
+              (reviews ?? []).find((e) => e.id === $event.id)!,
               editReview($event.id, $event.content),
             ).then(() => mapReviews())
           "
           @delete="
             reviewFrame?.close();
             viewingReviewId = null;
-            del(reviews, $event.id, deleteReview($event.id)).then(() =>
+            del(reviews ?? [], $event.id, deleteReview($event.id)).then(() =>
               mapReviews(),
             );
           "
@@ -63,12 +63,12 @@ const pageReviews = computed(() =>
   mappedReviews.value.slice((page.value - 1) * 25, page.value * 25),
 );
 const viewingReview = computed(() =>
-  reviews.value.find((e) => e.id === viewingReviewId.value),
+  (reviews.value ?? []).find((e) => e.id === viewingReviewId.value),
 );
 
 async function getMappedReviews() {
   return await Promise.all(
-    reviews.value
+    (reviews.value ?? [])
       .sort(
         (a, b) =>
           new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
