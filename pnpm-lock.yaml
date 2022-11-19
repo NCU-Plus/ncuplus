@@ -91,7 +91,7 @@ importers:
       supertest: ^6.3.1
       ts-jest: ^27.1.5
       ts-loader: ^9.4.1
-      tsconfig-paths: ^3.14.1
+      tsconfig-paths: ^4.0.0
       typeorm: ^0.3.10
     dependencies:
       '@casl/ability': 5.4.4
@@ -143,7 +143,7 @@ importers:
       supertest: 6.3.1
       ts-jest: 27.1.5_tdtgdiyp5hxzg372y7vswngaqy
       ts-loader: 9.4.1_vfotqvx6lgcbf3upbs6hgaza4q
-      tsconfig-paths: 3.14.1
+      tsconfig-paths: 4.1.0
 
   apps/frontend:
     specifiers:
@@ -2010,10 +2010,6 @@ packages:
 
   /@types/json-schema/7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
-    dev: true
-
-  /@types/json5/0.0.29:
-    resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
 
   /@types/jsonwebtoken/8.5.8:
@@ -6743,13 +6739,6 @@ packages:
     resolution: {integrity: sha512-ZClg6AaYvamvYEE82d3Iyd3vSSIjQ+odgjaTzRuO3s7toCdFKczob2i0zCh7JE8kWn17yvAWhUVxvqGwUalsRA==}
     dev: true
 
-  /json5/1.0.1:
-    resolution: {integrity: sha512-aKS4WQjPenRxiQsC93MNfjx+nbF4PAdYzmd/1JIj8HYzqfbu86beTuNgXDzPknWk0n0uARlyewZo4s++ES36Ow==}
-    hasBin: true
-    dependencies:
-      minimist: 1.2.7
-    dev: true
-
   /json5/2.2.1:
     resolution: {integrity: sha512-1hqLFMSrGHRHxav9q9gNjJ5EXznIxGVO09xQRrwplcS8qs28pZ8s8hupZAmqDwZUmVZ2Qb2jnyPOWcDH8m8dlA==}
     engines: {node: '>=6'}
@@ -9969,15 +9958,6 @@ packages:
       chalk: 4.1.2
       enhanced-resolve: 5.10.0
       tsconfig-paths: 4.1.0
-    dev: true
-
-  /tsconfig-paths/3.14.1:
-    resolution: {integrity: sha512-fxDhWnFSLt3VuTwtvJt5fpwxBHg5AdKWMsgcPOOIilyjymcYVZoCQF8fvFRezCNfblEXmi+PcM1eYHeOAgXCOQ==}
-    dependencies:
-      '@types/json5': 0.0.29
-      json5: 1.0.1
-      minimist: 1.2.7
-      strip-bom: 3.0.0
     dev: true
 
   /tsconfig-paths/4.1.0:
