@@ -44,7 +44,7 @@ importers:
 
   apps/backend:
     specifiers:
-      '@casl/ability': ^5.4.4
+      '@casl/ability': ^6.0.0
       '@nestjs/axios': ^0.1.0
       '@nestjs/cli': ^9.1.5
       '@nestjs/common': ^9.2.0
@@ -94,7 +94,7 @@ importers:
       tsconfig-paths: ^3.14.1
       typeorm: ^0.3.10
     dependencies:
-      '@casl/ability': 5.4.4
+      '@casl/ability': 6.3.2
       '@nestjs/axios': 0.1.0_2kbkxfsrhtatemqz6dhv2pefvq
       '@nestjs/common': 9.2.0_x6yqyveuahcdef4z4mxykmuv6a
       '@nestjs/config': 2.2.0_2kbkxfsrhtatemqz6dhv2pefvq
@@ -686,12 +686,6 @@ packages:
   /@bcoe/v8-coverage/0.2.3:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
-
-  /@casl/ability/5.4.4:
-    resolution: {integrity: sha512-7+GOnMUq6q4fqtDDesymBXTS9LSDVezYhFiSJ8Rn3f0aQLeRm7qHn66KWbej4niCOvm0XzNj9jzpkK0yz6hUww==}
-    dependencies:
-      '@ucast/mongo2js': 1.3.3
-    dev: false
 
   /@casl/ability/6.3.2:
     resolution: {integrity: sha512-ygOlg3WDu39t1ZOVdDfRpPXEiCn7F/a7uLBJIuAE6KksdBogzPszFRAuGULmo4h37fXIyouYUilVIryh0ddTRA==}
