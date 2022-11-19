@@ -62,7 +62,7 @@ importers:
       '@types/csurf': ^1.11.2
       '@types/express': ^4.17.14
       '@types/express-session': ^1.17.5
-      '@types/jest': 27.0.2
+      '@types/jest': 27.5.2
       '@types/multer': ^1.4.7
       '@types/node': ^16.18.3
       '@types/passport': ^1.0.11
@@ -131,7 +131,7 @@ importers:
       '@types/csurf': 1.11.2
       '@types/express': 4.17.14
       '@types/express-session': 1.17.5
-      '@types/jest': 27.0.2
+      '@types/jest': 27.5.2
       '@types/multer': 1.4.7
       '@types/node': 16.18.3
       '@types/passport': 1.0.11
@@ -141,7 +141,7 @@ importers:
       jest: 27.5.1
       source-map-support: 0.5.21
       supertest: 6.3.1
-      ts-jest: 27.1.5_wkff3uyrwroedjzg3qmlwonqta
+      ts-jest: 27.1.5_tdtgdiyp5hxzg372y7vswngaqy
       ts-loader: 9.4.1_vfotqvx6lgcbf3upbs6hgaza4q
       tsconfig-paths: 3.14.1
 
@@ -1995,10 +1995,10 @@ packages:
       '@types/istanbul-lib-report': 3.0.0
     dev: true
 
-  /@types/jest/27.0.2:
-    resolution: {integrity: sha512-4dRxkS/AFX0c5XW6IPMNOydLn2tEhNhJV7DnYK+0bjoJZ+QTmfucBlihX7aoEsh/ocYtkLC73UbnBXBXIxsULA==}
+  /@types/jest/27.5.2:
+    resolution: {integrity: sha512-mpT8LJJ4CMeeahobofYWIjFo0xonRS/HfxnVEPMPFSQdGUt1uHCnoPT7Zhb+sjDU2wz0oKV0OLUR0WzrHNgfeA==}
     dependencies:
-      jest-diff: 27.5.1
+      jest-matcher-utils: 27.5.1
       pretty-format: 27.5.1
     dev: true
 
@@ -9870,7 +9870,7 @@ packages:
     hasBin: true
     dev: true
 
-  /ts-jest/27.1.5_wkff3uyrwroedjzg3qmlwonqta:
+  /ts-jest/27.1.5_tdtgdiyp5hxzg372y7vswngaqy:
     resolution: {integrity: sha512-Xv6jBQPoBEvBq/5i2TeSG9tt/nqkbpcurrEG1b+2yfBrcJelOZF9Ml6dmyMh7bcW9JyFbRYpR5rxROSlBLTZHA==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     hasBin: true
@@ -9892,7 +9892,7 @@ packages:
         optional: true
     dependencies:
       '@babel/core': 7.20.2
-      '@types/jest': 27.0.2
+      '@types/jest': 27.5.2
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
       jest: 27.5.1
