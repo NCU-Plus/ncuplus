@@ -1,4 +1,3 @@
-import { defineNuxtConfig } from "nuxt";
 import { fileURLToPath } from "url";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
@@ -36,14 +35,11 @@ export default defineNuxtConfig({
       },
     },
   },
-  vite: {
-    server: {
-      proxy: {
-        "/open-api": {
-          target: "http://localhost:3000",
-          changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/open-api/, ""),
-        },
+  nitro: {
+    devProxy: {
+      "/open-api": {
+        target: "http://192.168.50.10:3000",
+        changeOrigin: true,
       },
     },
   },

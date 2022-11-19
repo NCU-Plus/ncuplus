@@ -52,7 +52,7 @@ export class APIClient {
       const resp = await $fetch<APIResponse<{ token: string }>>(
         `${this._config.public.apiBaseUrl}/auth/token`,
         {
-          headers: { "csrf-token": useCookie("X-CSRF-TOKEN").value },
+          headers: { "csrf-token": useCookie("X-CSRF-TOKEN").value ?? "" },
         },
       );
       return (resp.data as { token: string }).token;
@@ -100,7 +100,7 @@ export class APIClient {
         headers: {
           ...opts?.headers,
           Authorization: `Bearer ${this._token}`,
-          "csrf-token": useCookie("X-CSRF-TOKEN").value,
+          "csrf-token": useCookie("X-CSRF-TOKEN").value ?? "",
         },
       });
     } catch (e) {

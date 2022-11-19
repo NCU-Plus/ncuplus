@@ -1,7 +1,7 @@
 <template>
   <div class="page-wrapper">
     <div class="page items-center">
-      <CoursesSearch :courses-data="coursesData" />
+      <CoursesSearch :courses-data="coursesData ?? []" />
       <TableList
         :titles="['學期', '課名', '教師', '開課單位', '時間']"
         :rows="
@@ -36,8 +36,11 @@ const { data: coursesData } = await useFetch<Course[]>(`/api/courses`);
 const searchOptions = useSearchOptions();
 const page = useCoursePage();
 
-const filteredCoursesData = computed(() =>
-  coursesData.value
+const filteredCoursesData = computed(() => {
+  if (!coursesData.value) {
+    return [] as Course[];
+  }
+  return coursesData.value
     .filter((course: Course) => {
       if (searchOptions.value.semester !== "")
         return (
@@ -59,8 +62,8 @@ const filteredCoursesData = computed(() =>
           course.classNo.includes(searchOptions.value.query)
         );
       else return true;
-    }),
-);
+    });
+});
 const pageCoursesData = computed(() =>
   filteredCoursesData.value.slice((page.value - 1) * 25, page.value * 25),
 );
