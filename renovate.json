@@ -4,5 +4,6 @@
     "config:base",
     ":prHourlyLimitNone",
     ":prConcurrentLimitNone"
-  ]
+  ],
+  "labels": ["dependencies"]
 }
