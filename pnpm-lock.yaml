@@ -162,7 +162,7 @@ importers:
       '@vue/test-utils': ^2.2.3
       easymde: ^2.18.0
       highlight.js: ^11.6.0
-      isomorphic-dompurify: ^0.21.0
+      isomorphic-dompurify: ^0.24.0
       marked: ^4.2.2
       nuxt: ^3.0.0
       pinia: ^2.0.23
@@ -180,7 +180,7 @@ importers:
       '@vitejs/plugin-vue': 3.2.0_vite@3.2.4+vue@3.2.45
       easymde: 2.18.0
       highlight.js: 11.6.0
-      isomorphic-dompurify: 0.21.0
+      isomorphic-dompurify: 0.24.0
       marked: 4.2.2
       pinia: 2.0.23_vue@3.2.45
       vue-gtag: 2.0.1_vue@3.2.45
@@ -1917,6 +1917,12 @@ packages:
       '@types/express-serve-static-core': 4.17.31
     dev: true
 
+  /@types/dompurify/2.4.0:
+    resolution: {integrity: sha512-IDBwO5IZhrKvHFUl+clZxgf3hn2b/lU6H1KaBShPkQyGJUQ0xwebezIPSuiyGwfz1UzJWQl4M7BDxtHtCCPlTg==}
+    dependencies:
+      '@types/trusted-types': 2.0.2
+    dev: false
+
   /@types/eslint-scope/3.7.4:
     resolution: {integrity: sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==}
     dependencies:
@@ -2148,6 +2154,10 @@ packages:
     resolution: {integrity: sha512-JAUw1iXGO1qaWwEOzxTKJZ/5JxVeON9kvGZ/osgZaJImBnyjyn0cjovPsf6FNLmyGY8Vw9DoXZCMlfMkMwHRWg==}
     dependencies:
       '@types/estree': 1.0.0
+    dev: false
+
+  /@types/trusted-types/2.0.2:
+    resolution: {integrity: sha512-F5DIZ36YVLE+PN+Zwws4kJogq47hNgX3Nx6WyDJ3kcplxyke3XIzB8uK5n/Lpm1HBsbGzd6nmGehL8cPekP+Tg==}
     dev: false
 
   /@types/yargs-parser/21.0.0:
@@ -6050,9 +6060,10 @@ packages:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
     dev: true
 
-  /isomorphic-dompurify/0.21.0:
-    resolution: {integrity: sha512-aQ+nxkIHc8xqPkS0gzNdkPzAitPvXmRCn2lJZSnMPMJekbCKUWEYBZHWBslokE1hf4f1locnKaaTeMnHJPCmtw==}
+  /isomorphic-dompurify/0.24.0:
+    resolution: {integrity: sha512-YePhHHQAVsU1CYkL3gKQmga+fTAh66eWg+RVQOVFRNfzoLkd+gFhFY5S+g80f8b0v2JBMYg+npqdZI1vOxTOBQ==}
     dependencies:
+      '@types/dompurify': 2.4.0
       dompurify: 2.4.1
       jsdom: 20.0.2
     transitivePeerDependencies:
