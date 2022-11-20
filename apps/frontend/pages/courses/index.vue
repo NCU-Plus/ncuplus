@@ -12,7 +12,8 @@
         :data="listData"
       />
       <Pagenator
-        :get-state="useCoursePage"
+        ref="pagenator"
+        v-model:page="page"
         :max-page="Math.floor(filteredCoursesData.length / 15 + 1)"
       />
     </div>
@@ -23,11 +24,12 @@
 import { Course } from "types/Course";
 import { formatSemester } from "~/helpers/course";
 import { MetaBuilder } from "~~/helpers/MetaBuilder";
+import Pagenator from "~~/components/Pagenator.vue";
 
 const { data: coursesData } = await useFetch<Course[]>(`/api/courses`);
 const searchOptions = useSearchOptions();
-const page = useCoursePage();
-
+const page = ref(1);
+const pagenator = ref<InstanceType<typeof Pagenator> | null>(null);
 const filteredCoursesData = computed(() => {
   if (!coursesData.value) {
     return [] as Course[];
@@ -74,7 +76,7 @@ const listData = computed(() =>
 
 watch(
   () => filteredCoursesData.value,
-  () => (page.value = 1),
+  () => pagenator.value?.setPage(1),
 );
 
 const title = "課程列表";
