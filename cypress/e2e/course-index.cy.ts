@@ -55,18 +55,21 @@ describe("courses index page", () => {
     cy.get("#advanceSearch").check();
     cy.wait(1000);
     cy.get("select").first().select("所有學期");
+    cy.wait(1000);
     cy.get(".row-heading").eq(0).should("have.text", "110-下");
     cy.contains("Last").click();
     cy.get(".row-heading").eq(-1).should("have.text", "111-上");
 
     cy.wait(1000);
     cy.get("select").first().select("110-下");
+    cy.wait(1000);
     cy.get(".row-heading").eq(0).should("have.text", "110-下");
     cy.contains("Last").click();
     cy.get(".row-heading").eq(-1).should("have.text", "110-下");
 
     cy.wait(1000);
     cy.get("select").first().select("111-上");
+    cy.wait(1000);
     cy.get(".row-heading").eq(0).should("have.text", "111-上");
     cy.contains("Last").click();
     cy.get(".row-heading").eq(-1).should("have.text", "111-上");
