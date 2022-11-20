@@ -5,26 +5,26 @@
     >
       <div class="flex space-x-4">
         <div class="w-14 md:w-20 flex justify-center items-center">
-          <span class="truncate">
+          <span class="label-heading truncate">
             {{ labels.heading }}
           </span>
         </div>
         <div class="w-20 md:w-60 lg:w-80 flex flex-col justify-center">
-          <div class="truncate">
+          <div class="label-title truncate">
             {{ labels.title }}
           </div>
-          <div class="truncate">
+          <div class="label-subtitle truncate">
             {{ labels.subtitle }}
           </div>
         </div>
         <div class="w-20 md:w-60 lg:w-80 flex items-center">
-          <span class="truncate">
+          <span class="label-description truncate">
             {{ labels.description }}
           </span>
         </div>
       </div>
       <div class="w-20 md:w-40 flex justify-center items-center">
-        <span class="truncate">
+        <span class="label-other truncate">
           {{ labels.other }}
         </span>
       </div>
@@ -32,6 +32,7 @@
     <NuxtLink
       v-for="(row, i) of data"
       :key="i"
+      class="row-link"
       :to="row.link"
       @click="row.onClick ? row.onClick() : undefined"
     >
@@ -40,26 +41,26 @@
       >
         <div class="flex space-x-4">
           <div class="w-14 md:w-20 flex justify-center items-center">
-            <span class="truncate">
+            <span class="row-heading truncate">
               {{ row.heading }}
             </span>
           </div>
           <div class="w-20 md:w-60 lg:w-80 flex flex-col">
-            <div class="font-medium truncate">
+            <div class="row-title font-medium truncate">
               {{ row.title }}
             </div>
-            <div class="font-light truncate">
+            <div class="row-subtitle font-light truncate">
               {{ row.subtitle }}
             </div>
           </div>
           <div class="w-20 md:w-60 lg:w-80 flex items-center">
-            <span class="truncate">
+            <span class="row-description truncate">
               {{ row.description }}
             </span>
           </div>
         </div>
         <div class="w-20 md:w-40 flex justify-center items-center">
-          <span class="truncate">
+          <span class="row-other truncate">
             {{ row.other }}
           </span>
         </div>
