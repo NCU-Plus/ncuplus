@@ -15,7 +15,7 @@
     @apply container mx-auto min-h-screen;
   }
   .page {
-    @apply w-11/12 md:w-3/4 h-full mx-auto mt-20 mb-12 flex flex-col space-y-10;
+    @apply w-11/12 h-full mx-auto mt-20 mb-12 flex flex-col space-y-10;
   }
   .clearfix {
     @apply before:border before:content-[''] before:table before:clear-both before:w-full before:bg-black;

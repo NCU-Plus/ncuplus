@@ -1,16 +1,28 @@
 <template>
   <div>
     <ul class="my-5 flex">
-      <li
-        id="go-first-page"
-        class="pagenator-button rounded-l-md"
+      <NuxtLink
+        :to="{
+          query: {
+            ...route.query,
+            page: 1,
+          },
+        }"
         @click="page = 1"
       >
-        First
-      </li>
-      <li id="go-prev-page" class="pagenator-button" @click="decreasePage">
-        Prev
-      </li>
+        <li id="go-first-page" class="pagenator-button rounded-l-md">First</li>
+      </NuxtLink>
+      <NuxtLink
+        :to="{
+          query: {
+            ...route.query,
+            page: page - 1,
+          },
+        }"
+        @click="decreasePage"
+      >
+        <li id="go-prev-page" class="pagenator-button">Prev</li>
+      </NuxtLink>
       <input
         id="page-input"
         v-model="inputPage"
@@ -21,28 +33,52 @@
           else inputPage = page;
         "
       />
-      <li id="go-next-page" class="pagenator-button" @click="increasePage">
-        Next
-      </li>
-      <li
-        id="go-last-page"
-        class="pagenator-button rounded-r-md"
+      <NuxtLink
+        :to="{
+          query: {
+            ...route.query,
+            page: page + 1,
+          },
+        }"
+        @click="increasePage"
+      >
+        <li id="go-next-page" class="pagenator-button">Next</li>
+      </NuxtLink>
+      <NuxtLink
+        :to="{
+          query: {
+            ...route.query,
+            page: maxPage,
+          },
+        }"
         @click="page = maxPage"
       >
-        Last
-      </li>
+        <li id="go-last-page" class="pagenator-button rounded-r-md">Last</li>
+      </NuxtLink>
     </ul>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Ref } from "vue";
-
+const route = useRoute();
 const props = defineProps<{
-  getState: () => Ref<number>;
   maxPage: number;
 }>();
-const page = props.getState();
+const emits = defineEmits<{
+  (e: "update:page", page: number): void;
+}>();
+const page = ref(1);
+if (route.query.page) {
+  if (typeof route.query.page === "string") {
+    page.value = parseInt(route.query.page);
+  } else {
+    page.value = parseInt(route.query.page[0] ?? "1");
+  }
+  if (page.value <= 0) {
+    page.value = 1;
+  }
+}
+
 const inputPage = ref(page.value);
 
 function increasePage() {
@@ -58,10 +94,26 @@ function validatePage(page: number) {
   return true;
 }
 
+function setPage(newPage: number) {
+  if (validatePage(newPage)) {
+    page.value = newPage;
+  }
+}
+
 watch(
   () => page.value,
-  () => (inputPage.value = page.value),
+  () => {
+    inputPage.value = page.value;
+    emits("update:page", page.value);
+  },
 );
+
+defineExpose({
+  page,
+  increasePage,
+  decreasePage,
+  setPage,
+});
 </script>
 
 <style scoped>

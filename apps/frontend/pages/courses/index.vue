@@ -2,26 +2,19 @@
   <div class="page-wrapper">
     <div class="page items-center">
       <CoursesSearch :courses-data="coursesData ?? []" />
-      <TableList
-        :titles="['學期', '課名', '教師', '開課單位', '時間']"
-        :rows="
-          pageCoursesData.map((element) => {
-            return {
-              columns: {
-                semester: `${element.year}-${formatSemester(element.semester)}`,
-                title: element.title,
-                teachers: element.teachers,
-                departmentName: element.departmentName,
-                classTimes: element.classTimes,
-              },
-              onClick: () => navigateTo(`/courses/${element.id}`),
-            };
-          })
-        "
+      <List
+        :labels="{
+          heading: '學期',
+          title: '課名',
+          description: '開課單位',
+          other: '時間',
+        }"
+        :data="listData"
       />
       <Pagenator
-        :get-state="useCoursePage"
-        :max-page="Math.floor(filteredCoursesData.length / 25 + 1)"
+        ref="pagenator"
+        v-model:page="page"
+        :max-page="Math.floor(filteredCoursesData.length / 15 + 1)"
       />
     </div>
   </div>
@@ -31,11 +24,12 @@
 import { Course } from "types/Course";
 import { formatSemester } from "~/helpers/course";
 import { MetaBuilder } from "~~/helpers/MetaBuilder";
+import Pagenator from "~~/components/Pagenator.vue";
 
 const { data: coursesData } = await useFetch<Course[]>(`/api/courses`);
 const searchOptions = useSearchOptions();
-const page = useCoursePage();
-
+const page = ref(1);
+const pagenator = ref<InstanceType<typeof Pagenator> | null>(null);
 const filteredCoursesData = computed(() => {
   if (!coursesData.value) {
     return [] as Course[];
@@ -64,13 +58,25 @@ const filteredCoursesData = computed(() => {
       else return true;
     });
 });
+
 const pageCoursesData = computed(() =>
-  filteredCoursesData.value.slice((page.value - 1) * 25, page.value * 25),
+  filteredCoursesData.value.slice((page.value - 1) * 15, page.value * 15),
+);
+
+const listData = computed(() =>
+  pageCoursesData.value.map((e) => ({
+    heading: `${e.year}-${formatSemester(e.semester)}`,
+    title: e.title,
+    subtitle: e.teachers,
+    description: e.departmentName,
+    other: e.classTimes,
+    link: `/courses/${e.id}`,
+  })),
 );
 
 watch(
   () => filteredCoursesData.value,
-  () => (page.value = 1),
+  () => pagenator.value?.setPage(1),
 );
 
 const title = "課程列表";

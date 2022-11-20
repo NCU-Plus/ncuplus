@@ -1,13 +1,18 @@
 <template>
   <div class="page-wrapper">
     <div class="page items-center">
-      <TableList
-        :titles="['課程', '作者', '讚數', '時間']"
-        :rows="pageReviews"
+      <List
+        :labels="{
+          heading: '課程',
+          title: '標題',
+          description: '讚數',
+          other: '時間',
+        }"
+        :data="pageReviews"
       />
       <Pagenator
         :get-state="useReviewPage"
-        :max-page="Math.floor((reviews ?? []).length / 25 + 1)"
+        :max-page="Math.floor((reviews ?? []).length / 15 + 1)"
       />
       <ClientOnly>
         <ReviewFrame
@@ -60,7 +65,7 @@ const viewingReviewId = ref<number | null>(null);
 const mappedReviews = ref(await getMappedReviews());
 
 const pageReviews = computed(() =>
-  mappedReviews.value.slice((page.value - 1) * 25, page.value * 25),
+  mappedReviews.value.slice((page.value - 1) * 15, page.value * 15),
 );
 const viewingReview = computed(() =>
   (reviews.value ?? []).find((e) => e.id === viewingReviewId.value),
@@ -73,20 +78,21 @@ async function getMappedReviews() {
         (a, b) =>
           new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
       )
-      .map(async (element) => {
+      .map(async (e) => {
+        const result = e.content.match(/# (.*)\n/);
+        const title = result === null ? e.content : result[1];
         return {
-          columns: {
-            courseFeedbackClassNo: element.courseFeedbackClassNo,
-            author:
-              (await UserManager.getInstance().fetch(element.authorId))?.profile
-                .name ?? "未知使用者",
-            likes: element.reactions
-              .filter((e) => e.type === ReactionType.LIKE)
-              .length.toString(),
-            time: toDatetimeString(element.createdAt),
-          },
+          heading: e.courseFeedbackClassNo,
+          title: title,
+          subtitle:
+            (await UserManager.getInstance().fetch(e.authorId))?.profile.name ??
+            "未知使用者",
+          description: e.reactions
+            .filter((e) => e.type === ReactionType.LIKE)
+            .length.toString(),
+          other: toDatetimeString(e.createdAt),
           onClick: () => {
-            viewingReviewId.value = element.id;
+            viewingReviewId.value = e.id;
             reviewFrame.value?.show();
           },
         };
