@@ -33,7 +33,7 @@
       v-for="(row, i) of data"
       :key="i"
       :to="row.link"
-      @click="row.onClick ?? (() => {})"
+      @click="row.onClick ? row.onClick() : undefined"
     >
       <div
         class="flex px-2 py-2 space-x-2 justify-between overflow-x-hidden border-b-[1px] border-gray-200"
