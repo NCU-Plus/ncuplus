@@ -38,7 +38,7 @@ export default defineNuxtConfig({
   nitro: {
     devProxy: {
       "/open-api": {
-        target: "http://192.168.50.10:3000",
+        target: "http://localhost:3000",
         changeOrigin: true,
       },
     },
