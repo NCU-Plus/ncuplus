@@ -31,6 +31,7 @@ describe("class information", () => {
   it("case26: type 課程心得/討論 & 送出(已登入) ", () => {
     cy.login();
     cy.visit("/courses/1");
+    cy.wait(1000);
     cy.get('pre[role="presentation"]').type("hello world");
     cy.wait(1000);
     cy.get(".flex.flex-col.pl-5.mb-4.border-l-4.border-green-400.space-y-2")
