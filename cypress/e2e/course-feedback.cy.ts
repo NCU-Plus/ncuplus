@@ -106,15 +106,18 @@ describe("class information", () => {
       .find("svg")
       .eq(2)
       .click();
+    cy.wait(300);
     cy.get('div[class="flex flex-col pl-5 mb-4 border-l-4 border-green-400"]')
       .last()
       .find("#dropdown-menu")
       .contains("編輯")
       .click();
+    cy.wait(1000);
     cy.get('div[class="flex flex-col pl-5 mb-4 border-l-4 border-green-400"]')
       .last()
       .find(".CodeMirror-line")
       .type("hello again");
+    cy.wait(300);
     cy.get('div[class="flex flex-col pl-5 mb-4 border-l-4 border-green-400"]')
       .last()
       .find(".flex.space-x-2")
@@ -144,17 +147,20 @@ describe("class information", () => {
       .find("svg")
       .eq(2)
       .click();
+    cy.wait(300);
     cy.get("div[class='flex flex-col pl-5 mb-4 border-l-4 border-green-400']")
       .last()
       .find("#dropdown-menu")
       .contains("編輯")
       .click();
+    cy.wait(1000);
     cy.get("div[class='flex flex-col pl-5 mb-4 border-l-4 border-green-400']")
       .last()
       .find(".flex.space-x-2")
       .find("button")
       .first()
       .click();
+    cy.wait(1000);
     cy.get("div[class='flex flex-col pl-5 mb-4 border-l-4 border-green-400']")
       .last()
       .find(".flex.space-x-2")
