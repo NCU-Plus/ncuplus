@@ -16,7 +16,7 @@
         :to="{
           query: {
             ...route.query,
-            page: page - 1,
+            page: page - 1 >= 1 ? page - 1 : 1,
           },
         }"
         @click="decreasePage"
@@ -37,7 +37,7 @@
         :to="{
           query: {
             ...route.query,
-            page: page + 1,
+            page: page + 1 <= maxPage ? page + 1 : maxPage,
           },
         }"
         @click="increasePage"
