@@ -11,7 +11,8 @@
         :data="pageReviews"
       />
       <Pagenator
-        :get-state="useReviewPage"
+        ref="pagenator"
+        v-model:page="page"
         :max-page="Math.floor((reviews ?? []).length / 15 + 1)"
       />
       <ClientOnly>
@@ -57,9 +58,11 @@ import {
   edit,
 } from "~/helpers/course-feedback";
 import ReviewFrame from "~~/components/review/ReviewFrame.vue";
+import Pagenator from "~~/components/Pagenator.vue";
 
 const { data: reviews } = await useFetch("/api/reviews");
-const page = useReviewPage();
+const page = ref(1);
+const pagenator = ref<InstanceType<typeof Pagenator> | null>(null);
 const reviewFrame = ref<InstanceType<typeof ReviewFrame> | null>(null);
 const viewingReviewId = ref<number | null>(null);
 const mappedReviews = ref(await getMappedReviews());
@@ -103,6 +106,11 @@ async function getMappedReviews() {
 async function mapReviews() {
   mappedReviews.value = await getMappedReviews();
 }
+
+watch(
+  () => pagenator.value,
+  () => (page.value = pagenator.value?.page ?? 1),
+);
 
 const title = "心得列表";
 

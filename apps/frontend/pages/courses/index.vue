@@ -79,6 +79,11 @@ watch(
   () => pagenator.value?.setPage(1),
 );
 
+watch(
+  () => pagenator.value,
+  () => (page.value = pagenator.value?.page ?? 1),
+);
+
 const title = "課程列表";
 
 useHead({
