@@ -2,16 +2,28 @@
   <form class="w-full flex flex-col items-center">
     <div class="flex my-6 justify-center">
       <input
-        v-model="searchOptions.query"
+        :value="searchOptions.query"
         placeholder="課名/課號/老師"
         class="rounded-md pl-4 w-56 h-8"
+        @input="
+          update({
+            ...searchOptions,
+            query: ($event.target as HTMLInputElement).value,
+          })
+        "
         @keypress.enter.prevent
       />
       <div class="mx-4 flex items-center">
         <input
           id="advanceSearch"
-          v-model="searchOptions.advanceSearch"
+          :value="searchOptions.advanceSearch"
           type="checkbox"
+          @input="
+            update({
+              ...searchOptions,
+              advanceSearch: ($event.target as HTMLInputElement).checked,
+            })
+          "
         />
         <label>進階搜尋</label>
       </div>
@@ -23,8 +35,14 @@
     >
       <div class="w-2/5 md:w-32 h-10">
         <select
-          v-model="searchOptions.semester"
+          :value="searchOptions.semester"
           class="pl-4 pr-9 py-0 w-full h-full"
+          @input="
+            update({
+              ...searchOptions,
+              semester: ($event.target as HTMLInputElement).value,
+            })
+          "
         >
           <option value="">所有學期</option>
           <option
@@ -39,8 +57,14 @@
       </div>
       <div class="w-3/5 md:w-96 h-10">
         <select
-          v-model="searchOptions.department"
+          :value="searchOptions.department"
           class="pl-4 pr-9 py-0 w-full h-full"
+          @input="
+            update({
+              ...searchOptions,
+              department: ($event.target as HTMLInputElement).value,
+            })
+          "
         >
           <option value="">開課單位</option>
           <option
@@ -60,24 +84,16 @@
 <script setup lang="ts">
 import { Course } from "types/Course";
 import { formatSemester } from "~/helpers/course";
-import { getQuerys } from "~~/helpers/RouteUtils";
 import { SearchOptions } from "./CoursesSearchOptions";
 
 const route = useRoute();
-const querys = getQuerys(route.query);
 const props = defineProps<{
   coursesData: Course[];
+  searchOptions: SearchOptions;
 }>();
 const emits = defineEmits<{
   (e: "update:searchOptions", options: SearchOptions): void;
 }>();
-
-const searchOptions = ref<SearchOptions>({
-  advanceSearch: false,
-  query: querys.query ?? "",
-  semester: querys.semester ?? "",
-  department: querys.department ?? "",
-});
 
 const semesters = computed(() => {
   const semesters = new Set<string>();
@@ -95,23 +111,15 @@ const departments = computed(() => {
   return Array.from(departments).sort();
 });
 
-async function update() {
+async function update(newOptions: SearchOptions) {
   await navigateTo({
     query: {
       ...route.query,
-      query: searchOptions.value.query,
-      semester: searchOptions.value.semester,
-      department: searchOptions.value.department,
+      query: newOptions.query,
+      semester: newOptions.semester,
+      department: newOptions.department,
     },
   });
-  emits("update:searchOptions", searchOptions.value);
+  emits("update:searchOptions", newOptions);
 }
-
-watch(() => searchOptions.value.department, update);
-watch(() => searchOptions.value.semester, update);
-watch(() => searchOptions.value.query, update);
-
-defineExpose({
-  searchOptions,
-});
 </script>

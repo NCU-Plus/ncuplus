@@ -31,13 +31,16 @@ import { MetaBuilder } from "~~/helpers/MetaBuilder";
 import Pagenator from "~~/components/Pagenator.vue";
 import CoursesSearch from "~~/components/courses/CoursesSearch.vue";
 import { SearchOptions } from "~~/components/courses/CoursesSearchOptions";
+import { getQuerys } from "~~/helpers/RouteUtils";
 
+const route = useRoute();
+const querys = getQuerys(route.query);
 const { data: coursesData } = await useFetch<Course[]>(`/api/courses`);
 const searchOptions = ref<SearchOptions>({
   advanceSearch: false,
-  query: "",
-  semester: "",
-  department: "",
+  query: querys.query ?? "",
+  semester: querys.semester ?? "",
+  department: querys.department ?? "",
 });
 const page = ref(1);
 const pagenator = ref<InstanceType<typeof Pagenator> | null>(null);
@@ -94,12 +97,6 @@ watch(
 watch(
   () => pagenator.value,
   () => (page.value = pagenator.value?.page ?? 1),
-);
-
-watch(
-  () => search.value,
-  () =>
-    (searchOptions.value = search.value?.searchOptions ?? searchOptions.value),
 );
 
 const title = "課程列表";
