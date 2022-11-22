@@ -1,7 +1,11 @@
 <template>
   <div class="page-wrapper">
     <div class="page items-center">
-      <CoursesSearch :courses-data="coursesData ?? []" />
+      <CoursesSearch
+        ref="search"
+        v-model:search-options="searchOptions"
+        :courses-data="coursesData ?? []"
+      />
       <List
         :labels="{
           heading: '學期',
@@ -25,11 +29,19 @@ import { Course } from "types/Course";
 import { formatSemester } from "~/helpers/course";
 import { MetaBuilder } from "~~/helpers/MetaBuilder";
 import Pagenator from "~~/components/Pagenator.vue";
+import CoursesSearch from "~~/components/courses/CoursesSearch.vue";
+import { SearchOptions } from "~~/components/courses/CoursesSearchOptions";
 
 const { data: coursesData } = await useFetch<Course[]>(`/api/courses`);
-const searchOptions = useSearchOptions();
+const searchOptions = ref<SearchOptions>({
+  advanceSearch: false,
+  query: "",
+  semester: "",
+  department: "",
+});
 const page = ref(1);
 const pagenator = ref<InstanceType<typeof Pagenator> | null>(null);
+const search = ref<InstanceType<typeof CoursesSearch> | null>(null);
 const filteredCoursesData = computed(() => {
   if (!coursesData.value) {
     return [] as Course[];
@@ -82,6 +94,12 @@ watch(
 watch(
   () => pagenator.value,
   () => (page.value = pagenator.value?.page ?? 1),
+);
+
+watch(
+  () => search.value,
+  () =>
+    (searchOptions.value = search.value?.searchOptions ?? searchOptions.value),
 );
 
 const title = "課程列表";

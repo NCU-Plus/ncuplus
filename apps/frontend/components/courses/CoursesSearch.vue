@@ -60,12 +60,24 @@
 <script setup lang="ts">
 import { Course } from "types/Course";
 import { formatSemester } from "~/helpers/course";
+import { getQuerys } from "~~/helpers/QueryUtils";
+import { SearchOptions } from "./CoursesSearchOptions";
 
-const searchOptions = useSearchOptions();
-
+const route = useRoute();
+const querys = getQuerys(route.query);
 const props = defineProps<{
   coursesData: Course[];
 }>();
+const emits = defineEmits<{
+  (e: "update:searchOptions", options: SearchOptions): void;
+}>();
+
+const searchOptions = ref<SearchOptions>({
+  advanceSearch: false,
+  query: querys.query ?? "",
+  semester: querys.semester ?? "",
+  department: querys.department ?? "",
+});
 
 const semesters = computed(() => {
   const semesters = new Set<string>();
@@ -81,5 +93,25 @@ const departments = computed(() => {
     departments.add(courseData.departmentName);
   }
   return Array.from(departments).sort();
+});
+
+async function update() {
+  await navigateTo({
+    query: {
+      ...route.query,
+      query: searchOptions.value.query,
+      semester: searchOptions.value.semester,
+      department: searchOptions.value.department,
+    },
+  });
+  emits("update:searchOptions", searchOptions.value);
+}
+
+watch(() => searchOptions.value.department, update);
+watch(() => searchOptions.value.semester, update);
+watch(() => searchOptions.value.query, update);
+
+defineExpose({
+  searchOptions,
 });
 </script>
