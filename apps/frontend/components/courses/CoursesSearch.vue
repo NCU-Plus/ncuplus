@@ -60,7 +60,7 @@
 <script setup lang="ts">
 import { Course } from "types/Course";
 import { formatSemester } from "~/helpers/course";
-import { getQuerys } from "~~/helpers/QueryUtils";
+import { getQuerys } from "~~/helpers/RouteUtils";
 import { SearchOptions } from "./CoursesSearchOptions";
 
 const route = useRoute();

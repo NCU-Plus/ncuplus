@@ -117,14 +117,26 @@ import {
 import { APICourseFeedback } from "types/APICourseFeedback";
 import { APIPastExam } from "types/APIPastExam";
 import { MetaBuilder } from "~~/helpers/MetaBuilder";
+import { getParams } from "~~/helpers/RouteUtils";
 
+definePageMeta({
+  validate: async (route) => {
+    const params = getParams(route.params);
+    return /^[1-9][0-9]*$/.test(params.id ?? "");
+  },
+});
 const route = useRoute();
-
 const { data: course } = await useFetch<Course>(
   () => `/api/courses/${route.params.id}`,
   { key: `/api/courses/${route.params.id}` },
 );
-if (!course.value) throw new Error(`Course ${route.params.id} not found.`);
+
+if (!course.value)
+  throw createError({
+    statusCode: 404,
+    statusMessage: `Page Not Found: ${route.path}`,
+  });
+
 const { data: courseFeedback } = await useFetch<APICourseFeedback>(
   () => `/api/course-feedbacks/${(course.value as Course).classNo}`,
   { key: `/api/course-feedbacks/${(course.value as Course).classNo}` },
