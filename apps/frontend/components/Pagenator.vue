@@ -97,6 +97,7 @@ function validatePage(page: number) {
 function setPage(newPage: number) {
   if (validatePage(newPage)) {
     page.value = newPage;
+    navigateTo({ query: { ...route.query, page: newPage } });
   }
 }
 
