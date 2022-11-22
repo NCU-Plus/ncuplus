@@ -15,11 +15,7 @@
         }"
         :data="listData"
       />
-      <Pagenator
-        ref="pagenator"
-        v-model:page="page"
-        :max-page="Math.floor(filteredCoursesData.length / 15 + 1)"
-      />
+      <Pagenator ref="pagenator" v-model:page="page" :max-page="maxPage" />
     </div>
   </div>
 </template>
@@ -42,9 +38,6 @@ const searchOptions = ref<SearchOptions>({
   semester: querys.semester ?? "",
   department: querys.department ?? "",
 });
-const page = ref(1);
-const pagenator = ref<InstanceType<typeof Pagenator> | null>(null);
-const search = ref<InstanceType<typeof CoursesSearch> | null>(null);
 const filteredCoursesData = computed(() => {
   if (!coursesData.value) {
     return [] as Course[];
@@ -73,6 +66,14 @@ const filteredCoursesData = computed(() => {
       else return true;
     });
 });
+const maxPage = computed(() =>
+  Math.floor(filteredCoursesData.value.length / 15 + 1),
+);
+const page = ref(querys.page ? parseInt(querys.page) : 1);
+if (page.value <= 0) page.value = 1;
+else if (page.value > maxPage.value) page.value = maxPage.value;
+const pagenator = ref<InstanceType<typeof Pagenator> | null>(null);
+const search = ref<InstanceType<typeof CoursesSearch> | null>(null);
 
 const pageCoursesData = computed(() =>
   filteredCoursesData.value.slice((page.value - 1) * 15, page.value * 15),
@@ -92,11 +93,6 @@ const listData = computed(() =>
 watch(
   () => filteredCoursesData.value,
   () => pagenator.value?.setPage(1),
-);
-
-watch(
-  () => pagenator.value,
-  () => (page.value = pagenator.value?.page ?? 1),
 );
 
 const title = "課程列表";
