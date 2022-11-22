@@ -8,7 +8,7 @@
             page: 1,
           },
         }"
-        @click="page = 1"
+        @click="emits('update:page', 1)"
       >
         <li id="go-first-page" class="pagenator-button rounded-l-md">First</li>
       </NuxtLink>
@@ -25,12 +25,11 @@
       </NuxtLink>
       <input
         id="page-input"
-        v-model="inputPage"
+        :value="page"
         type="number"
         class="w-14 py-1 text-center"
         @keydown.enter="
-          if (validatePage(inputPage)) page = inputPage;
-          else inputPage = page;
+          setPage(($event.target as HTMLInputElement).valueAsNumber)
         "
       />
       <NuxtLink
@@ -51,7 +50,7 @@
             page: maxPage,
           },
         }"
-        @click="page = maxPage"
+        @click="emits('update:page', maxPage)"
       >
         <li id="go-last-page" class="pagenator-button rounded-r-md">Last</li>
       </NuxtLink>
@@ -62,55 +61,44 @@
 <script setup lang="ts">
 const route = useRoute();
 const props = defineProps<{
+  page: number;
   maxPage: number;
 }>();
 const emits = defineEmits<{
   (e: "update:page", page: number): void;
 }>();
-const page = ref(1);
-if (route.query.page) {
-  if (typeof route.query.page === "string") {
-    page.value = parseInt(route.query.page);
-  } else {
-    page.value = parseInt(route.query.page[0] ?? "1");
+
+function increasePage(): boolean {
+  if (props.page < props.maxPage) {
+    emits("update:page", props.page + 1);
+    return true;
   }
-  if (page.value <= 0) {
-    page.value = 1;
+  return false;
+}
+
+function decreasePage(): boolean {
+  if (props.page > 1) {
+    emits("update:page", props.page - 1);
+    return true;
   }
+  return false;
 }
 
-const inputPage = ref(page.value);
-
-function increasePage() {
-  if (page.value < props.maxPage) page.value++;
-}
-
-function decreasePage() {
-  if (page.value > 1) page.value--;
-}
-
-function validatePage(page: number) {
+function validatePage(page: number): boolean {
   if (page < 1 || page > props.maxPage) return false;
   return true;
 }
 
-function setPage(newPage: number) {
+async function setPage(newPage: number): Promise<boolean> {
   if (validatePage(newPage)) {
-    page.value = newPage;
-    navigateTo({ query: { ...route.query, page: newPage } });
+    await navigateTo({ query: { ...route.query, page: newPage } });
+    emits("update:page", newPage);
+    return true;
   }
+  return false;
 }
 
-watch(
-  () => page.value,
-  () => {
-    inputPage.value = page.value;
-    emits("update:page", page.value);
-  },
-);
-
 defineExpose({
-  page,
   increasePage,
   decreasePage,
   setPage,
