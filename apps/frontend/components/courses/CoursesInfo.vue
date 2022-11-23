@@ -84,7 +84,6 @@
             {{ formatPasswordCard(pastCourse.passwordCard) }}
           </td>
         </tr>
-        <span v-if="showingPastCourses && pending">Loading...</span>
       </tbody>
     </table>
   </section>
@@ -99,13 +98,15 @@ import {
 } from "~/helpers/course";
 
 const props = defineProps<{ course: Course }>();
-const { pending, data: pastCourses } = useLazyFetch<Course[]>(
-  () => `/api/past-courses/${props.course.classNo}`,
-  { key: `/api/past-courses/${props.course.classNo}` },
-);
 const showingPastCourses = ref(false);
+const cache = await useCache();
 const courses = computed(() => {
-  if (!pending.value && showingPastCourses.value) return pastCourses.value;
+  if (showingPastCourses.value)
+    return (
+      cache.courses.courses.filter(
+        (e) => e.classNo === props.course.classNo,
+      ) ?? [props.course]
+    );
   else return [props.course];
 });
 </script>

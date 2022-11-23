@@ -31,7 +31,9 @@ import { getQuerys } from "~~/helpers/RouteUtils";
 
 const route = useRoute();
 const querys = getQuerys(route.query);
-const { data: coursesData } = await useFetch<Course[]>(`/api/courses`);
+const cache = await useCache();
+const course = ref(cache.courses);
+const coursesData = ref(course.value.courses);
 const searchOptions = ref<SearchOptions>({
   advanceSearch: false,
   query: querys.query ?? "",
@@ -39,9 +41,6 @@ const searchOptions = ref<SearchOptions>({
   department: querys.department ?? "",
 });
 const filteredCoursesData = computed(() => {
-  if (!coursesData.value) {
-    return [] as Course[];
-  }
   return coursesData.value
     .filter((course: Course) => {
       if (searchOptions.value.semester !== "")
