@@ -1,5 +1,6 @@
 import { User } from "~/structures/User";
 import { APIUser } from "types/APIUser";
+import { APIResponse } from "~~/types/APIResponse";
 
 export class UserManager {
   private static _instance: UserManager;
@@ -11,11 +12,16 @@ export class UserManager {
   }
 
   public async refreshCache(id: number | undefined = undefined) {
+    const config = useRuntimeConfig();
     if (id) {
-      const user = await $fetch<APIUser>(`/api/users/${id}`);
+      const { data: user } = await $fetch<APIResponse<APIUser>>(
+        `${config.public.apiBaseUrl}/users/${id}`,
+      );
       if (user) this.cache.set(id, new User(user));
     } else {
-      const users = await $fetch<APIUser[]>("/api/users");
+      const { data: users } = await $fetch<APIResponse<APIUser[]>>(
+        `${config.public.apiBaseUrl}/users`,
+      );
       if (users)
         for (const user of users) this.cache.set(user.id, new User(user));
     }
@@ -24,10 +30,11 @@ export class UserManager {
   public async fetch(id: number): Promise<User | null> {
     const cachedUser = this.cache.get(id);
     if (cachedUser) return cachedUser;
-
-    const apiUser = await $fetch<APIUser>(`/api/users/${id}`);
+    const config = useRuntimeConfig();
+    const { data: apiUser } = await $fetch<APIResponse<APIUser>>(
+      `${config.public.apiBaseUrl}/users/${id}`,
+    );
     if (!apiUser) return null;
-
     const user = new User(apiUser);
     this.cache.set(id, user);
     return user;

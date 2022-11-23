@@ -57,13 +57,21 @@ import ReviewFrame from "~~/components/review/ReviewFrame.vue";
 import Pagenator from "~~/components/Pagenator.vue";
 import { getQuerys } from "~~/helpers/RouteUtils";
 import { APIReview } from "~~/types/APIReview";
+import { APIResponse } from "~~/types/APIResponse";
 
 const route = useRoute();
 const querys = getQuerys(route.query);
-const { data: reviews } = await useFetch("/api/reviews");
-if (reviews.value === null) {
-  reviews.value = [];
-}
+const config = useRuntimeConfig();
+const { data: reviewsRes } = await useFetch<APIResponse<APIReview[]>>(
+  `${config.public.apiBaseUrl}/reviews`,
+);
+if (!reviewsRes.value || !reviewsRes.value.data)
+  throw createError({
+    statusCode: 503,
+    message:
+      "Course feedback data is not available, please contact the website owner.",
+  });
+const reviews = ref(reviewsRes.value.data);
 const maxPage = computed(() =>
   Math.floor((reviews.value as APIReview[]).length / 15 + 1),
 );

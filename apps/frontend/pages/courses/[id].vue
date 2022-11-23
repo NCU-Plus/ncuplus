@@ -98,7 +98,7 @@
 </template>
 
 <script setup lang="ts">
-import { Course } from "types/Course";
+import { Course } from "~~/structures/Course";
 import {
   createComment,
   createReaction,
@@ -115,9 +115,9 @@ import {
   edit,
 } from "~/helpers/course-feedback";
 import { APICourseFeedback } from "types/APICourseFeedback";
-import { APIPastExam } from "types/APIPastExam";
 import { MetaBuilder } from "~~/helpers/MetaBuilder";
 import { getParams } from "~~/helpers/RouteUtils";
+import { APIResponse } from "~~/types/APIResponse";
 
 definePageMeta({
   validate: async (route) => {
@@ -125,34 +125,40 @@ definePageMeta({
     return /^[1-9][0-9]*$/.test(params.id ?? "");
   },
 });
+const config = useRuntimeConfig();
 const route = useRoute();
-const { data: course } = await useFetch<Course>(
-  () => `/api/courses/${route.params.id}`,
-  { key: `/api/courses/${route.params.id}` },
+const params = getParams(route.params);
+const courses = (await useCache()).courses;
+const t = courses.courses.find(
+  (courses) => courses.id.toString() === params.id ?? "",
 );
-
-if (!course.value)
+if (!t)
   throw createError({
     statusCode: 404,
     statusMessage: `Page Not Found: ${route.path}`,
   });
-
-const { data: courseFeedback } = await useFetch<APICourseFeedback>(
-  () => `/api/course-feedbacks/${(course.value as Course).classNo}`,
-  { key: `/api/course-feedbacks/${(course.value as Course).classNo}` },
+const course = ref(t);
+const { data: courseFeedbackRes } = await useFetch<
+  APIResponse<APICourseFeedback>
+>(
+  () => `${config.public.apiBaseUrl}/course-feedbacks/${course.value.classNo}`,
+  {
+    key: `${config.public.apiBaseUrl}/course-feedbacks/${course.value.classNo}`,
+  },
 );
-if (!courseFeedback.value)
-  throw new Error(
-    `Course feedback ${(course.value as Course).classNo} not found.`,
-  );
+if (!courseFeedbackRes.value || !courseFeedbackRes.value.data)
+  throw createError({
+    statusCode: 503,
+    message:
+      "Course feedback data is not available, please contact the website owner.",
+  });
+const courseFeedback = ref(courseFeedbackRes.value.data);
 
 async function download(entryId: number, successPromise: Promise<boolean>) {
-  if (await successPromise)
-    (
-      (courseFeedback.value as APICourseFeedback).pastExams.find(
-        (e) => e.id === entryId,
-      ) as APIPastExam
-    ).downloadCount += 1;
+  if (await successPromise) {
+    const t = courseFeedback.value.pastExams.find((e) => e.id === entryId);
+    if (t) t.downloadCount += 1;
+  }
 }
 
 const title = `${course.value.title}${
