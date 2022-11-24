@@ -15,8 +15,7 @@
           <font-awesome-icon v-else class="ml-2" :icon="['fas', 'caret-up']" />
         </div>
         <div v-show="showingPastCourses">
-          <span v-show="pending">Loading...</span>
-          <ul v-show="!pending">
+          <ul>
             <li v-for="pastCourse of pastCourses" :key="pastCourse.id">
               <NuxtLink
                 class="text-sky-600 hover:text-sky-800"
@@ -46,7 +45,6 @@
 <script setup lang="ts">
 import DialogFrame from "~~/components/DialogFrame.vue";
 import { APIReview } from "types/APIReview";
-import { Course } from "types/Course";
 import { formatSemester } from "~~/helpers/course";
 import { ReactionType } from "types/ReactionType";
 
@@ -64,11 +62,17 @@ const emits = defineEmits<{
   ): void;
   (event: "delete", data: { id: number }): void;
 }>();
-const apiUrl = computed(
-  () => `/api/past-courses/${props.review?.courseFeedbackClassNo}`,
+defineExpose({
+  show,
+  close,
+});
+const cache = await useCache();
+const pastCourses = computed(
+  () =>
+    cache.courses.courses.filter(
+      (e) => e.classNo === props.review?.courseFeedbackClassNo,
+    ) ?? [],
 );
-
-const { pending, data: pastCourses } = useLazyFetch<Course[]>(apiUrl);
 const dialog = ref<InstanceType<typeof DialogFrame> | null>(null);
 const showingPastCourses = ref(true);
 
@@ -79,9 +83,4 @@ function show() {
 function close() {
   dialog.value?.close();
 }
-
-defineExpose({
-  show,
-  close,
-});
 </script>
