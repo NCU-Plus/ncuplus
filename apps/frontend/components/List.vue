@@ -32,7 +32,7 @@
     <NuxtLink
       v-for="(row, i) of data"
       :key="i"
-      class="row-link"
+      class="row-link cursor-pointer hover:bg-gray-50"
       :to="row.link"
       @click="row.onClick ? row.onClick() : undefined"
     >
