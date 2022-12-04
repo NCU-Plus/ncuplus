@@ -43,7 +43,7 @@ cp apps/backend/db.env.example apps/backend/db.env
 Run test database:
 
 ```bash
-cd backend && docker-Fompose up -d --build
+cd backend && docker compose up -d --build
 ```
 
 > Database is bind to port 3306, and Adminer is bind to port 8080 by default.
@@ -67,11 +67,8 @@ pnpm build
 Locally preview production build:
 
 ```bash
-# frontend
-pnpm -F frontend preview
-
-# backend
-pnpm -F backend start:prod
+# server would be started at http://localhost:4000
+pnpm start:preview
 ```
 
 ## Testing
@@ -93,14 +90,14 @@ pnpm start:e2e
 # Run the following command if you need to run seeder
 pnpm build:backend
 
-# Open cypress app
+# Run cypress test in cypress app
 pnpm cypress open
 
-# Run cypress
+# Run cypress test in terminal
 pnpm cypress run
 ```
 
-> `pnpm start:ci` will start a proxy server at `http://localhost:4000`. It would proxy all requests which url starts with `/open-api` to backend and other requests to frontend.
+> `pnpm start:e2e` will start a proxy server at `http://localhost:4000`. It would proxy all requests which url starts with `/open-api` to backend and other requests to frontend.
 
 ## License
 
