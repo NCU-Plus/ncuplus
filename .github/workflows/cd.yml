@@ -2,19 +2,19 @@ name: CD
 
 on:
   release:
-    types: [released]
+    types: [released, edited]
 
 jobs:
-  unit-test:
-    uses: ./.github/workflows/unit-test.yml
-  e2e-test:
-    uses: ./.github/workflows/e2e-test.yml
-    secrets:
-      cypress-record-key: ${{ secrets.CYPRESS_RECORD_KEY }}
-      oauth-client-id: ${{ secrets.OAUTH_CLIENT_ID }}
-      oauth-client-secret: ${{ secrets.OAUTH_CLIENT_SECRET }}
+  release-note:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: ppodds/release-note@v0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
   docker:
-    needs: [unit-test, e2e-test]
     runs-on: ubuntu-latest
     name: "Build Docker image and push to Docker Hub"
     steps:
