@@ -22,4 +22,5 @@ export const config = {
     clientSecret: process.env.OAUTH_CLIENT_SECRET,
     redirectUrl: process.env.OAUTH_REDIRECT_URL,
   },
+  webRootUrl: process.env.WEB_ROOT_URL,
 };
