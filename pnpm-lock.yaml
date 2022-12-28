@@ -52,7 +52,7 @@ importers:
       '@nestjs/common': ^9.2.0
       '@nestjs/config': ^2.2.0
       '@nestjs/core': ^9.2.0
-      '@nestjs/jwt': ^9.0.0
+      '@nestjs/jwt': ^10.0.0
       '@nestjs/mapped-types': '*'
       '@nestjs/passport': ^9.0.0
       '@nestjs/platform-express': ^9.2.0
@@ -101,7 +101,7 @@ importers:
       '@nestjs/common': 9.2.0_weizl6uyifxeltqqggsn4erezy
       '@nestjs/config': 2.2.0_2kbkxfsrhtatemqz6dhv2pefvq
       '@nestjs/core': 9.2.0_jfowmhmgk7kwjudosrpv7e7liy
-      '@nestjs/jwt': 9.0.0_@nestjs+common@9.2.0
+      '@nestjs/jwt': 10.0.1_@nestjs+common@9.2.0
       '@nestjs/mapped-types': 1.2.0_tnt3guucbc535mt4nrxrr4hrgu
       '@nestjs/passport': 9.0.0_s6va3jdeufsye4wwu25es3p4om
       '@nestjs/platform-express': 9.2.0_pf2fb646rsvo5szivgkaevcpvi
@@ -2203,14 +2203,14 @@ packages:
     transitivePeerDependencies:
       - encoding
 
-  /@nestjs/jwt/9.0.0_@nestjs+common@9.2.0:
-    resolution: {integrity: sha512-ZsXGY/wMYKzEhymw2+dxiwrHTRKIKrGszx6r2EjQqNLypdXMQu0QrujwZJ8k3+XQV4snmuJwwNakQoA2ILfq8w==}
+  /@nestjs/jwt/10.0.1_@nestjs+common@9.2.0:
+    resolution: {integrity: sha512-LwXBKVYHnFeX6GH/Wt0WDjsWCmNDC6tEdLlwNMAvJgYp+TkiCpEmQLkgRpifdUE29mvYSbjSnVs2kW2ob935NA==}
     peerDependencies:
       '@nestjs/common': ^8.0.0 || ^9.0.0
     dependencies:
       '@nestjs/common': 9.2.0_weizl6uyifxeltqqggsn4erezy
-      '@types/jsonwebtoken': 8.5.8
-      jsonwebtoken: 8.5.1
+      '@types/jsonwebtoken': 8.5.9
+      jsonwebtoken: 9.0.0
     dev: false
 
   /@nestjs/mapped-types/1.2.0_tnt3guucbc535mt4nrxrr4hrgu:
@@ -3264,17 +3264,10 @@ packages:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
 
-  /@types/jsonwebtoken/8.5.8:
-    resolution: {integrity: sha512-zm6xBQpFDIDM6o9r6HSgDeIcLy82TKWctCXEPbJJcXb5AKmi5BNNdLXneixK4lplX3PqIVcwLBCGE/kAGnlD4A==}
-    dependencies:
-      '@types/node': 18.11.9
-    dev: false
-
   /@types/jsonwebtoken/8.5.9:
     resolution: {integrity: sha512-272FMnFGzAVMGtu9tkr29hRL6bZj4Zs1KZNeHLnKqAvp06tAIcarTMwOh8/8bz4FmKRcMxZhZNeUAQsNLoiPhg==}
     dependencies:
       '@types/node': 18.11.9
-    dev: true
 
   /@types/marked/4.0.7:
     resolution: {integrity: sha512-eEAhnz21CwvKVW+YvRvcTuFKNU9CV1qH+opcgVK3pIMI6YZzDm6gc8o2vHjldFk6MGKt5pueSB7IOpvpx5Qekw==}
@@ -8600,6 +8593,16 @@ packages:
       lodash.once: 4.1.1
       ms: 2.1.3
       semver: 5.7.1
+    dev: false
+
+  /jsonwebtoken/9.0.0:
+    resolution: {integrity: sha512-tuGfYXxkQGDPnLJ7SibiQgVgeDgfbPq2k2ICcbgqW8WxWLBAxKQM/ZCu/IT8SOSwmaYl4dpTFCW5xZv7YbbWUw==}
+    engines: {node: '>=12', npm: '>=6'}
+    dependencies:
+      jws: 3.2.2
+      lodash: 4.17.21
+      ms: 2.1.3
+      semver: 7.3.8
     dev: false
 
   /jsprim/2.0.2:
