@@ -34,7 +34,7 @@ jobs:
         with:
           # Disable running of tests within install job
           runTests: false
-          build: pnpm build:frontend
+          build: pnpm -F frontend build
       - name: Save frontend build folder
         uses: actions/upload-artifact@v3
         with:
