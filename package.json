@@ -9,7 +9,7 @@
     "dev": "concurrently \"pnpm -F frontend dev\" \"pnpm -F backend start:dev\"",
     "build": "lerna run build",
     "start:ci": "concurrently \"pnpm ts-node proxy.ts\" \"cd ./apps/frontend && node .output/server/index.mjs\" \"cross-env NODE_ENV=test pnpm -F backend start\"",
-    "start:e2e": "concurrently \"pnpm ts-node proxy.ts\" \"cd ./apps/frontend && cross-env NUXT_PUBLIC_API_BASE_URL=http://localhost:4000/open-api NITRO_PORT=3001 node .output/server/index.mjs\" \"cross-env NODE_ENV=test pnpm -F backend start\"",
+    "start:e2e": "concurrently \"sleep 10 && pnpm ts-node proxy.ts\" \"cd ./apps/frontend && cross-env NUXT_PUBLIC_API_BASE_URL=http://localhost:4000/open-api NITRO_PORT=3001 node .output/server/index.mjs\" \"cross-env NODE_ENV=test pnpm -F backend start\"",
     "start:preview": "concurrently \"pnpm ts-node proxy.ts\" \"cd ./apps/frontend && cross-env NUXT_PUBLIC_API_BASE_URL=http://localhost:4000/open-api NITRO_PORT=3001 node .output/server/index.mjs\" \"pnpm -F backend start:prod\"",
     "prepare": "husky install",
     "test": "lerna run test",
