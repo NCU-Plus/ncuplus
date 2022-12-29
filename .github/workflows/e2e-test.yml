@@ -95,6 +95,7 @@ jobs:
           DB_PASSWORD: test
           DB_NAME: ncuplus
           DB_TIMEZONE: "+08:00"
+          WEB_ROOT_URL: "http://localhost:4000"
           UPLOAD_FILES_PATH: "uploads/"
           OAUTH_CLIENT_ID: ${{ secrets.oauth-client-id }}
           OAUTH_CLIENT_SECRET: ${{ secrets.oauth-client-secret }}
