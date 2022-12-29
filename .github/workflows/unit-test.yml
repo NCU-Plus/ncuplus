@@ -3,7 +3,7 @@ name: Run Tests
 on:
   workflow_call:
 jobs:
-  frontend-tests:
+  tests:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -17,36 +17,10 @@ jobs:
         node-version: 16
         cache: 'pnpm'
     - name: Install dependencies
-      run: |
-        pnpm i -F .
-        pnpm i -F frontend
+      run: pnpm i
     - run: pnpm -F frontend exec nuxt prepare
     - name: Run unit tests
-      run: pnpm test:frontend
+      run: pnpm test
     - name: Run linter
-      run: pnpm lint:frontend
-  backend-tests:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.15.1]
-    name: "Test: node-${{ matrix.node_version }}"
-    steps:
-    - uses: actions/checkout@v3
-    - name: Install pnpm
-      uses: pnpm/action-setup@v2
-      with:
-        version: 7
-    - name: Set node version to ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'pnpm'
-    - name: Install deps
-      run: |
-        pnpm i -F .
-        pnpm i -F backend
-    - name: Run unit tests
-      run: pnpm test:backend 
-    - name: Run linter
-      run: pnpm lint:backend
+      run: pnpm lint
+
