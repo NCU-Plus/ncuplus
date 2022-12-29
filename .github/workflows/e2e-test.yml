@@ -34,7 +34,7 @@ jobs:
         with:
           # Disable running of tests within install job
           runTests: false
-          build: pnpm build:frontend
+          build: pnpm -F frontend build
       - name: Save frontend build folder
         uses: actions/upload-artifact@v3
         with:
@@ -75,8 +75,8 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           start: pnpm start:ci
-          wait-on: 'http://localhost:3000'
-          wait-on-timeout: 30
+          wait-on: 'http://localhost:4000'
+          wait-on-timeout: 60
           browser: chrome
           record: true
         env:
@@ -95,6 +95,7 @@ jobs:
           DB_PASSWORD: test
           DB_NAME: ncuplus
           DB_TIMEZONE: "+08:00"
+          WEB_ROOT_URL: "http://localhost:4000"
           UPLOAD_FILES_PATH: "uploads/"
           OAUTH_CLIENT_ID: ${{ secrets.oauth-client-id }}
           OAUTH_CLIENT_SECRET: ${{ secrets.oauth-client-secret }}
