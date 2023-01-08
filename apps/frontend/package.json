@@ -21,7 +21,7 @@
     "@vitejs/plugin-vue": "^4.0.0",
     "easymde": "^2.18.0",
     "highlight.js": "^11.6.0",
-    "isomorphic-dompurify": "^0.24.0",
+    "isomorphic-dompurify": "^0.26.0",
     "marked": "^4.2.2",
     "pinia": "^2.0.23",
     "vue-gtag": "^2.0.1"

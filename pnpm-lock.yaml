@@ -164,7 +164,7 @@ importers:
       '@vue/test-utils': ^2.2.3
       easymde: ^2.18.0
       highlight.js: ^11.6.0
-      isomorphic-dompurify: ^0.24.0
+      isomorphic-dompurify: ^0.26.0
       marked: ^4.2.2
       nuxt: ^3.0.0
       pinia: ^2.0.23
@@ -182,7 +182,7 @@ importers:
       '@vitejs/plugin-vue': 4.0.0_vite@4.0.0+vue@3.2.45
       easymde: 2.18.0
       highlight.js: 11.6.0
-      isomorphic-dompurify: 0.24.0
+      isomorphic-dompurify: 0.26.0
       marked: 4.2.2
       pinia: 2.0.23_vue@3.2.45
       vue-gtag: 2.0.1_vue@3.2.45
@@ -7935,12 +7935,12 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /isomorphic-dompurify/0.24.0:
-    resolution: {integrity: sha512-YePhHHQAVsU1CYkL3gKQmga+fTAh66eWg+RVQOVFRNfzoLkd+gFhFY5S+g80f8b0v2JBMYg+npqdZI1vOxTOBQ==}
+  /isomorphic-dompurify/0.26.0:
+    resolution: {integrity: sha512-70gPadd/NJPTBuTtM5PsWimmc7S4fcBENzOFMHfBtIPacaygUvI9n63qFkUTc91WDDC9yB68mtmluW9/NhhTJw==}
     dependencies:
       '@types/dompurify': 2.4.0
       dompurify: 2.4.1
-      jsdom: 20.0.2
+      jsdom: 21.0.0
     transitivePeerDependencies:
       - bufferutil
       - canvas
@@ -8469,8 +8469,8 @@ packages:
     resolution: {integrity: sha512-UVU9dibq2JcFWxQPA6KCqj5O42VOmAY3zQUfEKxU0KpTGXwNoCjkX1e13eHNvw/xPynt6pU0rZ1htjWTNTSXsg==}
     dev: true
 
-  /jsdom/20.0.2:
-    resolution: {integrity: sha512-AHWa+QO/cgRg4N+DsmHg1Y7xnz+8KU3EflM0LVDTdmrYOc1WWTSkOjtpUveQH+1Bqd5rtcVnb/DuxV/UjDO4rA==}
+  /jsdom/21.0.0:
+    resolution: {integrity: sha512-AIw+3ZakSUtDYvhwPwWHiZsUi3zHugpMEKlNPaurviseYoBqo0zBd3zqoUi3LPCNtPFlEP8FiW9MqCZdjb2IYA==}
     engines: {node: '>=14'}
     peerDependencies:
       canvas: ^2.5.0
@@ -8497,7 +8497,7 @@ packages:
       saxes: 6.0.0
       symbol-tree: 3.2.4
       tough-cookie: 4.1.2
-      w3c-xmlserializer: 3.0.0
+      w3c-xmlserializer: 4.0.0
       webidl-conversions: 7.0.0
       whatwg-encoding: 2.0.0
       whatwg-mimetype: 3.0.0
@@ -13471,9 +13471,9 @@ packages:
       '@vue/server-renderer': 3.2.45_vue@3.2.45
       '@vue/shared': 3.2.45
 
-  /w3c-xmlserializer/3.0.0:
-    resolution: {integrity: sha512-3WFqGEgSXIyGhOmAFtlicJNMjEps8b1MG31NCA0/vOF9+nKMUW1ckhi9cnNHmf88Rzw5V+dwIwsm2C7X8k9aQg==}
-    engines: {node: '>=12'}
+  /w3c-xmlserializer/4.0.0:
+    resolution: {integrity: sha512-d+BFHzbiCx6zGfz0HyQ6Rg69w9k19nviJspaj4yNscGjrHu94sVP+aRm75yEbCh+r2/yR+7q6hux9LVtbuTGBw==}
+    engines: {node: '>=14'}
     dependencies:
       xml-name-validator: 4.0.0
     dev: false
