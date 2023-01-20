@@ -52,6 +52,7 @@ export class CourseFeedbackService {
       }
       courseFeedback = this.courseFeedbackRepository.create({
         classNo: classNo,
+        ratings: [],
         reviews: [],
         comments: [],
         pastExams: [],
