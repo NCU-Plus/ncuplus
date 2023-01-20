@@ -15,6 +15,7 @@ import {
   faEllipsisV,
   faCaretDown,
   faCaretUp,
+  faSignal,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -35,6 +36,7 @@ library.add(faTimes);
 library.add(faEllipsisV);
 library.add(faCaretDown);
 library.add(faCaretUp);
+library.add(faSignal);
 
 export default defineNuxtPlugin((nuxtApp) => {
   // eslint-disable-next-line

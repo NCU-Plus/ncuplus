@@ -6,6 +6,8 @@ import { APIResponse } from "types/APIResponse";
 import { APIReview } from "types/APIReview";
 import { ReactionType } from "types/ReactionType";
 import { APIClient } from "./APIClient";
+import { RatingType } from "~~/types/RatingType";
+import { APIRating } from "~~/types/APIRating";
 
 type CourseFeedbackType = "comment" | "review";
 
@@ -323,4 +325,41 @@ export async function del(
       target.findIndex((e) => e.id === entryId),
       1,
     );
+}
+
+export async function createRating(
+  classNo: string,
+  rating: {
+    type: RatingType;
+    value: number;
+  },
+) {
+  const config = useRuntimeConfig();
+  const toast = useToast();
+  const client = APIClient.getInstance();
+  const response = await client.fetch<APIResponse<APIRating>>(
+    `${config.public.apiBaseUrl}/course-feedbacks/${classNo}/ratings`,
+    {
+      method: "POST",
+      body: rating,
+    },
+  );
+
+  if (response.statusCode !== 200) {
+    let message = "評分時發生錯誤";
+    if (response.statusCode === 401) message = "尚未登入";
+    else if (response.statusCode === 403) message = "你已經針對此項評分過了";
+
+    toast.pushToast({
+      type: ToastType.ERROR,
+      message: message,
+    });
+    return null;
+  }
+
+  toast.pushToast({
+    type: ToastType.SUCCESS,
+    message: "評分成功",
+  });
+  return response.data;
 }

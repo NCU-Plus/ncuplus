@@ -8,89 +8,71 @@
         </h1>
       </section>
       <!--info-->
-      <CoursesInfo :course="(course as Course)" />
+      <CoursesInfo :course="course" />
+      <!--rating-->
+      <CoursesRating
+        v-model:ratings="courseFeedback.ratings"
+        :class-no="courseFeedback.classNo"
+      />
       <!--comment-->
       <CoursesCommentList
-        :comments-data="(courseFeedback as APICourseFeedback).comments"
+        :comments-data="courseFeedback.comments"
         @add="
           add(
-            (courseFeedback as APICourseFeedback).comments,
-            createComment((course as Course).classNo, $event.content),
+            courseFeedback.comments,
+            createComment(course.classNo, $event.content),
           )
         "
         @reaction="
           add(
-            (courseFeedback as APICourseFeedback).comments.find(
-              (e) => e.id === $event.id,
-            )!.reactions,
+            courseFeedback.comments.find((e) => e.id === $event.id)!.reactions,
             createReaction('comment', $event.operation, $event.id),
           )
         "
         @complete-edit="
           edit(
-            (courseFeedback as APICourseFeedback).comments.find(
-              (e) => e.id === $event.id,
-            )!,
+            courseFeedback.comments.find((e) => e.id === $event.id)!,
             editComment($event.id, $event.content),
           )
         "
         @delete="
-          del(
-            (courseFeedback as APICourseFeedback).comments,
-            $event.id,
-            deleteComment($event.id),
-          )
+          del(courseFeedback.comments, $event.id, deleteComment($event.id))
         "
       />
       <!--review-->
       <CoursesReviewList
-        :reviews-data="(courseFeedback as APICourseFeedback).reviews"
+        :reviews-data="courseFeedback.reviews"
         @add="
           add(
-            (courseFeedback as APICourseFeedback).reviews,
-            createReview((course as Course).classNo, $event.content),
+            courseFeedback.reviews,
+            createReview(course.classNo, $event.content),
           )
         "
         @reaction="
           add(
-            (courseFeedback as APICourseFeedback).reviews.find(
-              (e) => e.id === $event.id,
-            )!.reactions,
+            courseFeedback.reviews.find((e) => e.id === $event.id)!.reactions,
             createReaction('review', $event.operation, $event.id),
           )
         "
         @complete-edit="
           edit(
-            (courseFeedback as APICourseFeedback).reviews.find(
-              (e) => e.id === $event.id,
-            )!,
+            courseFeedback.reviews.find((e) => e.id === $event.id)!,
             editReview($event.id, $event.content),
           )
         "
         @delete="
-          del(
-            (courseFeedback as APICourseFeedback).reviews,
-            $event.id,
-            deleteReview($event.id),
-          )
+          del(courseFeedback.reviews, $event.id, deleteReview($event.id))
         "
       />
       <!--past exams-->
       <CoursesPastExamList
-        :past-exams-data="(courseFeedback as APICourseFeedback).pastExams"
+        :past-exams-data="courseFeedback.pastExams"
         @upload="
-          add(
-            (courseFeedback as APICourseFeedback).pastExams,
-            createPastExam((course as Course).classNo, $event),
-          )
+          add(courseFeedback.pastExams, createPastExam(course.classNo, $event))
         "
         @download="download($event.id, downloadPastExam($event.id))"
         @delete="
-          del(
-            (courseFeedback as APICourseFeedback).pastExams,
-            $event.id,
-            deletePastExam($event.id),
-          )
+          del(courseFeedback.pastExams, $event.id, deletePastExam($event.id))
         "
       />
     </div>
@@ -98,7 +80,6 @@
 </template>
 
 <script setup lang="ts">
-import { Course } from "~~/structures/Course";
 import {
   createComment,
   createReaction,
