@@ -18,6 +18,9 @@ import { CreateReactionDto } from './dtos/create-reaction.dto';
 import { CreateReviewDto } from './dtos/create-review.dto';
 import { UpdateReviewDto } from './dtos/update-review.dto';
 import { CreatePastExamDto } from './dtos/create-past-exam.dto';
+import { Rating } from './rating,entity';
+import { CreateRatingDto } from './dtos/create-rating.dto';
+import { UpdateRatingDto } from './dtos/update-rating.dto';
 
 @Injectable()
 export class CourseFeedbackService {
@@ -33,6 +36,8 @@ export class CourseFeedbackService {
     private readonly reactionRepository: Repository<Reaction>,
     @InjectRepository(PastExam)
     private readonly pastExamRepository: Repository<PastExam>,
+    @InjectRepository(Rating)
+    private readonly ratingRepository: Repository<Rating>,
   ) {}
 
   async getCourseFeedback(classNo: string): Promise<CourseFeedback> {
@@ -298,5 +303,58 @@ export class CourseFeedbackService {
       throw new ForbiddenException(
         'You have already liked or disliked this comment',
       );
+  }
+
+  async findAllRating() {
+    return await this.ratingRepository.find();
+  }
+
+  async createRating(
+    classNo: string,
+    authorId: number,
+    createRatingDto: CreateRatingDto,
+  ) {
+    const courseFeedback = await this.getCourseFeedback(classNo);
+    if (!courseFeedback)
+      throw new NotFoundException(`Course with classNo ${classNo} not found`);
+    // check if user has already rated the type for this course
+    if (
+      courseFeedback.ratings.some(
+        (rating) =>
+          rating.authorId === authorId && rating.type === createRatingDto.type,
+      )
+    )
+      throw new ForbiddenException(
+        'You have already rated this type for the course',
+      );
+    const rating = this.ratingRepository.create({
+      authorId: authorId,
+      type: createRatingDto.type,
+      value: createRatingDto.value,
+      courseFeedbackClassNo: courseFeedback.classNo,
+    });
+    return await this.ratingRepository.save(rating);
+  }
+
+  async findOneRating(ratingId: number): Promise<Rating> {
+    const rating = await this.ratingRepository.findOne({
+      where: { id: ratingId },
+    });
+    if (!rating)
+      throw new NotFoundException(`Rating with ID ${ratingId} not found`);
+    return rating;
+  }
+
+  async editRating(
+    ratingId: number,
+    updateRatingDto: UpdateRatingDto,
+  ): Promise<Rating> {
+    const rating = await this.findOneRating(ratingId);
+    if (updateRatingDto.value) rating.value = updateRatingDto.value;
+    return await this.ratingRepository.save(rating);
+  }
+
+  async deleteRating(ratingId: number): Promise<void> {
+    await this.ratingRepository.delete(ratingId);
   }
 }

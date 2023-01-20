@@ -7,11 +7,15 @@ import {
 } from 'typeorm';
 import { PastExam } from './past-exam.entity';
 import { Comment, Review } from './content.entity';
+import { Rating } from './rating,entity';
 
 @Entity('CourseFeedbacks')
 export class CourseFeedback {
   @PrimaryColumn()
   classNo: string;
+
+  @OneToMany(() => Rating, (rating) => rating.courseFeedback, { eager: true })
+  ratings: Rating[];
 
   @OneToMany(() => Comment, (comment) => comment.courseFeedback, {
     eager: true,
