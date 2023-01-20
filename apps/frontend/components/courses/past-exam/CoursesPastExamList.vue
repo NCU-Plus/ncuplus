@@ -59,7 +59,13 @@
           <button class="button" @click="upload">送出</button>
         </div>
       </transition>
-      <button class="button" @click="uploading = !uploading">我要上傳</button>
+      <button
+        id="upload-pastexam-btn"
+        class="button"
+        @click="uploading = !uploading"
+      >
+        我要上傳
+      </button>
     </div>
     <CoursesPastExamDescription />
   </section>

@@ -171,21 +171,15 @@ describe("class information", () => {
   it("case32: click 我要上傳（第一次） ", () => {
     cy.visit("/courses/1");
     cy.wait(1000);
-    cy.get(
-      "body > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > section:nth-child(5) > div:nth-child(3) > button:nth-child(2)"
-    ).click();
+    cy.get("#upload-pastexam-btn").click();
     cy.wait(1000);
     cy.get('input[type="file"]').should("be.visible");
   });
   it("case33: click 我要上傳（第二次） ", () => {
     cy.visit("/courses/1");
     cy.wait(1000);
-    cy.get(
-      "body > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > section:nth-child(5) > div:nth-child(3) > button:nth-child(2)"
-    ).click();
-    cy.get(
-      "body > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > section:nth-child(5) > div:nth-child(3) > button:nth-child(2)"
-    ).click();
+    cy.get("#upload-pastexam-btn").click();
+    cy.get("#upload-pastexam-btn").click();
     cy.wait(1000);
     cy.get('input[type="file"]').should("not.be.visible");
   });
