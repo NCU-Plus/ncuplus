@@ -15,7 +15,7 @@ export enum RatingType {
   RECOMMEND = 2,
 }
 
-@Entity('Rating')
+@Entity('Ratings')
 export class Rating {
   @PrimaryGeneratedColumn()
   id: number;
