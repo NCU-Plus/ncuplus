@@ -19,11 +19,13 @@
     "@pinia/nuxt": "^0.4.3",
     "@tweenjs/tween.js": "^18.6.4",
     "@vitejs/plugin-vue": "^4.0.0",
+    "chart.js": "^4.2.0",
     "easymde": "^2.18.0",
     "highlight.js": "^11.6.0",
     "isomorphic-dompurify": "^0.26.0",
     "marked": "^4.2.2",
     "pinia": "^2.0.23",
+    "vue-chartjs": "^5.2.0",
     "vue-gtag": "^2.0.1"
   },
   "devDependencies": {
