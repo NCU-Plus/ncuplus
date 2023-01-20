@@ -34,17 +34,21 @@ import { PastExamHook } from './hooks/past-exam.hook';
 import { ReviewHook } from './hooks/review.hook';
 import { PastExam } from './past-exam.entity';
 import { Reaction } from './reaction.entity';
+import { Rating } from './rating,entity';
+import { CreateRatingDto } from './dtos/create-rating.dto';
+import { RatingHook } from './hooks/rating.hook';
+import { UpdateRatingDto } from './dtos/update-rating.dto';
 
 @Controller()
 export class CourseFeedbackController {
-  constructor(private readonly courseInfoService: CourseFeedbackService) {}
+  constructor(private readonly courseFeedbackService: CourseFeedbackService) {}
 
   @Get('course-feedbacks/:classNo')
   async getCourseFeedback(@Param('classNo') classNo: string) {
     return {
       statusCode: 200,
       message: 'OK',
-      data: await this.courseInfoService.getCourseFeedback(classNo),
+      data: await this.courseFeedbackService.getCourseFeedback(classNo),
     };
   }
 
@@ -53,7 +57,7 @@ export class CourseFeedbackController {
     return {
       statusCode: 200,
       message: 'OK',
-      data: await this.courseInfoService.findAllComment(),
+      data: await this.courseFeedbackService.findAllComment(),
     };
   }
 
@@ -69,7 +73,7 @@ export class CourseFeedbackController {
     return {
       statusCode: 200,
       message: 'OK',
-      data: await this.courseInfoService.createComment(
+      data: await this.courseFeedbackService.createComment(
         classNo,
         req.user.id,
         createCommentDto,
@@ -88,7 +92,7 @@ export class CourseFeedbackController {
     return {
       statusCode: 200,
       message: 'OK',
-      data: await this.courseInfoService.editComment(id, updateCommentDto),
+      data: await this.courseFeedbackService.editComment(id, updateCommentDto),
     };
   }
 
@@ -96,7 +100,7 @@ export class CourseFeedbackController {
   @Delete('comments/:id')
   @UseAbility(Actions.delete, Comment, CommentHook)
   async deleteComment(@Param('id', ParseIntPipe) id: number) {
-    await this.courseInfoService.deleteComment(id);
+    await this.courseFeedbackService.deleteComment(id);
     return {
       statusCode: 200,
       message: 'OK',
@@ -115,7 +119,7 @@ export class CourseFeedbackController {
     return {
       statusCode: 200,
       message: 'OK',
-      data: await this.courseInfoService.reactToComment(
+      data: await this.courseFeedbackService.reactToComment(
         id,
         req.user.id,
         createReactionDto,
@@ -128,7 +132,7 @@ export class CourseFeedbackController {
     return {
       statusCode: 200,
       message: 'OK',
-      data: await this.courseInfoService.findAllReview(),
+      data: await this.courseFeedbackService.findAllReview(),
     };
   }
 
@@ -144,7 +148,7 @@ export class CourseFeedbackController {
     return {
       statusCode: 200,
       message: 'OK',
-      data: await this.courseInfoService.createReview(
+      data: await this.courseFeedbackService.createReview(
         classNo,
         req.user.id,
         createReviewDto,
@@ -163,7 +167,7 @@ export class CourseFeedbackController {
     return {
       statusCode: 200,
       message: 'OK',
-      data: await this.courseInfoService.editReview(id, updateReviewDto),
+      data: await this.courseFeedbackService.editReview(id, updateReviewDto),
     };
   }
 
@@ -171,7 +175,7 @@ export class CourseFeedbackController {
   @Delete('reviews/:id')
   @UseAbility(Actions.delete, Review, ReviewHook)
   async deleteReview(@Param('id', ParseIntPipe) id: number) {
-    await this.courseInfoService.deleteReview(id);
+    await this.courseFeedbackService.deleteReview(id);
     return {
       statusCode: 200,
       message: 'OK',
@@ -190,7 +194,7 @@ export class CourseFeedbackController {
     return {
       statusCode: 200,
       message: 'OK',
-      data: await this.courseInfoService.reactToReview(
+      data: await this.courseFeedbackService.reactToReview(
         id,
         req.user.id,
         createReactionDto,
@@ -240,7 +244,7 @@ export class CourseFeedbackController {
     return {
       statusCode: 201,
       message: 'Created',
-      data: await this.courseInfoService.uploadPastExam(
+      data: await this.courseFeedbackService.uploadPastExam(
         classNo,
         req.user.id,
         createPastExamDto,
@@ -253,14 +257,60 @@ export class CourseFeedbackController {
   @Get('past-exams/:id')
   @UseAbility(Actions.read, PastExam)
   async getPastExam(@Param('id', ParseIntPipe) id: number) {
-    return await this.courseInfoService.getPastExam(id);
+    return await this.courseFeedbackService.getPastExam(id);
   }
 
   @UseGuards(JwtAuthGuard, AccessGuard)
   @Delete('past-exams/:id')
   @UseAbility(Actions.delete, PastExam, PastExamHook)
   async deletePastExam(@Param('id', ParseIntPipe) id: number) {
-    await this.courseInfoService.deletePastExam(id);
+    await this.courseFeedbackService.deletePastExam(id);
     return { statusCode: 200, message: 'OK' };
+  }
+
+  @UseGuards(JwtAuthGuard, AccessGuard)
+  @Post('course-feedbacks/:classNo/ratings')
+  @UseAbility(Actions.create, Rating)
+  async createRating(
+    @Request() req,
+    @Param('classNo') classNo: string,
+    @Body(new ValidationPipe({ transform: true }))
+    createRatingDto: CreateRatingDto,
+  ) {
+    return {
+      statusCode: 200,
+      message: 'OK',
+      data: await this.courseFeedbackService.createRating(
+        classNo,
+        req.user.id,
+        createRatingDto,
+      ),
+    };
+  }
+
+  @UseGuards(JwtAuthGuard, AccessGuard)
+  @Put('ratings/:id')
+  @UseAbility(Actions.update, Rating, RatingHook)
+  async updateRating(
+    @Param('id', ParseIntPipe) id: number,
+    @Body(new ValidationPipe({ transform: true }))
+    updateRatingDto: UpdateRatingDto,
+  ) {
+    return {
+      statusCode: 200,
+      message: 'OK',
+      data: await this.courseFeedbackService.editRating(id, updateRatingDto),
+    };
+  }
+
+  @UseGuards(JwtAuthGuard, AccessGuard)
+  @Delete('ratings/:id')
+  @UseAbility(Actions.delete, Rating, RatingHook)
+  async deleteRating(@Param('id', ParseIntPipe) id: number) {
+    await this.courseFeedbackService.deleteRating(id);
+    return {
+      statusCode: 200,
+      message: 'OK',
+    };
   }
 }

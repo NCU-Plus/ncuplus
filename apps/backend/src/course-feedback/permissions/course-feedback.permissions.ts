@@ -5,6 +5,7 @@ import { CourseFeedback } from '../course-feedback.entity';
 import { PastExam } from '../past-exam.entity';
 import { Reaction } from '../reaction.entity';
 import { Comment, Review } from '../content.entity';
+import { Rating } from '../rating,entity';
 
 export type Subjects = InferSubjects<
   | typeof CourseFeedback
@@ -12,11 +13,12 @@ export type Subjects = InferSubjects<
   | typeof Review
   | typeof PastExam
   | typeof Reaction
+  | typeof Rating
 >;
 
 export const permissions: Permissions<UserRole, Subjects, Actions> = {
   every({ user, can, cannot }) {
-    can(Actions.create, [Comment, Review, PastExam]);
+    can(Actions.create, [Comment, Review, PastExam, Rating]);
     can(Actions.create, Reaction);
     cannot(Actions.create, Reaction, {
       comment: {
@@ -29,9 +31,9 @@ export const permissions: Permissions<UserRole, Subjects, Actions> = {
       },
     });
 
-    can(Actions.read, [Comment, Review, PastExam, Reaction]);
+    can(Actions.read, [Comment, Review, PastExam, Reaction, Rating]);
 
-    can([Actions.update, Actions.delete], [Comment, Review, Reaction], {
+    can([Actions.update, Actions.delete], [Comment, Review, Reaction, Rating], {
       authorId: user.id as unknown as number,
     });
     can([Actions.update, Actions.delete], PastExam, {
