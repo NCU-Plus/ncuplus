@@ -4,7 +4,9 @@
       <font-awesome-icon :icon="['fa', 'signal']" size="lg" />
       <strong class="text-2xl">課程評分</strong>
     </h3>
-    <div class="flex space-x-4">
+    <div
+      class="flex flex-col space-y-4 items-center md:flex-row md:justify-center md:space-x-4 md:space-y-0"
+    >
       <div class="w-80">
         <CoursesRatingChart
           v-if="difficultyRating.length !== 0"
