@@ -20,12 +20,49 @@ import { AccessGuard, Actions, UseAbility } from 'nest-casl';
 import { Report } from './report.entity';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ReportHook } from './hooks/report.hook';
+import {
+  ApiBadRequestResponse,
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiTags,
+  ApiUnauthorizedResponse,
+  getSchemaPath,
+} from '@nestjs/swagger';
+import { ApiResponseDto } from '../types/ApiResponseDto';
+import { ReportDto } from './dtos/report.dto';
 
+@ApiTags('Reports')
 @Controller('reports')
 export class ReportController {
   constructor(private readonly reportService: ReportService) {}
 
   @Post()
+  @ApiBearerAuth()
+  @ApiCreatedResponse({
+    description: 'The created report.',
+    schema: {
+      allOf: [
+        {
+          $ref: getSchemaPath(ApiResponseDto),
+        },
+        {
+          properties: {
+            data: {
+              $ref: getSchemaPath(ReportDto),
+            },
+          },
+        },
+      ],
+    },
+  })
+  @ApiBadRequestResponse({
+    description: 'Bad request',
+  })
+  @ApiUnauthorizedResponse({
+    description: 'Unauthorized',
+  })
   @UseGuards(JwtAuthGuard, AccessGuard)
   @UseAbility(Actions.create, Report)
   async create(
@@ -34,7 +71,7 @@ export class ReportController {
     createReportDto: CreateReportDto,
   ) {
     return {
-      statusCode: 200,
+      statusCode: 201,
       message: 'OK',
       data: await this.reportService.create(
         (req.user as User).id,
@@ -44,6 +81,30 @@ export class ReportController {
   }
 
   @Get()
+  @ApiBearerAuth()
+  @ApiOkResponse({
+    description: 'Get report list.',
+    schema: {
+      allOf: [
+        {
+          $ref: getSchemaPath(ApiResponseDto),
+        },
+        {
+          properties: {
+            data: {
+              type: 'array',
+              items: {
+                $ref: getSchemaPath(ReportDto),
+              },
+            },
+          },
+        },
+      ],
+    },
+  })
+  @ApiUnauthorizedResponse({
+    description: 'Unauthorized',
+  })
   @UseGuards(JwtAuthGuard, AccessGuard)
   @UseAbility(Actions.read, Report)
   async findAll(@Req() req: Request) {
@@ -55,6 +116,30 @@ export class ReportController {
   }
 
   @Get(':id')
+  @ApiBearerAuth()
+  @ApiOkResponse({
+    description: 'The report.',
+    schema: {
+      allOf: [
+        {
+          $ref: getSchemaPath(ApiResponseDto),
+        },
+        {
+          properties: {
+            data: {
+              $ref: getSchemaPath(ReportDto),
+            },
+          },
+        },
+      ],
+    },
+  })
+  @ApiUnauthorizedResponse({
+    description: 'Unauthorized',
+  })
+  @ApiNotFoundResponse({
+    description: 'Report not found',
+  })
   @UseGuards(JwtAuthGuard, AccessGuard)
   @UseAbility(Actions.read, Report, ReportHook)
   async findOne(@Param('id', ParseIntPipe) id: number) {
@@ -66,6 +151,33 @@ export class ReportController {
   }
 
   @Put(':id')
+  @ApiBearerAuth()
+  @ApiOkResponse({
+    description: 'The updated report.',
+    schema: {
+      allOf: [
+        {
+          $ref: getSchemaPath(ApiResponseDto),
+        },
+        {
+          properties: {
+            data: {
+              $ref: getSchemaPath(ReportDto),
+            },
+          },
+        },
+      ],
+    },
+  })
+  @ApiBadRequestResponse({
+    description: 'Bad request',
+  })
+  @ApiUnauthorizedResponse({
+    description: 'Unauthorized',
+  })
+  @ApiNotFoundResponse({
+    description: 'Report not found',
+  })
   @UseGuards(JwtAuthGuard, AccessGuard)
   @UseAbility(Actions.update, Report, ReportHook)
   async update(
@@ -80,6 +192,19 @@ export class ReportController {
   }
 
   @Delete(':id')
+  @ApiBearerAuth()
+  @ApiOkResponse({
+    description: 'Delete successfully.',
+    schema: {
+      $ref: getSchemaPath(ApiResponseDto),
+    },
+  })
+  @ApiUnauthorizedResponse({
+    description: 'Unauthorized',
+  })
+  @ApiNotFoundResponse({
+    description: 'Report not found',
+  })
   @UseGuards(JwtAuthGuard, AccessGuard)
   @UseAbility(Actions.delete, Report, ReportHook)
   async remove(@Param('id', ParseIntPipe) id: number) {
