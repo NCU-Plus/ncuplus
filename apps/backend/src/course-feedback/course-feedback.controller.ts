@@ -38,11 +38,50 @@ import { Rating } from './rating,entity';
 import { CreateRatingDto } from './dtos/create-rating.dto';
 import { RatingHook } from './hooks/rating.hook';
 import { UpdateRatingDto } from './dtos/update-rating.dto';
+import {
+  ApiBadRequestResponse,
+  ApiBearerAuth,
+  ApiBody,
+  ApiConsumes,
+  ApiCreatedResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiTags,
+  ApiUnauthorizedResponse,
+  getSchemaPath,
+} from '@nestjs/swagger';
+import { ApiResponseDto } from 'src/types/ApiResponseDto';
+import { CourseFeedbackDto } from './dtos/course-feedback.dto';
+import { CommentDto } from './dtos/comment.dto';
+import { ReactionDto } from './dtos/reaction.dto';
+import { ReviewDto } from './dtos/review.dto';
+import { PastExamDto } from './dtos/past-exam.dto';
+import { RatingDto } from './dtos/rating.dto';
 
+@ApiTags('Course Feedbacks')
 @Controller()
 export class CourseFeedbackController {
   constructor(private readonly courseFeedbackService: CourseFeedbackService) {}
 
+  @ApiOkResponse({
+    description: 'Get course feedback.',
+    schema: {
+      allOf: [
+        { $ref: getSchemaPath(ApiResponseDto) },
+        {
+          properties: {
+            data: {
+              type: 'array',
+              items: { $ref: getSchemaPath(CourseFeedbackDto) },
+            },
+          },
+        },
+      ],
+    },
+  })
+  @ApiNotFoundResponse({
+    description: "The class doesn't exist.",
+  })
   @Get('course-feedbacks/:classNo')
   async getCourseFeedback(@Param('classNo') classNo: string) {
     return {
@@ -52,6 +91,23 @@ export class CourseFeedbackController {
     };
   }
 
+  @ApiTags('Comments')
+  @ApiOkResponse({
+    description: 'Get all comments.',
+    schema: {
+      allOf: [
+        { $ref: getSchemaPath(ApiResponseDto) },
+        {
+          properties: {
+            data: {
+              type: 'array',
+              items: { $ref: getSchemaPath(CommentDto) },
+            },
+          },
+        },
+      ],
+    },
+  })
   @Get('comments')
   async getAllComments() {
     return {
@@ -61,6 +117,32 @@ export class CourseFeedbackController {
     };
   }
 
+  @ApiTags('Comments')
+  @ApiBearerAuth()
+  @ApiCreatedResponse({
+    description: 'Create successfully.',
+    schema: {
+      allOf: [
+        { $ref: getSchemaPath(ApiResponseDto) },
+        {
+          properties: {
+            data: {
+              $ref: getSchemaPath(CommentDto),
+            },
+          },
+        },
+      ],
+    },
+  })
+  @ApiBadRequestResponse({
+    description: 'Bad request.',
+  })
+  @ApiUnauthorizedResponse({
+    description: 'Unauthorized.',
+  })
+  @ApiNotFoundResponse({
+    description: "The class doesn't exist.",
+  })
   @UseGuards(JwtAuthGuard, AccessGuard)
   @Post('course-feedbacks/:classNo/comments')
   @UseAbility(Actions.create, Comment)
@@ -71,7 +153,7 @@ export class CourseFeedbackController {
     createCommentDto: CreateCommentDto,
   ) {
     return {
-      statusCode: 200,
+      statusCode: 201,
       message: 'OK',
       data: await this.courseFeedbackService.createComment(
         classNo,
@@ -81,6 +163,32 @@ export class CourseFeedbackController {
     };
   }
 
+  @ApiTags('Comments')
+  @ApiBearerAuth()
+  @ApiOkResponse({
+    description: 'Update successfully.',
+    schema: {
+      allOf: [
+        { $ref: getSchemaPath(ApiResponseDto) },
+        {
+          properties: {
+            data: {
+              $ref: getSchemaPath(CommentDto),
+            },
+          },
+        },
+      ],
+    },
+  })
+  @ApiBadRequestResponse({
+    description: 'Bad request.',
+  })
+  @ApiUnauthorizedResponse({
+    description: 'Unauthorized.',
+  })
+  @ApiNotFoundResponse({
+    description: "The comment doesn't exist.",
+  })
   @UseGuards(JwtAuthGuard, AccessGuard)
   @Put('comments/:id')
   @UseAbility(Actions.update, Comment, CommentHook)
@@ -96,6 +204,23 @@ export class CourseFeedbackController {
     };
   }
 
+  @ApiTags('Comments')
+  @ApiBearerAuth()
+  @ApiOkResponse({
+    description: 'Delete successfully.',
+    schema: {
+      $ref: getSchemaPath(ApiResponseDto),
+    },
+  })
+  @ApiBadRequestResponse({
+    description: 'Bad request.',
+  })
+  @ApiUnauthorizedResponse({
+    description: 'Unauthorized.',
+  })
+  @ApiNotFoundResponse({
+    description: "The comment doesn't exist.",
+  })
   @UseGuards(JwtAuthGuard, AccessGuard)
   @Delete('comments/:id')
   @UseAbility(Actions.delete, Comment, CommentHook)
@@ -107,6 +232,32 @@ export class CourseFeedbackController {
     };
   }
 
+  @ApiTags('Comments', 'Reactions')
+  @ApiBearerAuth()
+  @ApiCreatedResponse({
+    description: 'React to comment successfully.',
+    schema: {
+      allOf: [
+        { $ref: getSchemaPath(ApiResponseDto) },
+        {
+          properties: {
+            data: {
+              $ref: getSchemaPath(ReactionDto),
+            },
+          },
+        },
+      ],
+    },
+  })
+  @ApiBadRequestResponse({
+    description: 'Bad request.',
+  })
+  @ApiUnauthorizedResponse({
+    description: 'Unauthorized.',
+  })
+  @ApiNotFoundResponse({
+    description: "The comment doesn't exist.",
+  })
   @UseGuards(JwtAuthGuard, AccessGuard)
   @Post('comments/:id/reactions')
   @UseAbility(Actions.create, Reaction) // check comment or review author is too hard to implement. help wanted.
@@ -117,7 +268,7 @@ export class CourseFeedbackController {
     createReactionDto: CreateReactionDto,
   ) {
     return {
-      statusCode: 200,
+      statusCode: 201,
       message: 'OK',
       data: await this.courseFeedbackService.reactToComment(
         id,
@@ -127,6 +278,25 @@ export class CourseFeedbackController {
     };
   }
 
+  @ApiTags('Reviews')
+  @ApiOkResponse({
+    description: 'Get all reviews.',
+    schema: {
+      allOf: [
+        { $ref: getSchemaPath(ApiResponseDto) },
+        {
+          properties: {
+            data: {
+              type: 'array',
+              items: {
+                $ref: getSchemaPath(ReviewDto),
+              },
+            },
+          },
+        },
+      ],
+    },
+  })
   @Get('reviews')
   async getAllReviews() {
     return {
@@ -136,6 +306,32 @@ export class CourseFeedbackController {
     };
   }
 
+  @ApiTags('Reviews')
+  @ApiBearerAuth()
+  @ApiCreatedResponse({
+    description: 'Create successfully.',
+    schema: {
+      allOf: [
+        { $ref: getSchemaPath(ApiResponseDto) },
+        {
+          properties: {
+            data: {
+              $ref: getSchemaPath(ReviewDto),
+            },
+          },
+        },
+      ],
+    },
+  })
+  @ApiBadRequestResponse({
+    description: 'Bad request.',
+  })
+  @ApiUnauthorizedResponse({
+    description: 'Unauthorized.',
+  })
+  @ApiNotFoundResponse({
+    description: "The class doesn't exist.",
+  })
   @UseGuards(JwtAuthGuard, AccessGuard)
   @Post('course-feedbacks/:classNo/reviews')
   @UseAbility(Actions.create, Review)
@@ -146,7 +342,7 @@ export class CourseFeedbackController {
     createReviewDto: CreateReviewDto,
   ) {
     return {
-      statusCode: 200,
+      statusCode: 201,
       message: 'OK',
       data: await this.courseFeedbackService.createReview(
         classNo,
@@ -156,6 +352,32 @@ export class CourseFeedbackController {
     };
   }
 
+  @ApiTags('Reviews')
+  @ApiBearerAuth()
+  @ApiOkResponse({
+    description: 'Update successfully.',
+    schema: {
+      allOf: [
+        { $ref: getSchemaPath(ApiResponseDto) },
+        {
+          properties: {
+            data: {
+              $ref: getSchemaPath(ReviewDto),
+            },
+          },
+        },
+      ],
+    },
+  })
+  @ApiBadRequestResponse({
+    description: 'Bad request.',
+  })
+  @ApiUnauthorizedResponse({
+    description: 'Unauthorized.',
+  })
+  @ApiNotFoundResponse({
+    description: "The review doesn't exist.",
+  })
   @UseGuards(JwtAuthGuard, AccessGuard)
   @Put('reviews/:id')
   @UseAbility(Actions.update, Review, ReviewHook)
@@ -171,6 +393,23 @@ export class CourseFeedbackController {
     };
   }
 
+  @ApiTags('Reviews')
+  @ApiBearerAuth()
+  @ApiOkResponse({
+    description: 'Delete successfully.',
+    schema: {
+      $ref: getSchemaPath(ApiResponseDto),
+    },
+  })
+  @ApiBadRequestResponse({
+    description: 'Bad request.',
+  })
+  @ApiUnauthorizedResponse({
+    description: 'Unauthorized.',
+  })
+  @ApiNotFoundResponse({
+    description: "The review doesn't exist.",
+  })
   @UseGuards(JwtAuthGuard, AccessGuard)
   @Delete('reviews/:id')
   @UseAbility(Actions.delete, Review, ReviewHook)
@@ -182,6 +421,32 @@ export class CourseFeedbackController {
     };
   }
 
+  @ApiTags('Reviews', 'Reactions')
+  @ApiBearerAuth()
+  @ApiCreatedResponse({
+    description: 'React to review successfully.',
+    schema: {
+      allOf: [
+        { $ref: getSchemaPath(ApiResponseDto) },
+        {
+          properties: {
+            data: {
+              $ref: getSchemaPath(ReactionDto),
+            },
+          },
+        },
+      ],
+    },
+  })
+  @ApiBadRequestResponse({
+    description: 'Bad request.',
+  })
+  @ApiUnauthorizedResponse({
+    description: 'Unauthorized.',
+  })
+  @ApiNotFoundResponse({
+    description: "The review doesn't exist.",
+  })
   @UseGuards(JwtAuthGuard, AccessGuard)
   @Post('reviews/:id/reactions')
   @UseAbility(Actions.create, Reaction)
@@ -192,7 +457,7 @@ export class CourseFeedbackController {
     createReactionDto: CreateReactionDto,
   ) {
     return {
-      statusCode: 200,
+      statusCode: 201,
       message: 'OK',
       data: await this.courseFeedbackService.reactToReview(
         id,
@@ -202,6 +467,51 @@ export class CourseFeedbackController {
     };
   }
 
+  @ApiTags('Past Exams')
+  @ApiBearerAuth()
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      allOf: [
+        { $ref: getSchemaPath(CreatePastExamDto) },
+        {
+          required: ['file'],
+          properties: {
+            file: {
+              type: 'string',
+              format: 'binary',
+              description: 'The file to upload.',
+              nullable: false,
+            },
+          },
+        },
+      ],
+    },
+  })
+  @ApiCreatedResponse({
+    description: 'Upload past exam successfully.',
+    schema: {
+      allOf: [
+        { $ref: getSchemaPath(ApiResponseDto) },
+        {
+          properties: {
+            data: {
+              $ref: getSchemaPath(PastExamDto),
+            },
+          },
+        },
+      ],
+    },
+  })
+  @ApiBadRequestResponse({
+    description: 'Bad request.',
+  })
+  @ApiUnauthorizedResponse({
+    description: 'Unauthorized.',
+  })
+  @ApiNotFoundResponse({
+    description: "The class doesn't exist.",
+  })
   @HttpCode(201)
   @Post('course-feedbacks/:classNo/past-exams')
   @UseGuards(JwtAuthGuard, AccessGuard)
@@ -253,6 +563,17 @@ export class CourseFeedbackController {
     };
   }
 
+  @ApiTags('Past Exams')
+  @ApiBearerAuth()
+  @ApiOkResponse({
+    description: 'Past exam file.',
+  })
+  @ApiUnauthorizedResponse({
+    description: 'No authorization.',
+  })
+  @ApiNotFoundResponse({
+    description: "The past exam doesn't exist.",
+  })
   @UseGuards(JwtAuthGuard, AccessGuard)
   @Get('past-exams/:id')
   @UseAbility(Actions.read, PastExam)
@@ -260,6 +581,20 @@ export class CourseFeedbackController {
     return await this.courseFeedbackService.getPastExam(id);
   }
 
+  @ApiTags('Past Exams')
+  @ApiBearerAuth()
+  @ApiOkResponse({
+    description: 'Delete past exam successfully.',
+    schema: {
+      $ref: getSchemaPath(ApiResponseDto),
+    },
+  })
+  @ApiUnauthorizedResponse({
+    description: 'No authorization.',
+  })
+  @ApiNotFoundResponse({
+    description: "The past exam doesn't exist.",
+  })
   @UseGuards(JwtAuthGuard, AccessGuard)
   @Delete('past-exams/:id')
   @UseAbility(Actions.delete, PastExam, PastExamHook)
@@ -268,6 +603,32 @@ export class CourseFeedbackController {
     return { statusCode: 200, message: 'OK' };
   }
 
+  @ApiTags('Ratings')
+  @ApiBearerAuth()
+  @ApiCreatedResponse({
+    description: 'Create successfully.',
+    schema: {
+      allOf: [
+        { $ref: getSchemaPath(ApiResponseDto) },
+        {
+          properties: {
+            data: {
+              $ref: getSchemaPath(RatingDto),
+            },
+          },
+        },
+      ],
+    },
+  })
+  @ApiBadRequestResponse({
+    description: 'Bad request.',
+  })
+  @ApiUnauthorizedResponse({
+    description: 'No authorization.',
+  })
+  @ApiNotFoundResponse({
+    description: "The course doesn't exist.",
+  })
   @UseGuards(JwtAuthGuard, AccessGuard)
   @Post('course-feedbacks/:classNo/ratings')
   @UseAbility(Actions.create, Rating)
@@ -278,7 +639,7 @@ export class CourseFeedbackController {
     createRatingDto: CreateRatingDto,
   ) {
     return {
-      statusCode: 200,
+      statusCode: 201,
       message: 'OK',
       data: await this.courseFeedbackService.createRating(
         classNo,
@@ -288,6 +649,32 @@ export class CourseFeedbackController {
     };
   }
 
+  @ApiTags('Ratings')
+  @ApiBearerAuth()
+  @ApiOkResponse({
+    description: 'Update successfully.',
+    schema: {
+      allOf: [
+        { $ref: getSchemaPath(ApiResponseDto) },
+        {
+          properties: {
+            data: {
+              $ref: getSchemaPath(RatingDto),
+            },
+          },
+        },
+      ],
+    },
+  })
+  @ApiBadRequestResponse({
+    description: 'Bad request.',
+  })
+  @ApiUnauthorizedResponse({
+    description: 'No authorization.',
+  })
+  @ApiNotFoundResponse({
+    description: "The rating doesn't exist.",
+  })
   @UseGuards(JwtAuthGuard, AccessGuard)
   @Put('ratings/:id')
   @UseAbility(Actions.update, Rating, RatingHook)
@@ -303,6 +690,20 @@ export class CourseFeedbackController {
     };
   }
 
+  @ApiTags('Ratings')
+  @ApiBearerAuth()
+  @ApiOkResponse({
+    description: 'Delete successfully.',
+    schema: {
+      $ref: getSchemaPath(ApiResponseDto),
+    },
+  })
+  @ApiUnauthorizedResponse({
+    description: 'No authorization.',
+  })
+  @ApiNotFoundResponse({
+    description: "The rating doesn't exist.",
+  })
   @UseGuards(JwtAuthGuard, AccessGuard)
   @Delete('ratings/:id')
   @UseAbility(Actions.delete, Rating, RatingHook)

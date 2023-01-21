@@ -37,6 +37,9 @@ export class PastExam {
   @Column()
   uploaderId: number;
 
+  @Column({ nullable: true })
+  courseFeedbackClassNo: string;
+
   @ManyToOne(
     () => CourseFeedback,
     (courseFeedback) => courseFeedback.pastExams,

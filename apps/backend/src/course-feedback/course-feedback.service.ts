@@ -222,7 +222,7 @@ export class CourseFeedbackService {
         'createdAt',
         'updatedAt',
       ],
-      where: { courseFeedback: courseFeedback },
+      where: { courseFeedbackClassNo: courseFeedback.classNo },
     });
     return pastExams;
   }

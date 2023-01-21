@@ -57,6 +57,7 @@ importers:
       '@nestjs/passport': ^9.0.0
       '@nestjs/platform-express': ^9.2.0
       '@nestjs/schematics': ^9.0.3
+      '@nestjs/swagger': ^6.1.4
       '@nestjs/testing': ^9.2.0
       '@nestjs/typeorm': ^9.0.1
       '@types/connect-redis': ^0.0.19
@@ -105,6 +106,7 @@ importers:
       '@nestjs/mapped-types': 1.2.0_tnt3guucbc535mt4nrxrr4hrgu
       '@nestjs/passport': 9.0.0_s6va3jdeufsye4wwu25es3p4om
       '@nestjs/platform-express': 9.2.0_pf2fb646rsvo5szivgkaevcpvi
+      '@nestjs/swagger': 6.1.4_7bahhri2qmmg7rtpxohsviizwm
       '@nestjs/typeorm': 9.0.1_2ekyp7igf6cbpgvvmiypy4gzpu
       class-transformer: 0.5.1
       class-validator: 0.14.0
@@ -2291,6 +2293,35 @@ packages:
     transitivePeerDependencies:
       - chokidar
     dev: true
+
+  /@nestjs/swagger/6.1.4_7bahhri2qmmg7rtpxohsviizwm:
+    resolution: {integrity: sha512-kE8VjR+NaoKqxg8XqM/YYfALScPh4AcoR8Wywga8/OxHsTHY+MKxqvTpWp7IhCUWSA6xT8nQUpcC9Rt7C+r7Hw==}
+    peerDependencies:
+      '@fastify/static': ^6.0.0
+      '@nestjs/common': ^9.0.0
+      '@nestjs/core': ^9.0.0
+      class-transformer: '*'
+      class-validator: '*'
+      reflect-metadata: ^0.1.12
+    peerDependenciesMeta:
+      '@fastify/static':
+        optional: true
+      class-transformer:
+        optional: true
+      class-validator:
+        optional: true
+    dependencies:
+      '@nestjs/common': 9.2.0_weizl6uyifxeltqqggsn4erezy
+      '@nestjs/core': 9.2.0_jfowmhmgk7kwjudosrpv7e7liy
+      '@nestjs/mapped-types': 1.2.0_tnt3guucbc535mt4nrxrr4hrgu
+      class-transformer: 0.5.1
+      class-validator: 0.14.0
+      js-yaml: 4.1.0
+      lodash: 4.17.21
+      path-to-regexp: 3.2.0
+      reflect-metadata: 0.1.13
+      swagger-ui-dist: 4.15.5
+    dev: false
 
   /@nestjs/testing/9.2.0_3jiwpo56qab566j5kwfezyelg4:
     resolution: {integrity: sha512-Lj6UXmBJKcXB16bZzu0IG7GpH7hl5Cn71OcPSrVVuPrFd5kDYqFbodfE9OkAKaHjEhOvZ2ynoo/i6cyfX4yOvQ==}
@@ -12202,6 +12233,10 @@ packages:
       picocolors: 1.0.0
       stable: 0.1.8
     dev: true
+
+  /swagger-ui-dist/4.15.5:
+    resolution: {integrity: sha512-V3eIa28lwB6gg7/wfNvAbjwJYmDXy1Jo1POjyTzlB6wPcHiGlRxq39TSjYGVjQrUSAzpv+a7nzp7mDxgNy57xA==}
+    dev: false
 
   /symbol-observable/4.0.0:
     resolution: {integrity: sha512-b19dMThMV4HVFynSAM1++gBHAbk2Tc/osgLIBZMKsyqh34jb2e8Os7T6ZW/Bt3pJFdBTd2JwAnAAEQV7rSNvcQ==}

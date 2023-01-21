@@ -1,4 +1,4 @@
-import { PickType } from '@nestjs/mapped-types';
+import { PickType } from '@nestjs/swagger';
 import { CreateRatingDto } from './create-rating.dto';
 
 export class UpdateRatingDto extends PickType(CreateRatingDto, [
