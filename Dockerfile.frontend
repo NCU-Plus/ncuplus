@@ -1,4 +1,4 @@
-FROM node:19.3-bullseye AS build
+FROM node:19.6-bullseye AS build
 
 WORKDIR /app
 COPY --chown=node:node package.json .
@@ -22,7 +22,7 @@ COPY --chown=node:node ./apps/frontend/ ./apps/frontend/
 # build
 RUN pnpm -F frontend build
 
-FROM node:19.3-bullseye As production
+FROM node:19.6-bullseye As production
 
 WORKDIR /home/node/app
 COPY --chown=node:node --from=build /app/apps/frontend/.output ./.output
