@@ -38,7 +38,7 @@ describe("class information", () => {
       .contains("送出")
       .click();
     cy.wait(1000);
-    cy.get(".flex.flex-col.pl-5.mb-4.border-l-4.border-green-400")
+    cy.get("article")
       .find("p")
       .last()
       .should("have.text", "hello world");
