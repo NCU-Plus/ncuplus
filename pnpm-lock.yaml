@@ -167,7 +167,7 @@ importers:
       chart.js: ^4.2.1
       easymde: ^2.18.0
       highlight.js: ^11.7.0
-      isomorphic-dompurify: ^0.26.0
+      isomorphic-dompurify: ^0.27.0
       marked: ^4.2.12
       nuxt: ^3.2.0
       pinia: ^2.0.30
@@ -187,7 +187,7 @@ importers:
       chart.js: 4.2.1
       easymde: 2.18.0
       highlight.js: 11.7.0
-      isomorphic-dompurify: 0.26.0
+      isomorphic-dompurify: 0.27.0
       marked: 4.2.12
       pinia: 2.0.30_vue@3.2.47
       vue-chartjs: 5.2.0_chart.js@4.2.1+vue@3.2.47
@@ -8187,8 +8187,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /isomorphic-dompurify/0.26.0:
-    resolution: {integrity: sha512-70gPadd/NJPTBuTtM5PsWimmc7S4fcBENzOFMHfBtIPacaygUvI9n63qFkUTc91WDDC9yB68mtmluW9/NhhTJw==}
+  /isomorphic-dompurify/0.27.0:
+    resolution: {integrity: sha512-3bu3FScq34IEJgCSgHyw5+uAub/UNpXIJF0cI0aFmB6d1sER5LeQSmnI/QlVXmyfPnmJ2m8IvgcdsuvDQXuDow==}
     dependencies:
       '@types/dompurify': 2.4.0
       dompurify: 2.4.3
