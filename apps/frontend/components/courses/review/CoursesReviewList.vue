@@ -18,6 +18,14 @@
           插入樣板課程心得
         </button>
       </div>
+      <div
+        class="w-full px-4 py-3 bg-blue-100 border-t border-b border-blue-500"
+      >
+        <p class="font-bold">提示</p>
+        <p class="text-sm">
+          首行的最大標題 (#) 會變成心得名稱，顯示在心得列表中，可多加利用。
+        </p>
+      </div>
       <MarkdownEditor ref="mdEditor" placeholder="我要發文..." />
       <div class="flex justify-end">
         <button class="button" @click="createReview()">送出</button>
