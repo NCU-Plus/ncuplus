@@ -1,7 +1,7 @@
 import { RuntimeConfig } from "@nuxt/schema";
-import { NitroFetchRequest } from "nitropack";
-import { FetchError, FetchOptions, FetchResponse } from "ohmyfetch";
 import { APIResponse } from "types/APIResponse";
+import { NitroFetchRequest, NitroFetchOptions } from "nitropack";
+import { FetchError, FetchResponse } from "ofetch";
 
 export class APIClient {
   private static instance: APIClient;
@@ -73,14 +73,40 @@ export class APIClient {
 
   public async fetch<T = unknown>(
     request: NitroFetchRequest,
-    opts?: FetchOptions | undefined,
+    opts?:
+      | NitroFetchOptions<
+          NitroFetchRequest,
+          | "get"
+          | "head"
+          | "patch"
+          | "post"
+          | "put"
+          | "delete"
+          | "connect"
+          | "options"
+          | "trace"
+        >
+      | undefined,
   ): Promise<T> {
     return (await this._fetch<T>($fetch, request, opts)) as T;
   }
 
   public async fetchRaw<T = unknown>(
     request: NitroFetchRequest,
-    opts?: FetchOptions | undefined,
+    opts?:
+      | NitroFetchOptions<
+          NitroFetchRequest,
+          | "get"
+          | "head"
+          | "patch"
+          | "post"
+          | "put"
+          | "delete"
+          | "connect"
+          | "options"
+          | "trace"
+        >
+      | undefined,
   ): Promise<FetchResponse<T>> {
     return (await this._fetch<T>(
       $fetch.raw,
@@ -92,17 +118,28 @@ export class APIClient {
   private async _fetch<T = unknown>(
     fetchFn: typeof $fetch | typeof $fetch.raw,
     request: NitroFetchRequest,
-    opts?: FetchOptions | undefined,
+    opts?: NitroFetchOptions<
+      NitroFetchRequest,
+      | "get"
+      | "head"
+      | "patch"
+      | "post"
+      | "put"
+      | "delete"
+      | "connect"
+      | "options"
+      | "trace"
+    >,
   ): Promise<FetchResponse<T> | T | unknown> {
     try {
-      return await fetchFn(request, {
-        ...opts,
-        headers: {
-          ...opts?.headers,
+      if (opts) {
+        opts.headers = {
+          ...opts.headers,
           Authorization: `Bearer ${this._token}`,
           "csrf-token": useCookie("X-CSRF-TOKEN").value ?? "",
-        },
-      });
+        };
+      }
+      return await fetchFn(request, opts);
     } catch (e) {
       if ((e as FetchError).response?.status === 401) {
         await this.refreshToken();
