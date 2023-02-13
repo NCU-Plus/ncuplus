@@ -60,7 +60,7 @@ importers:
       '@nestjs/swagger': ^6.2.1
       '@nestjs/testing': ^9.3.8
       '@nestjs/typeorm': ^9.0.1
-      '@types/connect-redis': ^0.0.19
+      '@types/connect-redis': ^0.0.20
       '@types/cookie-parser': ^1.4.3
       '@types/csurf': ^1.11.2
       '@types/express': ^4.17.17
@@ -130,7 +130,7 @@ importers:
       '@nestjs/cli': 9.2.0
       '@nestjs/schematics': 9.0.4_typescript@4.9.5
       '@nestjs/testing': 9.3.8_aknvb6i6yy6c5uvn7ka6dpvunu
-      '@types/connect-redis': 0.0.19
+      '@types/connect-redis': 0.0.20
       '@types/cookie-parser': 1.4.3
       '@types/csurf': 1.11.2
       '@types/express': 4.17.17
@@ -3495,13 +3495,15 @@ packages:
       '@types/tern': 0.23.4
     dev: false
 
-  /@types/connect-redis/0.0.19:
-    resolution: {integrity: sha512-2312okmqA8MtogPkLmgwmM12VeSYH8gUAuRSzAtVz3PBoyEZwqt7Ri1lXBFtJmIVd3oXC/Hvg1KJSkt9x2ukKw==}
+  /@types/connect-redis/0.0.20:
+    resolution: {integrity: sha512-3VTUzlsYtgsZlIt9G7BY2EyBr96JE93V9DB7JfItNZi6NzQzqyR+S0yLK5iPHd6X31CA7drUoCNNx3LCXn4XOw==}
     dependencies:
       '@types/express': 4.17.17
       '@types/express-session': 1.17.6
-      '@types/ioredis': 4.28.10
       '@types/redis': 2.8.32
+      ioredis: 5.3.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@types/connect/3.4.35:
@@ -3584,12 +3586,6 @@ packages:
 
   /@types/http-proxy/1.17.9:
     resolution: {integrity: sha512-QsbSjA/fSk7xB+UXlCT3wHBy5ai9wOcNDWwZAtud+jXhwOM3l+EYZh8Lng4+/6n8uar0J7xILzqftJdJ/Wdfkw==}
-    dependencies:
-      '@types/node': 18.13.0
-    dev: true
-
-  /@types/ioredis/4.28.10:
-    resolution: {integrity: sha512-69LyhUgrXdgcNDv7ogs1qXZomnfOEnSmrmMFqKgt1XMJxmoOSG/u3wYy13yACIfKuMJ8IhKgHafDO3sx19zVQQ==}
     dependencies:
       '@types/node': 18.13.0
     dev: true
