@@ -22,7 +22,7 @@
     "chart.js": "^4.2.1",
     "easymde": "^2.18.0",
     "highlight.js": "^11.7.0",
-    "isomorphic-dompurify": "^0.26.0",
+    "isomorphic-dompurify": "^1.0.0",
     "marked": "^4.2.12",
     "pinia": "^2.0.30",
     "vue-chartjs": "^5.2.0",
