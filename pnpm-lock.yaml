@@ -65,7 +65,7 @@ importers:
       '@types/csurf': ^1.11.2
       '@types/express': ^4.17.17
       '@types/express-session': ^1.17.6
-      '@types/jest': 29.4.0
+      '@types/jest': 29.5.0
       '@types/multer': ^1.4.7
       '@types/node': ^18.13.0
       '@types/passport': ^1.0.11
@@ -135,7 +135,7 @@ importers:
       '@types/csurf': 1.11.2
       '@types/express': 4.17.17
       '@types/express-session': 1.17.6
-      '@types/jest': 29.4.0
+      '@types/jest': 29.5.0
       '@types/multer': 1.4.7
       '@types/node': 18.13.0
       '@types/passport': 1.0.11
@@ -3606,8 +3606,8 @@ packages:
       '@types/istanbul-lib-report': 3.0.0
     dev: true
 
-  /@types/jest/29.4.0:
-    resolution: {integrity: sha512-VaywcGQ9tPorCX/Jkkni7RWGFfI11whqzs8dvxF41P17Z+z872thvEvlIbznjPJ02kl1HMX3LmLOonsj2n7HeQ==}
+  /@types/jest/29.5.0:
+    resolution: {integrity: sha512-3Emr5VOl/aoBwnWcH/EFQvlSAmjV+XtV9GGu5mwdYew5vhQh0IUZx/60x0TzHDu09Bi7HMx10t/namdJw5QIcg==}
     dependencies:
       expect: 29.4.2
       pretty-format: 29.4.2
