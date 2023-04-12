@@ -104,8 +104,8 @@ importers:
         specifier: ^0.14.0
         version: 0.14.0
       connect-redis:
-        specifier: ^6.1.3
-        version: 6.1.3
+        specifier: ^7.0.0
+        version: 7.0.0
       cookie-parser:
         specifier: ^1.4.6
         version: 1.4.6
@@ -5521,9 +5521,9 @@ packages:
       proto-list: 1.2.4
     dev: true
 
-  /connect-redis@6.1.3:
-    resolution: {integrity: sha512-aaNluLlAn/3JPxRwdzw7lhvEoU6Enb+d83xnokUNhC9dktqBoawKWL+WuxinxvBLTz6q9vReTnUDnUslaz74aw==}
-    engines: {node: '>=12'}
+  /connect-redis@7.0.0:
+    resolution: {integrity: sha512-f7TlBs7J0Zz6y3mSKArBEN6qQ3T8BzsD1+tFSnnbvvCG1PjHllsQU/L7dTEaJsuZgzl/XU9hz+DMiPq1UJQMAQ==}
+    engines: {node: '>=16'}
     dev: false
 
   /consola@2.15.3:
