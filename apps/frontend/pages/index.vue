@@ -69,9 +69,9 @@
 <script setup lang="ts">
 /* eslint-disable */
 // @ts-ignore
-import bgImg1 from "~/assets/background/中大湖.png";
+import bgImg1 from "~/assets/background/中大湖.jpg";
 // @ts-ignore
-import bgImg2 from "~/assets/background/飛碟.png";
+import bgImg2 from "~/assets/background/飛碟.jpg";
 // @ts-ignore
 import bgImg3 from "~/assets/background/總圖.jpg";
 // @ts-ignore
@@ -79,7 +79,7 @@ import bgImg4 from "~/assets/background/男十三.jpg";
 // @ts-ignore
 import bgImg5 from "~/assets/background/操場.jpg";
 // @ts-ignore
-import bgImg6 from "~/assets/background/櫻花.png";
+import bgImg6 from "~/assets/background/櫻花.jpg";
 /* eslint-enable */
 import { MetaBuilder } from "~~/helpers/MetaBuilder";
 
