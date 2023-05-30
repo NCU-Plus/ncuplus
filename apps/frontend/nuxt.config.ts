@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   alias: {
     types: fileURLToPath(new URL("types", import.meta.url)),
   },
-  modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt"],
+  modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt", "nuxt-gtag"],
   build: {
     transpile: [
       "@fortawesome/fontawesome-svg-core",
@@ -23,7 +23,7 @@ export default defineNuxtConfig({
     cssPath: "~/assets/tailwind.css",
   },
   runtimeConfig: {
-    public: { gaId: "", apiBaseUrl: "", deployDomain: "" },
+    public: { gtagId: "", apiBaseUrl: "", deployDomain: "" },
   },
   vue: {
     compilerOptions: {
