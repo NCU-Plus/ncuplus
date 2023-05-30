@@ -14,7 +14,7 @@ jobs:
   install:
     runs-on: ubuntu-latest
     container:
-      image: cypress/browsers:node16.17.0-chrome106
+      image: cypress/browsers:node-18.16.0-chrome-113.0.5672.92-1-ff-113.0-edge-113.0.1774.35-1
       options: --user 1001
     steps:
       - name: Checkout
@@ -22,7 +22,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 7
+          version: 8
       - name: Disable husky install
         run: npm pkg delete scripts.prepare
       - name: Install dependencies
@@ -45,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: install
     container:
-      image: cypress/browsers:node16.17.0-chrome106
+      image: cypress/browsers:node-18.16.0-chrome-113.0.5672.92-1-ff-113.0-edge-113.0.1774.35-1
       options: --user 1001
     strategy:
       fail-fast: false
@@ -60,7 +60,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 7
+          version: 8
       - name: Disable husky install
         run: npm pkg delete scripts.prepare
       - name: Install dependencies
