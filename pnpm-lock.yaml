@@ -141,8 +141,8 @@ importers:
         specifier: ^1.7.0
         version: 1.7.0
       redis:
-        specifier: ^3.1.2
-        version: 3.1.2
+        specifier: ^4.6.7
+        version: 4.6.7
       reflect-metadata:
         specifier: ^0.1.13
         version: 0.1.13
@@ -151,7 +151,7 @@ importers:
         version: 7.8.1
       typeorm:
         specifier: ^0.3.17
-        version: 0.3.17(mysql2@3.4.0)(redis@3.1.2)(ts-node@10.9.1)
+        version: 0.3.17(mysql2@3.4.0)(redis@4.6.7)(ts-node@10.9.1)
     devDependencies:
       '@nestjs/cli':
         specifier: ^10.0.3
@@ -162,9 +162,6 @@ importers:
       '@nestjs/testing':
         specifier: ^10.0.3
         version: 10.0.3(@nestjs/common@10.0.3)(@nestjs/core@10.0.3)(@nestjs/platform-express@10.0.3)
-      '@types/connect-redis':
-        specifier: ^0.0.20
-        version: 0.0.20
       '@types/cookie-parser':
         specifier: ^1.4.3
         version: 1.4.3
@@ -1951,7 +1948,7 @@ packages:
       '@nestjs/core': 10.0.3(@nestjs/common@10.0.3)(@nestjs/platform-express@10.0.3)(reflect-metadata@0.1.13)(rxjs@7.8.1)
       reflect-metadata: 0.1.13
       rxjs: 7.8.1
-      typeorm: 0.3.17(mysql2@3.4.0)(redis@3.1.2)(ts-node@10.9.1)
+      typeorm: 0.3.17(mysql2@3.4.0)(redis@4.6.7)(ts-node@10.9.1)
       uuid: 9.0.0
     dev: false
 
@@ -2546,6 +2543,55 @@ packages:
     dev: true
     optional: true
 
+  /@redis/bloom@1.2.0(@redis/client@1.5.8):
+    resolution: {integrity: sha512-HG2DFjYKbpNmVXsa0keLHp/3leGJz1mjh09f2RLGGLQZzSHpkmZWuwJbAvo3QcRY8p80m5+ZdXZdYOSBLlp7Cg==}
+    peerDependencies:
+      '@redis/client': ^1.0.0
+    dependencies:
+      '@redis/client': 1.5.8
+    dev: false
+
+  /@redis/client@1.5.8:
+    resolution: {integrity: sha512-xzElwHIO6rBAqzPeVnCzgvrnBEcFL1P0w8P65VNLRkdVW8rOE58f52hdj0BDgmsdOm4f1EoXPZtH4Fh7M/qUpw==}
+    engines: {node: '>=14'}
+    dependencies:
+      cluster-key-slot: 1.1.2
+      generic-pool: 3.9.0
+      yallist: 4.0.0
+    dev: false
+
+  /@redis/graph@1.1.0(@redis/client@1.5.8):
+    resolution: {integrity: sha512-16yZWngxyXPd+MJxeSr0dqh2AIOi8j9yXKcKCwVaKDbH3HTuETpDVPcLujhFYVPtYrngSco31BUcSa9TH31Gqg==}
+    peerDependencies:
+      '@redis/client': ^1.0.0
+    dependencies:
+      '@redis/client': 1.5.8
+    dev: false
+
+  /@redis/json@1.0.4(@redis/client@1.5.8):
+    resolution: {integrity: sha512-LUZE2Gdrhg0Rx7AN+cZkb1e6HjoSKaeeW8rYnt89Tly13GBI5eP4CwDVr+MY8BAYfCg4/N15OUrtLoona9uSgw==}
+    peerDependencies:
+      '@redis/client': ^1.0.0
+    dependencies:
+      '@redis/client': 1.5.8
+    dev: false
+
+  /@redis/search@1.1.3(@redis/client@1.5.8):
+    resolution: {integrity: sha512-4Dg1JjvCevdiCBTZqjhKkGoC5/BcB7k9j99kdMnaXFXg8x4eyOIVg9487CMv7/BUVkFLZCaIh8ead9mU15DNng==}
+    peerDependencies:
+      '@redis/client': ^1.0.0
+    dependencies:
+      '@redis/client': 1.5.8
+    dev: false
+
+  /@redis/time-series@1.0.4(@redis/client@1.5.8):
+    resolution: {integrity: sha512-ThUIgo2U/g7cCuZavucQTQzA9g9JbDDY2f64u3AbAoz/8vE2lt2U37LamDUVChhaDA3IRT9R6VvJwqnUfTJzng==}
+    peerDependencies:
+      '@redis/client': ^1.0.0
+    dependencies:
+      '@redis/client': 1.5.8
+    dev: false
+
   /@rollup/plugin-alias@5.0.0(rollup@3.25.1):
     resolution: {integrity: sha512-l9hY5chSCjuFRPsnRm16twWBiSApl2uYFLsepQYwtBuAxNMQ/1dJqADld40P0Jkqm65GRTLy/AC6hnpVebtLsA==}
     engines: {node: '>=14.0.0'}
@@ -2837,17 +2883,6 @@ packages:
       '@types/tern': 0.23.4
     dev: false
 
-  /@types/connect-redis@0.0.20:
-    resolution: {integrity: sha512-3VTUzlsYtgsZlIt9G7BY2EyBr96JE93V9DB7JfItNZi6NzQzqyR+S0yLK5iPHd6X31CA7drUoCNNx3LCXn4XOw==}
-    dependencies:
-      '@types/express': 4.17.17
-      '@types/express-session': 1.17.7
-      '@types/redis': 2.8.32
-      ioredis: 5.3.2
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
   /@types/connect@3.4.35:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
     dependencies:
@@ -3050,12 +3085,6 @@ packages:
 
   /@types/range-parser@1.2.4:
     resolution: {integrity: sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==}
-    dev: true
-
-  /@types/redis@2.8.32:
-    resolution: {integrity: sha512-7jkMKxcGq9p242exlbsVzuJb57KqHRhNl4dHoQu2Y5v9bCAbtIXXH0R3HleSQW4CTOqpHIYUW3t6tpUj4BVQ+w==}
-    dependencies:
-      '@types/node': 18.16.18
     dev: true
 
   /@types/resolve@1.20.2:
@@ -3308,7 +3337,7 @@ packages:
         optional: true
     dependencies:
       '@ucast/core': 1.10.2
-      typeorm: 0.3.17(mysql2@3.4.0)(redis@3.1.2)(ts-node@10.9.1)
+      typeorm: 0.3.17(mysql2@3.4.0)(redis@4.6.7)(ts-node@10.9.1)
     dev: false
 
   /@unhead/dom@1.1.27:
@@ -4682,7 +4711,6 @@ packages:
   /cluster-key-slot@1.1.2:
     resolution: {integrity: sha512-RMr0FhtfXemyinomL4hrWcYJxmX6deFdCxpJzhDttxgO1+bcCnkk+9drydLVDmAMG7NE6aN/fl4F7ucU/90gAA==}
     engines: {node: '>=0.10.0'}
-    dev: true
 
   /cmd-shim@6.0.1:
     resolution: {integrity: sha512-S9iI9y0nKR4hwEQsVWpyxld/6kRfGepGfzff83FcaiEBpmvlbA2nnGe7Cylgrx2f/p1P5S5wpRm9oL8z1PbS3Q==}
@@ -5469,11 +5497,6 @@ packages:
   /delegates@1.0.0:
     resolution: {integrity: sha512-bd2L678uiWATM6m5Z1VzNCErI3jiGzt6HGY8OVICs40JQq/HALfbyNJmp0UDakEY4pMMaN0Ly5om/B1VI/+xfQ==}
     dev: true
-
-  /denque@1.5.1:
-    resolution: {integrity: sha512-XwE+iZ4D6ZUB7mfYRMb5wByE8L74HCn30FBN7sWnXksWc1LO1bPDl67pBR9o/kC4z/xSNAwkMYcGgqDV3BE3Hw==}
-    engines: {node: '>=0.10'}
-    dev: false
 
   /denque@2.1.0:
     resolution: {integrity: sha512-HVQE3AAb/pxF8fQAoiqpvg9i3evqug3hoiwakOyZAwJm+6vZehbkYXZ0l4JxS+I3QxM97v5aaRNhj8v5oBhekw==}
@@ -6574,6 +6597,11 @@ packages:
     resolution: {integrity: sha512-eeB5GfMNeevm/GRYq20ShmsaGcmI81kIX2K9XQx5miC8KdHaC6Jm0qQ8ZNeGOi7wYB8OsdxKs+Y2oVuTFuVwKQ==}
     dependencies:
       is-property: 1.0.2
+    dev: false
+
+  /generic-pool@3.9.0:
+    resolution: {integrity: sha512-hymDOu5B53XvN4QT9dBmZxPX4CWhBPPLguTZ9MMFeFa/Kg0xWVfylOVNlJji/E7yTZWFd/q9GO5TxDLq156D7g==}
+    engines: {node: '>= 4'}
     dev: false
 
   /gensync@1.0.0-beta.2:
@@ -11154,28 +11182,27 @@ packages:
       strip-indent: 3.0.0
     dev: true
 
-  /redis-commands@1.7.0:
-    resolution: {integrity: sha512-nJWqw3bTFy21hX/CPKHth6sfhZbdiHP6bTawSgQBlKOVRG7EZkfHbbHwQJnrE4vsQf0CMNE+3gJ4Fmm16vdVlQ==}
-    dev: false
-
   /redis-errors@1.2.0:
     resolution: {integrity: sha512-1qny3OExCf0UvUV/5wpYKf2YwPcOqXzkwKKSmKHiE6ZMQs5heeE/c8eXK+PNllPvmjgAbfnsbpkGZWy8cBpn9w==}
     engines: {node: '>=4'}
+    dev: true
 
   /redis-parser@3.0.0:
     resolution: {integrity: sha512-DJnGAeenTdpMEH6uAJRK/uiyEIH9WVsUmoLwzudwGJUwZPp80PDBWPHXSAGNPwNvIXAbe7MSUB1zQFugFml66A==}
     engines: {node: '>=4'}
     dependencies:
       redis-errors: 1.2.0
+    dev: true
 
-  /redis@3.1.2:
-    resolution: {integrity: sha512-grn5KoZLr/qrRQVwoSkmzdbw6pwF+/rwODtrOr6vuBRiR/f3rjSTGupbF90Zpqm2oenix8Do6RV7pYEkGwlKkw==}
-    engines: {node: '>=10'}
+  /redis@4.6.7:
+    resolution: {integrity: sha512-KrkuNJNpCwRm5vFJh0tteMxW8SaUzkm5fBH7eL5hd/D0fAkzvapxbfGPP/r+4JAXdQuX7nebsBkBqA2RHB7Usw==}
     dependencies:
-      denque: 1.5.1
-      redis-commands: 1.7.0
-      redis-errors: 1.2.0
-      redis-parser: 3.0.0
+      '@redis/bloom': 1.2.0(@redis/client@1.5.8)
+      '@redis/client': 1.5.8
+      '@redis/graph': 1.1.0(@redis/client@1.5.8)
+      '@redis/json': 1.0.4(@redis/client@1.5.8)
+      '@redis/search': 1.1.3(@redis/client@1.5.8)
+      '@redis/time-series': 1.0.4(@redis/client@1.5.8)
     dev: false
 
   /reflect-metadata@0.1.13:
@@ -12485,7 +12512,7 @@ packages:
   /typedarray@0.0.6:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
 
-  /typeorm@0.3.17(mysql2@3.4.0)(redis@3.1.2)(ts-node@10.9.1):
+  /typeorm@0.3.17(mysql2@3.4.0)(redis@4.6.7)(ts-node@10.9.1):
     resolution: {integrity: sha512-UDjUEwIQalO9tWw9O2A4GU+sT3oyoUXheHJy4ft+RFdnRdQctdQ34L9SqE2p7LdwzafHx1maxT+bqXON+Qnmig==}
     engines: {node: '>= 12.9.0'}
     hasBin: true
@@ -12554,7 +12581,7 @@ packages:
       glob: 8.1.0
       mkdirp: 2.1.6
       mysql2: 3.4.0
-      redis: 3.1.2
+      redis: 4.6.7
       reflect-metadata: 0.1.13
       sha.js: 2.4.11
       ts-node: 10.9.1(@types/node@18.16.18)(typescript@5.1.3)

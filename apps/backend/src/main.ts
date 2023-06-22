@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { createClient } from 'redis';
-import * as connectRedis from 'connect-redis';
+import RedisStore from 'connect-redis';
 import helmet from 'helmet';
 import * as session from 'express-session';
 import * as passport from 'passport';
@@ -33,11 +33,14 @@ async function bootstrap() {
     saveUninitialized: false,
   };
   if (process.env.NODE_ENV === 'production') {
-    const redisClient = createClient({
-      url: process.env.REDIS_URL,
-    });
     try {
-      const RedisStore = connectRedis(session);
+      const redisClient = await createClient({
+        url: process.env.REDIS_URL,
+      });
+      const redisStore = new RedisStore({
+        client: redisClient,
+        prefix: 'session:',
+      });
       sessionOptions.store = new RedisStore({ client: redisClient });
     } catch (e) {
       Logger.error('Unable to connect to Redis');
