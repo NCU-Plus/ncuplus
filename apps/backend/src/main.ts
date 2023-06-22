@@ -34,9 +34,10 @@ async function bootstrap() {
   };
   if (process.env.NODE_ENV === 'production') {
     try {
-      const redisClient = await createClient({
+      const redisClient = createClient({
         url: process.env.REDIS_URL,
       });
+      await redisClient.connect();
       const redisStore = new RedisStore({
         client: redisClient,
         prefix: 'session:',
