@@ -38,10 +38,6 @@ async function bootstrap() {
         url: process.env.REDIS_URL,
       });
       await redisClient.connect();
-      const redisStore = new RedisStore({
-        client: redisClient,
-        prefix: 'session:',
-      });
       sessionOptions.store = new RedisStore({ client: redisClient });
     } catch (e) {
       Logger.error('Unable to connect to Redis');
