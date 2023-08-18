@@ -3,7 +3,8 @@
   "extends": [
     "config:base",
     ":prHourlyLimitNone",
-    ":prConcurrentLimitNone"
+    ":prConcurrentLimitNone",
+    ":semanticCommitTypeAll(chore)"
   ],
   "labels": ["dependencies"],
   "rangeStrategy": "bump"
