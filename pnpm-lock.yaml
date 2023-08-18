@@ -265,8 +265,8 @@ importers:
         specifier: ^2.0.1
         version: 2.0.1(marked@7.0.3)
       marked-mangle:
-        specifier: ^1.1.0
-        version: 1.1.0(marked@7.0.3)
+        specifier: ^1.1.2
+        version: 1.1.2(marked@7.0.3)
       pinia:
         specifier: ^2.1.4
         version: 2.1.4(typescript@5.1.6)(vue@3.3.4)
@@ -8943,10 +8943,10 @@ packages:
       marked: 7.0.3
     dev: false
 
-  /marked-mangle@1.1.0(marked@7.0.3):
-    resolution: {integrity: sha512-ed2W2gMB2HIBaYasBZveMFJfDRTL2OFycr0GgUSPcBSNl5dX+1r6lHG6u1eFXw7kej2hBTWa1m6YZqcfn4Coxw==}
+  /marked-mangle@1.1.2(marked@7.0.3):
+    resolution: {integrity: sha512-+TDSCT4YiXYlSoinMLEzOY6ErY9S1ZuLMjP5OcC6ZWpre93OxCxspFwa5qZ4RIu7X7TH7fnV0CYxEmgvBz4aFg==}
     peerDependencies:
-      marked: ^4 || ^5
+      marked: ^4 || ^5 || ^6 || ^7
     dependencies:
       marked: 7.0.3
     dev: false
