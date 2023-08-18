@@ -293,8 +293,8 @@ importers:
         specifier: ^3.6.5
         version: 3.6.5(@types/node@18.16.19)(eslint@8.45.0)(typescript@5.1.6)
       nuxt-gtag:
-        specifier: ^0.5.7
-        version: 0.5.7
+        specifier: ^0.6.1
+        version: 0.6.1
       tailwind-scrollbar-hide:
         specifier: ^1.1.7
         version: 1.1.7
@@ -9735,8 +9735,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /nuxt-gtag@0.5.7:
-    resolution: {integrity: sha512-Q6NRndEJ0phEfKdS4uLy3hpVBkgWGnG5KJ2dhVyCmbLXcfakkmf19f2WJ5uM2yUOg8rAkYgDjRb9XyAfE+okuA==}
+  /nuxt-gtag@0.6.1:
+    resolution: {integrity: sha512-HQQkspu60QbJwLnL8+ASQC2GKZJtnlez4JD9TwJzCtdkClcsK2yvb2kEKYK3veVWkB2dWeFd7ZybE1RQyYlanQ==}
     dependencies:
       '@nuxt/kit': 3.6.5
       defu: 6.1.2
