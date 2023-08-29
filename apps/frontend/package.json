@@ -31,12 +31,12 @@
     "vue-chartjs": "^5.2.0"
   },
   "devDependencies": {
-    "@nuxt/test-utils": "^3.6.5",
+    "@nuxt/test-utils": "^3.7.0",
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@tailwindcss/forms": "^0.5.4",
     "@tailwindcss/typography": "^0.5.9",
     "@vue/test-utils": "^2.4.1",
-    "nuxt": "^3.6.5",
+    "nuxt": "^3.7.0",
     "nuxt-gtag": "^0.6.1",
     "tailwind-scrollbar-hide": "^1.1.7",
     "vitest": "^0.34.2"
