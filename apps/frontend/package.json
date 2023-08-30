@@ -37,7 +37,7 @@
     "@tailwindcss/typography": "^0.5.9",
     "@vue/test-utils": "^2.4.1",
     "nuxt": "^3.7.0",
-    "nuxt-gtag": "^0.6.1",
+    "nuxt-gtag": "^0.6.2",
     "tailwind-scrollbar-hide": "^1.1.7",
     "vitest": "^0.34.3"
   }
