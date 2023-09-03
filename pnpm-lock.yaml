@@ -256,17 +256,17 @@ importers:
         specifier: ^1.8.0
         version: 1.8.0
       marked:
-        specifier: ^7.0.5
-        version: 7.0.5
+        specifier: ^8.0.0
+        version: 8.0.0
       marked-gfm-heading-id:
         specifier: ^3.0.6
-        version: 3.0.6(marked@7.0.5)
+        version: 3.0.6(marked@8.0.0)
       marked-highlight:
         specifier: ^2.0.4
-        version: 2.0.4(marked@7.0.5)
+        version: 2.0.4(marked@8.0.0)
       marked-mangle:
         specifier: ^1.1.2
-        version: 1.1.2(marked@7.0.5)
+        version: 1.1.2(marked@8.0.0)
       pinia:
         specifier: ^2.1.6
         version: 2.1.6(typescript@5.2.2)(vue@3.3.4)
@@ -9591,29 +9591,29 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /marked-gfm-heading-id@3.0.6(marked@7.0.5):
+  /marked-gfm-heading-id@3.0.6(marked@8.0.0):
     resolution: {integrity: sha512-ot/iTTxvSJpUWv+DJ5aGVj2kxdEpsiKj6NJy6icwcdrVPHsbAE3dZ3Usk4ORt8ke2HKbw83n5Q5jNwSMuAYMSA==}
     peerDependencies:
       marked: ^4 || ^5 || ^6 || ^7
     dependencies:
       github-slugger: 2.0.0
-      marked: 7.0.5
+      marked: 8.0.0
     dev: false
 
-  /marked-highlight@2.0.4(marked@7.0.5):
+  /marked-highlight@2.0.4(marked@8.0.0):
     resolution: {integrity: sha512-hnm+rY3p+DQlSd2uY3zSXec+1kq5x9lD3+PWOMz0ROcil4Btcbt///Fto52jqWWt7XBGiTRk+1+w2rGfx2U2Sw==}
     peerDependencies:
       marked: ^4 || ^5 || ^6 || ^7
     dependencies:
-      marked: 7.0.5
+      marked: 8.0.0
     dev: false
 
-  /marked-mangle@1.1.2(marked@7.0.5):
+  /marked-mangle@1.1.2(marked@8.0.0):
     resolution: {integrity: sha512-+TDSCT4YiXYlSoinMLEzOY6ErY9S1ZuLMjP5OcC6ZWpre93OxCxspFwa5qZ4RIu7X7TH7fnV0CYxEmgvBz4aFg==}
     peerDependencies:
       marked: ^4 || ^5 || ^6 || ^7
     dependencies:
-      marked: 7.0.5
+      marked: 8.0.0
     dev: false
 
   /marked@4.3.0:
@@ -9622,8 +9622,8 @@ packages:
     hasBin: true
     dev: false
 
-  /marked@7.0.5:
-    resolution: {integrity: sha512-lwNAFTfXgqpt/XvK17a/8wY9/q6fcSPZT1aP6QW0u74VwaJF/Z9KbRcX23sWE4tODM+AolJNcUtErTkgOeFP/Q==}
+  /marked@8.0.0:
+    resolution: {integrity: sha512-RI/D5csFVreNrFchdKFSdV38GDHJdD7OdmbNWYzGvApPb0A9pyypgfHC/FBH4ugmRE8cr7yg/TH7tu8585eMhA==}
     engines: {node: '>= 16'}
     hasBin: true
     dev: false
