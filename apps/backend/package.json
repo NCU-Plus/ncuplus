@@ -66,7 +66,7 @@
     "@types/node": "^20.9.0",
     "@types/passport": "^1.0.12",
     "@types/passport-jwt": "^3.0.9",
-    "@types/passport-oauth2": "^1.4.12",
+    "@types/passport-oauth2": "^1.4.15",
     "@types/supertest": "^2.0.12",
     "jest": "^29.6.4",
     "rimraf": "^5.0.1",

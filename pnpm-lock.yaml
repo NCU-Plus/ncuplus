@@ -190,8 +190,8 @@ importers:
         specifier: ^3.0.9
         version: 3.0.9
       '@types/passport-oauth2':
-        specifier: ^1.4.12
-        version: 1.4.12
+        specifier: ^1.4.15
+        version: 1.4.15
       '@types/supertest':
         specifier: ^2.0.12
         version: 2.0.12
@@ -3940,8 +3940,8 @@ packages:
       '@types/passport-strategy': 0.2.35
     dev: true
 
-  /@types/passport-oauth2@1.4.12:
-    resolution: {integrity: sha512-RZg6cYTyEGinrZn/7REYQds6zrTxoBorX1/fdaz5UHzkG8xdFE7QQxkJagCr2ETzGII58FAFDmnmbTUVMrltNA==}
+  /@types/passport-oauth2@1.4.15:
+    resolution: {integrity: sha512-9cUTP/HStNSZmhxXGuRrBJfEWzIEJRub2eyJu3CvkA+8HAMc9W3aKdFhVq+Qz1hi42qn+GvSAnz3zwacDSYWpw==}
     dependencies:
       '@types/express': 4.17.17
       '@types/oauth': 0.9.1
