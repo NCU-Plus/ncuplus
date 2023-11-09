@@ -79,7 +79,7 @@
 </template>
 
 <script setup lang="ts">
-import { APIRating } from "~~/types/APIRating";
+import type { APIRating } from "~~/types/APIRating";
 import { RatingType } from "~~/types/RatingType";
 import DialogFrame from "~/components/DialogFrame.vue";
 import { createRating } from "~~/helpers/course-feedback";

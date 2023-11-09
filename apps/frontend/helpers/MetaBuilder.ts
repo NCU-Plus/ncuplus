@@ -1,5 +1,5 @@
-import { RuntimeConfig } from "@nuxt/schema";
-import { RouteLocationNormalizedLoaded } from "vue-router";
+import type { RuntimeConfig } from "@nuxt/schema";
+import type { RouteLocationNormalizedLoaded } from "vue-router";
 
 export class MetaBuilder {
   private readonly _meta: Record<string, any>[] = [];

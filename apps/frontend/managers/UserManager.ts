@@ -1,6 +1,6 @@
 import { User } from "~/structures/User";
-import { APIUser } from "types/APIUser";
-import { APIResponse } from "~~/types/APIResponse";
+import type { APIUser } from "types/APIUser";
+import type { APIResponse } from "~~/types/APIResponse";
 
 export class UserManager {
   private static _instance: UserManager;

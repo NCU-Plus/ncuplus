@@ -21,12 +21,12 @@
 </template>
 
 <script setup lang="ts">
-import { Course } from "types/Course";
+import type { Course } from "types/Course";
 import { formatSemester } from "~/helpers/course";
 import { MetaBuilder } from "~~/helpers/MetaBuilder";
 import Pagenator from "~~/components/Pagenator.vue";
 import CoursesSearch from "~~/components/courses/CoursesSearch.vue";
-import { SearchOptions } from "~~/components/courses/CoursesSearchOptions";
+import type { SearchOptions } from "~~/components/courses/CoursesSearchOptions";
 import { getQuerys } from "~~/helpers/RouteUtils";
 
 const route = useRoute();

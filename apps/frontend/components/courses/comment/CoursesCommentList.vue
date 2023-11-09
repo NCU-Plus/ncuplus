@@ -29,7 +29,7 @@
   </section>
 </template>
 <script setup lang="ts">
-import { APIComment } from "types/APIComment";
+import type { APIComment } from "types/APIComment";
 import { ReactionType } from "types/ReactionType";
 
 defineProps<{ commentsData: APIComment[] }>();

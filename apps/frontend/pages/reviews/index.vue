@@ -56,8 +56,8 @@ import {
 import ReviewFrame from "~~/components/review/ReviewFrame.vue";
 import Pagenator from "~~/components/Pagenator.vue";
 import { getQuerys } from "~~/helpers/RouteUtils";
-import { APIReview } from "~~/types/APIReview";
-import { APIResponse } from "~~/types/APIResponse";
+import type { APIReview } from "~~/types/APIReview";
+import type { APIResponse } from "~~/types/APIResponse";
 
 const route = useRoute();
 const querys = getQuerys(route.query);

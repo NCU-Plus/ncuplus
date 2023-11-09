@@ -45,7 +45,7 @@
 </template>
 
 <script setup lang="ts">
-import { APIPastExam } from "types/APIPastExam";
+import type { APIPastExam } from "types/APIPastExam";
 import { toDatetimeString } from "~/helpers/time";
 import { UserManager } from "~/managers/UserManager";
 import { formatFilesize } from "~/helpers/file";

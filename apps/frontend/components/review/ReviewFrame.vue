@@ -44,7 +44,7 @@
 
 <script setup lang="ts">
 import DialogFrame from "~~/components/DialogFrame.vue";
-import { APIReview } from "types/APIReview";
+import type { APIReview } from "types/APIReview";
 import { formatSemester } from "~~/helpers/course";
 import { ReactionType } from "types/ReactionType";
 

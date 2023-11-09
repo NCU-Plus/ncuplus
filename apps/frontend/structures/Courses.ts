@@ -1,4 +1,4 @@
-import { APICourse } from "~~/types/APICourse";
+import type { APICourse } from "~~/types/APICourse";
 import { Colleges } from "./Colleges";
 import { Course } from "./Course";
 import { Departments } from "./Departments";

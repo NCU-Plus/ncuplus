@@ -1,4 +1,4 @@
-import { APICollege } from "~~/types/APICollege";
+import type { APICollege } from "~~/types/APICollege";
 
 export class Colleges {
   public readonly colleges: APICollege[];

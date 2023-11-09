@@ -1,5 +1,5 @@
-import { APIProfile } from "types/APIProfiile";
-import { APIUser } from "types/APIUser";
+import type { APIProfile } from "types/APIProfiile";
+import type { APIUser } from "types/APIUser";
 import { UserRole } from "types/UserRole";
 
 export class User {

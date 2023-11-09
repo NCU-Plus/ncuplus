@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import TWEEN from "@tweenjs/tween.js";
-import { DurationOptions } from "./DurationOptions";
+import type { DurationOptions } from "./DurationOptions";
 
 const props = defineProps<{
   backgroundImages: string[];

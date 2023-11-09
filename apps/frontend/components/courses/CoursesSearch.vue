@@ -82,9 +82,9 @@
 </template>
 
 <script setup lang="ts">
-import { Course } from "types/Course";
+import type { Course } from "types/Course";
 import { formatSemester } from "~/helpers/course";
-import { SearchOptions } from "./CoursesSearchOptions";
+import type { SearchOptions } from "./CoursesSearchOptions";
 
 const route = useRoute();
 const props = defineProps<{

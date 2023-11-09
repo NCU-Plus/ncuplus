@@ -2,10 +2,10 @@ import { acceptHMRUpdate, defineStore } from "pinia";
 import { Colleges } from "~~/structures/Colleges";
 import { Courses } from "~~/structures/Courses";
 import { Departments } from "~~/structures/Departments";
-import { APICollege } from "~~/types/APICollege";
-import { APICourse } from "~~/types/APICourse";
-import { APIDepartment } from "~~/types/APIDepartment";
-import { APIResponse } from "~~/types/APIResponse";
+import type { APICollege } from "~~/types/APICollege";
+import type { APICourse } from "~~/types/APICourse";
+import type { APIDepartment } from "~~/types/APIDepartment";
+import type { APIResponse } from "~~/types/APIResponse";
 
 export interface AppCache {
   courses: Courses;

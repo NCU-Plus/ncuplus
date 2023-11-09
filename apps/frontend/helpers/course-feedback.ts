@@ -1,13 +1,13 @@
 import { ToastType, useToast } from "~~/stores/toast";
-import { APIComment } from "types/APIComment";
-import { APIPastExam } from "types/APIPastExam";
-import { APIReaction } from "types/APIReaction";
-import { APIResponse } from "types/APIResponse";
-import { APIReview } from "types/APIReview";
+import type { APIComment } from "types/APIComment";
+import type { APIPastExam } from "types/APIPastExam";
+import type { APIReaction } from "types/APIReaction";
+import type { APIResponse } from "types/APIResponse";
+import type { APIReview } from "types/APIReview";
 import { ReactionType } from "types/ReactionType";
 import { APIClient } from "./APIClient";
 import { RatingType } from "~~/types/RatingType";
-import { APIRating } from "~~/types/APIRating";
+import type { APIRating } from "~~/types/APIRating";
 
 type CourseFeedbackType = "comment" | "review";
 
