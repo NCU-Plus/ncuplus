@@ -133,13 +133,12 @@ export class APIClient {
     >,
   ): Promise<FetchResponse<T> | T | unknown> {
     try {
-      if (opts) {
-        opts.headers = {
-          ...opts.headers,
-          Authorization: `Bearer ${this._token}`,
-          "csrf-token": useCookie("X-CSRF-TOKEN").value ?? "",
-        };
-      }
+      opts = { ...opts };
+      opts.headers = {
+        ...opts.headers,
+        Authorization: `Bearer ${this._token}`,
+        "csrf-token": useCookie("X-CSRF-TOKEN").value ?? "",
+      };
       return await fetchFn(request, { ...opts });
     } catch (e) {
       if ((e as FetchError).response?.status === 401) {
