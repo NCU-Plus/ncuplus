@@ -169,8 +169,8 @@ importers:
         specifier: ^1.11.2
         version: 1.11.2
       '@types/express':
-        specifier: ^4.17.17
-        version: 4.17.17
+        specifier: ^4.17.21
+        version: 4.17.21
       '@types/express-session':
         specifier: ^1.17.7
         version: 1.17.7
@@ -3769,7 +3769,7 @@ packages:
   /@types/cookie-parser@1.4.3:
     resolution: {integrity: sha512-CqSKwFwefj4PzZ5n/iwad/bow2hTCh0FlNAeWLtQM3JA/NX/iYagIpWG2cf1bQKQ2c9gU2log5VUCrn7LDOs0w==}
     dependencies:
-      '@types/express': 4.17.17
+      '@types/express': 4.17.21
     dev: true
 
   /@types/cookiejar@2.1.2:
@@ -3817,11 +3817,11 @@ packages:
   /@types/express-session@1.17.7:
     resolution: {integrity: sha512-L25080PBYoRLu472HY/HNCxaXY8AaGgqGC8/p/8+BYMhG0RDOLQ1wpXOpAzr4Gi5TGozTKyJv5BVODM5UNyVMw==}
     dependencies:
-      '@types/express': 4.17.17
+      '@types/express': 4.17.21
     dev: true
 
-  /@types/express@4.17.17:
-    resolution: {integrity: sha512-Q4FmmuLGBG58btUnfS1c1r/NQdlp3DMfGDGig8WhfpA2YRUtEkxAjkZb0yvplJGYdF1fsQ81iMDcH24sSCNC/Q==}
+  /@types/express@4.17.21:
+    resolution: {integrity: sha512-ejlPM315qwLpaQlQDTjPdsUFSc6ZsP4AN6AlWnogPjQ7CVi7PYF3YVz+CY3jE2pwYf7E/7HlDAN0rV2GxTG0HQ==}
     dependencies:
       '@types/body-parser': 1.19.2
       '@types/express-serve-static-core': 4.17.35
@@ -3906,7 +3906,7 @@ packages:
   /@types/multer@1.4.7:
     resolution: {integrity: sha512-/SNsDidUFCvqqcWDwxv2feww/yqhNeTRL5CVoL3jU4Goc4kKEL10T7Eye65ZqPNi4HRx8sAEX59pV1aEH7drNA==}
     dependencies:
-      '@types/express': 4.17.17
+      '@types/express': 4.17.21
     dev: true
 
   /@types/node@16.18.41:
@@ -3935,7 +3935,7 @@ packages:
   /@types/passport-jwt@3.0.9:
     resolution: {integrity: sha512-5XJt+79emfgpuBvBQusUPylFIVtW1QVAAkTRwCbRJAmxUjmLtIqUU6V1ovpnHPu6Qut3mR5Juc+s7kd06roNTg==}
     dependencies:
-      '@types/express': 4.17.17
+      '@types/express': 4.17.21
       '@types/jsonwebtoken': 9.0.2
       '@types/passport-strategy': 0.2.35
     dev: true
@@ -3943,7 +3943,7 @@ packages:
   /@types/passport-oauth2@1.4.12:
     resolution: {integrity: sha512-RZg6cYTyEGinrZn/7REYQds6zrTxoBorX1/fdaz5UHzkG8xdFE7QQxkJagCr2ETzGII58FAFDmnmbTUVMrltNA==}
     dependencies:
-      '@types/express': 4.17.17
+      '@types/express': 4.17.21
       '@types/oauth': 0.9.1
       '@types/passport': 1.0.12
     dev: true
@@ -3951,14 +3951,14 @@ packages:
   /@types/passport-strategy@0.2.35:
     resolution: {integrity: sha512-o5D19Jy2XPFoX2rKApykY15et3Apgax00RRLf0RUotPDUsYrQa7x4howLYr9El2mlUApHmCMv5CZ1IXqKFQ2+g==}
     dependencies:
-      '@types/express': 4.17.17
+      '@types/express': 4.17.21
       '@types/passport': 1.0.12
     dev: true
 
   /@types/passport@1.0.12:
     resolution: {integrity: sha512-QFdJ2TiAEoXfEQSNDISJR1Tm51I78CymqcBa8imbjo6dNNu+l2huDxxbDEIoFIwOSKMkOfHEikyDuZ38WwWsmw==}
     dependencies:
-      '@types/express': 4.17.17
+      '@types/express': 4.17.21
     dev: true
 
   /@types/qs@6.9.7:
