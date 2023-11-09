@@ -1,7 +1,8 @@
-import { RuntimeConfig } from "@nuxt/schema";
-import { APIResponse } from "types/APIResponse";
-import { NitroFetchRequest, NitroFetchOptions } from "nitropack";
-import { FetchError, FetchResponse } from "ofetch";
+import type { RuntimeConfig } from "@nuxt/schema";
+import type { APIResponse } from "types/APIResponse";
+import type { NitroFetchRequest, NitroFetchOptions } from "nitropack";
+import type { FetchResponse } from "ofetch";
+import { FetchError } from "ofetch";
 
 export class APIClient {
   private static instance: APIClient;
@@ -139,11 +140,11 @@ export class APIClient {
           "csrf-token": useCookie("X-CSRF-TOKEN").value ?? "",
         };
       }
-      return await fetchFn(request, opts);
+      return await fetchFn(request, { ...opts });
     } catch (e) {
       if ((e as FetchError).response?.status === 401) {
         await this.refreshToken();
-        return await this._fetch<T>(fetchFn, request, opts);
+        return await fetchFn<T>(request, opts);
       }
       return (e as FetchError).data;
     }

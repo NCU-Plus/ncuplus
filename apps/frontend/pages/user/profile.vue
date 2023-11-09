@@ -48,8 +48,8 @@ import { MetaBuilder } from "~~/helpers/MetaBuilder";
 import { UserManager } from "~~/managers/UserManager";
 import { ToastType, useToast } from "~~/stores/toast";
 import { User } from "~~/structures/User";
-import { APIProfile } from "types/APIProfiile";
-import { APIResponse } from "types/APIResponse";
+import type { APIProfile } from "types/APIProfiile";
+import type { APIResponse } from "types/APIResponse";
 
 const title = "個人檔案";
 const loggedInUser = useLoggedInUser();

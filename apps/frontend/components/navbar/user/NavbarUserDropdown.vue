@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import { APIClient } from "~/helpers/APIClient";
-import { APIResponse } from "types/APIResponse";
+import type { APIResponse } from "types/APIResponse";
 
 const loggedInUser = useLoggedInUser();
 

@@ -95,10 +95,10 @@ import {
   del,
   edit,
 } from "~/helpers/course-feedback";
-import { APICourseFeedback } from "types/APICourseFeedback";
+import type { APICourseFeedback } from "types/APICourseFeedback";
 import { MetaBuilder } from "~~/helpers/MetaBuilder";
 import { getParams } from "~~/helpers/RouteUtils";
-import { APIResponse } from "~~/types/APIResponse";
+import type { APIResponse } from "~~/types/APIResponse";
 
 definePageMeta({
   validate: async (route) => {

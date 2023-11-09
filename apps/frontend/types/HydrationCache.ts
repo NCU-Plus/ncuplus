@@ -1,6 +1,6 @@
-import { APICollege } from "./APICollege";
-import { APICourse } from "./APICourse";
-import { APIDepartment } from "./APIDepartment";
+import type { APICollege } from "./APICollege";
+import type { APICourse } from "./APICourse";
+import type { APIDepartment } from "./APIDepartment";
 
 export interface HydrationCache {
   courses: APICourse[];

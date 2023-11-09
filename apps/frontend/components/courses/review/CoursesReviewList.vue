@@ -36,7 +36,7 @@
 
 <script setup lang="ts">
 import { ReactionType } from "types/ReactionType";
-import { APIReview } from "types/APIReview";
+import type { APIReview } from "types/APIReview";
 import { courseReviewTemplate } from "~/assets/course-review-template";
 import MarkdownEditor from "~~/components/markdown/MarkdownEditor.vue";
 

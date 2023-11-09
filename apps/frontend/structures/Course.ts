@@ -1,5 +1,5 @@
-import { APICourse } from "~~/types/APICourse";
-import { Course as ICourse } from "~~/types/Course";
+import type { APICourse } from "~~/types/APICourse";
+import type { Course as ICourse } from "~~/types/Course";
 
 export class Course implements ICourse {
   public readonly collegeName: string;

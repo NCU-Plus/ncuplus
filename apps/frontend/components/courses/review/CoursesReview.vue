@@ -102,7 +102,7 @@
 </template>
 
 <script setup lang="ts">
-import { APIReview } from "types/APIReview";
+import type { APIReview } from "types/APIReview";
 import { ReactionType } from "types/ReactionType";
 import { UserManager } from "~/managers/UserManager";
 import { toDatetimeString } from "@/helpers/time";

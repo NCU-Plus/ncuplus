@@ -1,6 +1,7 @@
 import { ToastType, useToast } from "~~/stores/toast";
-import { APIReport, ReportType, TargetType } from "types/APIReport";
-import { APIResponse } from "types/APIResponse";
+import type { APIReport } from "types/APIReport";
+import { ReportType, TargetType } from "types/APIReport";
+import type { APIResponse } from "types/APIResponse";
 import { APIClient } from "./APIClient";
 
 export function formatReportType(reportType: ReportType) {

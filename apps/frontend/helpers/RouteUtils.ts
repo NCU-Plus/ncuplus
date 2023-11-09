@@ -1,4 +1,4 @@
-import { LocationQuery, RouteParams } from "vue-router";
+import type { LocationQuery, RouteParams } from "vue-router";
 
 export function getQuerys(query: LocationQuery): {
   [x: string]: string | undefined;

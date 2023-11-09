@@ -1,4 +1,4 @@
-import { APIDepartment } from "~~/types/APIDepartment";
+import type { APIDepartment } from "~~/types/APIDepartment";
 
 export class Departments {
   public readonly departments: APIDepartment[];

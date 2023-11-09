@@ -1,4 +1,4 @@
-import { APICourse } from "./APICourse";
+import type { APICourse } from "./APICourse";
 
 export interface Course extends APICourse {
   collegeName: string;

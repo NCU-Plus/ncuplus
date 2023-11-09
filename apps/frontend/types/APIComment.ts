@@ -1,4 +1,4 @@
-import { APIReaction } from "./APIReaction";
+import type { APIReaction } from "./APIReaction";
 
 export interface APIComment {
   id: number;
