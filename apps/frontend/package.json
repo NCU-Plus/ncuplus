@@ -28,7 +28,7 @@
     "easymde": "^2.18.0",
     "highlight.js": "^11.8.0",
     "isomorphic-dompurify": "^1.9.0",
-    "marked": "^8.0.0",
+    "marked": "^10.0.0",
     "marked-gfm-heading-id": "^3.0.7",
     "marked-highlight": "^2.0.5",
     "marked-mangle": "^1.1.3",
