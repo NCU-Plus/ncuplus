@@ -21,7 +21,7 @@
     "format:backend": "prettier -w --config \"./apps/backend/.prettierrc\" \"./apps/backend/{src,test}/**/*.ts\""
   },
   "devDependencies": {
-    "@types/http-proxy": "^1.17.11",
+    "@types/http-proxy": "^1.17.14",
     "@types/node": "^20.10.0",
     "@typescript-eslint/eslint-plugin": "^6.5.0",
     "@typescript-eslint/parser": "^6.5.0",
