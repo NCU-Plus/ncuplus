@@ -274,8 +274,8 @@ importers:
         specifier: ^8.0.0
         version: 8.0.0
       marked-gfm-heading-id:
-        specifier: ^3.0.7
-        version: 3.0.7(marked@8.0.0)
+        specifier: ^3.1.2
+        version: 3.1.2(marked@8.0.0)
       marked-highlight:
         specifier: ^2.0.5
         version: 2.0.5(marked@8.0.0)
@@ -10182,10 +10182,10 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /marked-gfm-heading-id@3.0.7(marked@8.0.0):
-    resolution: {integrity: sha512-8JtFnp8/50qwpwwt446Uv4Ohy0jDLNGnAB7sWln7SLQcQQV7+K3qlMMwYupELz9cZvKKiRqXHEGNopcEvxM2ew==}
+  /marked-gfm-heading-id@3.1.2(marked@8.0.0):
+    resolution: {integrity: sha512-SdIZvhNxDgndFkDa2WRcFP4ahYm6k6hoHdTCN+fD7HRiI/R3Eimcw/Yl7ikQ+0KUuDpi75NnYQiThZnZsNr9Dg==}
     peerDependencies:
-      marked: '>=4 <9'
+      marked: '>=4 <12'
     dependencies:
       github-slugger: 2.0.0
       marked: 8.0.0
