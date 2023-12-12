@@ -32,13 +32,13 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Build frontend and push
-      uses: docker/build-push-action@v4
+      uses: docker/build-push-action@v5
       with:
         push: true
         tags: ppodds/ncuplus-frontend:latest,ppodds/ncuplus-frontend:${{ steps.get-version.outputs.version }}
         file: Dockerfile.frontend
     - name: Build backend and push
-      uses: docker/build-push-action@v4
+      uses: docker/build-push-action@v5
       with:
         push: true
         tags: ppodds/ncuplus-backend:latest,ppodds/ncuplus-backend:${{ steps.get-version.outputs.version }}
