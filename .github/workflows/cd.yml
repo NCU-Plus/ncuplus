@@ -14,15 +14,15 @@ jobs:
       - uses: ppodds/relno-action@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+  get-version:
+    uses: ppodds/workflows/.github/workflows/get-version-from-tag.yml@master
+    with:
+      tag: ${{ github.event.release.tag_name }}
   docker:
+    needs: get-version
     runs-on: ubuntu-latest
     name: "Build Docker image and push to Docker Hub"
     steps:
-    - name: Get version string
-      id: get-version
-      run: |
-        tag=${{github.event.release.tag_name}}
-        echo "::set-output name=version::${tag:1}"
     - uses: actions/checkout@v4
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
@@ -35,11 +35,21 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         push: true
-        tags: ppodds/ncuplus-frontend:latest,ppodds/ncuplus-frontend:${{ steps.get-version.outputs.version }}
+        tags: ppodds/ncuplus-frontend:latest,ppodds/ncuplus-frontend:${{ needs.get-version.outputs.version }}
         file: Dockerfile.frontend
     - name: Build backend and push
       uses: docker/build-push-action@v5
       with:
         push: true
-        tags: ppodds/ncuplus-backend:latest,ppodds/ncuplus-backend:${{ steps.get-version.outputs.version }}
+        tags: ppodds/ncuplus-backend:latest,ppodds/ncuplus-backend:${{ needs.get-version.outputs.version }}
         file: Dockerfile.backend
+  trigger-deploy:
+    needs:
+      - docker
+      - get-version
+    uses: ppodds/workflows/.github/workflows/update-helm-chart.yml@master
+    with:
+      repo: ppodds/ncuplus-helm
+      app_version: ${{ needs.get-version.outputs.version }}
+    secrets:
+      TOKEN: ${{ secrets.DEPLOY_REPO_TOKEN }}
