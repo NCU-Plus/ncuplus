@@ -32,7 +32,7 @@ jobs:
           runTests: false
           build: pnpm -F frontend build
       - name: Save frontend build folder
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build
           if-no-files-found: error
