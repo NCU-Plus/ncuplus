@@ -268,8 +268,8 @@ importers:
         specifier: ^11.9.0
         version: 11.9.0
       isomorphic-dompurify:
-        specifier: ^1.12.0
-        version: 1.12.0
+        specifier: ^1.13.0
+        version: 1.13.0
       marked:
         specifier: ^8.0.1
         version: 8.0.1
@@ -8541,8 +8541,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /isomorphic-dompurify@1.12.0:
-    resolution: {integrity: sha512-E/3IKMkFt5qWeWD6RC7caDfS0NroDfCsn6OYvUtJGAQwSteR13m9IardqFCHMJG12uR/nFcuTjULgGW2w3bw3g==}
+  /isomorphic-dompurify@1.13.0:
+    resolution: {integrity: sha512-9qOYGngy9ZR9JB/iLmr7SViPSZ7uWGvepdnLaXYznbTxvJOCuONneKajJ54f+IRQpvL8608ylUy9EK1iPtL3Ag==}
     engines: {node: '>=18'}
     dependencies:
       '@types/dompurify': 3.0.5
