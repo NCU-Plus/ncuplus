@@ -22,7 +22,7 @@
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.10",
     "@tweenjs/tween.js": "^18.6.4",
-    "@vitejs/plugin-vue": "^4.5.2",
+    "@vitejs/plugin-vue": "^4.6.2",
     "@vue/test-utils": "^2.4.3",
     "chart.js": "^4.4.1",
     "easymde": "^2.18.0",
