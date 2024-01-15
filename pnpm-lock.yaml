@@ -250,8 +250,8 @@ importers:
         specifier: ^0.5.10
         version: 0.5.10(tailwindcss@3.3.6)
       '@tweenjs/tween.js':
-        specifier: ^18.6.4
-        version: 18.6.4
+        specifier: ^22.0.0
+        version: 22.0.0
       '@vitejs/plugin-vue':
         specifier: ^4.5.2
         version: 4.5.2(vite@5.0.8)(vue@3.3.11)
@@ -3564,8 +3564,8 @@ packages:
       minimatch: 9.0.3
     dev: true
 
-  /@tweenjs/tween.js@18.6.4:
-    resolution: {integrity: sha512-lB9lMjuqjtuJrx7/kOkqQBtllspPIN+96OvTCeJ2j5FEzinoAXTdAMFnDAQT1KVPRlnYfBrqxtqP66vDM40xxQ==}
+  /@tweenjs/tween.js@22.0.0:
+    resolution: {integrity: sha512-vi0/BgpaS7rklYOwaiSSnteqE6n1cIL2NsODipfN8KNxSgIrRNDsxagqt2+FN7DkIJaxrHmg9x/KTl+xkRTa1g==}
     dev: true
 
   /@types/babel__core@7.20.5:
