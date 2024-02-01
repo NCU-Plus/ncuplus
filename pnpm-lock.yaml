@@ -271,17 +271,17 @@ importers:
         specifier: ^2.3.0
         version: 2.3.0
       marked:
-        specifier: ^8.0.1
-        version: 8.0.1
+        specifier: ^11.2.0
+        version: 11.2.0
       marked-gfm-heading-id:
         specifier: ^3.1.2
-        version: 3.1.2(marked@8.0.1)
+        version: 3.1.2(marked@11.2.0)
       marked-highlight:
         specifier: ^2.0.9
-        version: 2.0.9(marked@8.0.1)
+        version: 2.0.9(marked@11.2.0)
       marked-mangle:
         specifier: ^1.1.6
-        version: 1.1.6(marked@8.0.1)
+        version: 1.1.6(marked@11.2.0)
       nuxt:
         specifier: ^3.8.2
         version: 3.8.2(@types/node@20.10.4)(eslint@8.55.0)(typescript@5.3.3)(vite@5.0.8)
@@ -9910,40 +9910,40 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /marked-gfm-heading-id@3.1.2(marked@8.0.1):
+  /marked-gfm-heading-id@3.1.2(marked@11.2.0):
     resolution: {integrity: sha512-SdIZvhNxDgndFkDa2WRcFP4ahYm6k6hoHdTCN+fD7HRiI/R3Eimcw/Yl7ikQ+0KUuDpi75NnYQiThZnZsNr9Dg==}
     peerDependencies:
       marked: '>=4 <12'
     dependencies:
       github-slugger: 2.0.0
-      marked: 8.0.1
+      marked: 11.2.0
     dev: true
 
-  /marked-highlight@2.0.9(marked@8.0.1):
+  /marked-highlight@2.0.9(marked@11.2.0):
     resolution: {integrity: sha512-HAK1WJSK6CGVDzplOf6layWFz1lHm8Fsjd+SEUYmLhAZmM8TlYmErC/hTphoiOxogYqGQGt3Ghug3Yhs+s+3jw==}
     peerDependencies:
       marked: '>=4 <12'
     dependencies:
-      marked: 8.0.1
+      marked: 11.2.0
     dev: true
 
-  /marked-mangle@1.1.6(marked@8.0.1):
+  /marked-mangle@1.1.6(marked@11.2.0):
     resolution: {integrity: sha512-4g4GevEeFE/RbB0Zue8k7e7RSDpEolb7yWVWzsAuuo2q4FMsVZiC+hqst762neHorCyjr32d5nNMZSWM/f27Ow==}
     peerDependencies:
       marked: '>=4 <12'
     dependencies:
-      marked: 8.0.1
+      marked: 11.2.0
+    dev: true
+
+  /marked@11.2.0:
+    resolution: {integrity: sha512-HR0m3bvu0jAPYiIvLUUQtdg1g6D247//lvcekpHO1WMvbwDlwSkZAX9Lw4F4YHE1T0HaaNve0tuAWuV1UJ6vtw==}
+    engines: {node: '>= 18'}
+    hasBin: true
     dev: true
 
   /marked@4.3.0:
     resolution: {integrity: sha512-PRsaiG84bK+AMvxziE/lCFss8juXjNaWzVbN5tXAm4XjeaS9NAHhop+PjQxz2A9h8Q4M/xGmzP8vqNwy6JeK0A==}
     engines: {node: '>= 12'}
-    hasBin: true
-    dev: true
-
-  /marked@8.0.1:
-    resolution: {integrity: sha512-eEbeEb/mJwh+sNLEhHOWtxMgjN/NEwZUBs1nkiIH2sTQTq07KmPMQ48ihyvo5+Ya56spVOPhunfGr6406crCVA==}
-    engines: {node: '>= 16'}
     hasBin: true
     dev: true
 
