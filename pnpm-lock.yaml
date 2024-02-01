@@ -27,8 +27,8 @@ importers:
         specifier: ^7.0.3
         version: 7.0.3
       cypress:
-        specifier: ^13.6.1
-        version: 13.6.1
+        specifier: ^13.6.4
+        version: 13.6.4
       eslint:
         specifier: ^8.55.0
         version: 8.55.0
@@ -1886,7 +1886,7 @@ packages:
     engines: {node: '>=16.0.0'}
     dependencies:
       chalk: 4.1.2
-      execa: 5.0.0
+      execa: 5.1.1
       strong-log-transformer: 2.1.0
     dev: true
 
@@ -3916,12 +3916,6 @@ packages:
     resolution: {integrity: sha512-svK240gr6LVWvv3YGyhLlA+6LRRWA4mnGIU7RcNmgjBYFl6665wcXrRfxGp5tEPVHUNm5FMcmq7too9bxCwX/w==}
     dependencies:
       '@types/express': 4.17.21
-    dev: true
-
-  /@types/node@18.19.3:
-    resolution: {integrity: sha512-k5fggr14DwAytoA/t8rPrIz++lXK7/DqckthCmoZOKNsEbJkId4Z//BqgApXBUGrGddrigYa1oqheo/7YmW4rg==}
-    dependencies:
-      undici-types: 5.26.5
     dev: true
 
   /@types/node@20.11.14:
@@ -6431,15 +6425,14 @@ packages:
       http-errors: 1.7.3
     dev: false
 
-  /cypress@13.6.1:
-    resolution: {integrity: sha512-k1Wl5PQcA/4UoTffYKKaxA0FJKwg8yenYNYRzLt11CUR0Kln+h7Udne6mdU1cUIdXBDTVZWtmiUjzqGs7/pEpw==}
+  /cypress@13.6.4:
+    resolution: {integrity: sha512-pYJjCfDYB+hoOoZuhysbbYhEmNW7DEDsqn+ToCLwuVowxUXppIWRr7qk4TVRIU471ksfzyZcH+mkoF0CQUKnpw==}
     engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
     hasBin: true
     requiresBuild: true
     dependencies:
       '@cypress/request': 3.0.1
       '@cypress/xvfb': 1.2.4(supports-color@8.1.1)
-      '@types/node': 18.19.3
       '@types/sinonjs__fake-timers': 8.1.1
       '@types/sizzle': 2.3.8
       arch: 2.2.0
