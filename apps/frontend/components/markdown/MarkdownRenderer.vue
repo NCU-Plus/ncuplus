@@ -11,5 +11,7 @@ const props = defineProps<{
   content: string;
 }>();
 
-const dom = computed(() => DOMPurify.sanitize(marked.parse(props.content)));
+const dom = computed(() =>
+  DOMPurify.sanitize(marked.parse(props.content) as string),
+);
 </script>

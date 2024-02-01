@@ -1,6 +1,6 @@
 import { mount } from "@vue/test-utils";
 import { nextTick } from "vue";
-import AnimationBackground from "~~/components/AnimationBackground.vue";
+import AnimationBackground from "~/components/AnimationBackground.vue";
 import { describe, expect, it } from "vitest";
 
 describe("AnimationBackground test", () => {

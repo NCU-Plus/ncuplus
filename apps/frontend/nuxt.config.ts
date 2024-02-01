@@ -5,7 +5,12 @@ export default defineNuxtConfig({
   alias: {
     types: fileURLToPath(new URL("types", import.meta.url)),
   },
-  modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt", "nuxt-gtag"],
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "@pinia/nuxt",
+    "nuxt-gtag",
+    "@nuxt/test-utils/module",
+  ],
   build: {
     transpile: [
       "@fortawesome/fontawesome-svg-core",

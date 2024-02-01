@@ -23,6 +23,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     );
     marked.setOptions({
       breaks: true,
+      async: false,
     });
   });
 });
