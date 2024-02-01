@@ -33,7 +33,7 @@
     "marked-highlight": "^2.0.9",
     "marked-mangle": "^1.1.6",
     "nuxt": "^3.8.2",
-    "nuxt-gtag": "^0.6.3",
+    "nuxt-gtag": "^1.1.2",
     "pinia": "^2.1.7",
     "tailwind-scrollbar-hide": "^1.1.7",
     "vitest": "^1.0.4",
