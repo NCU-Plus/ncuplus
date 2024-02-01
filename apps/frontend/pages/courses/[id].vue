@@ -119,14 +119,11 @@ if (!t)
     statusMessage: `Page Not Found: ${route.path}`,
   });
 const course = ref(t);
-const { data: courseFeedbackRes } = await useFetch<
-  APIResponse<APICourseFeedback>
->(
+const courseFeedbackUrl = computed(
   () => `${config.public.apiBaseUrl}/course-feedbacks/${course.value.classNo}`,
-  {
-    key: `${config.public.apiBaseUrl}/course-feedbacks/${course.value.classNo}`,
-  },
 );
+const { data: courseFeedbackRes } =
+  await useFetch<APIResponse<APICourseFeedback>>(courseFeedbackUrl);
 if (!courseFeedbackRes.value || !courseFeedbackRes.value.data)
   throw createError({
     statusCode: 503,

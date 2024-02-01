@@ -14,7 +14,7 @@
     "prepare": "husky install",
     "test": "lerna run test",
     "lint": "concurrently \"pnpm lint:frontend\" \"pnpm lint:backend\"",
-    "lint:frontend": "eslint --fix -c \"./apps/frontend/.eslintrc.js\" \"./apps/frontend/**/*.{ts,vue}\"",
+    "lint:frontend": "eslint --fix -c \"./apps/frontend/.eslintrc.cjs\" \"./apps/frontend/**/*.{ts,vue}\"",
     "lint:backend": "eslint --fix -c \"./apps/backend/.eslintrc.js\" \"./apps/backend/{src,apps,libs,test}/**/*.ts\"",
     "format": "concurrently \"pnpm format:frontend\" \"pnpm format:backend\"",
     "format:frontend": "prettier -w --config \"./apps/frontend/.prettierrc\" \"./apps/frontend/**/*.{ts,vue}\"",
