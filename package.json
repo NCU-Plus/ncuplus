@@ -44,7 +44,7 @@
   "lint-staged": {
     "apps/frontend/**/*.{ts,vue}": [
       "prettier -w --config \"./apps/frontend/.prettierrc\"",
-      "eslint --fix -c \"./apps/frontend/.eslintrc.js\""
+      "eslint --fix -c \"./apps/frontend/.eslintrc.cjs\""
     ],
     "apps/backend/{src,apps,libs,test}/**/*.ts": [
       "eslint --fix -c \"./apps/backend/.eslintrc.js\""
