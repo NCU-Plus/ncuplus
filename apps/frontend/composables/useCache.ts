@@ -72,36 +72,3 @@ export const useCache = async (): Promise<AppCache> => {
   }
   throw new Error("This should never happen.");
 };
-
-// export const useCache = async (): Promise<AppCache> => {
-//   const config = useRuntimeConfig();
-//   const [{ data: courses }, { data: colleges }, { data: departments }] =
-//     await Promise.all([
-//       $fetch<APIResponse<APICourse[]>>(`${config.public.apiBaseUrl}/courses`),
-//       $fetch<APIResponse<APICollege[]>>(`${config.public.apiBaseUrl}/colleges`),
-//       $fetch<APIResponse<APIDepartment[]>>(
-//         `${config.public.apiBaseUrl}/departments`,
-//       ),
-//     ]);
-//   if (!courses)
-//     throw createError({
-//       statusCode: 503,
-//       message:
-//         "Course data is not available, please contact the website owner.",
-//     });
-//   if (!colleges)
-//     throw createError({
-//       statusCode: 503,
-//       message:
-//         "College data is not available, please contact the website owner.",
-//     });
-//   if (!departments)
-//     throw createError({
-//       statusCode: 503,
-//       message:
-//         "Departments data is not available, please contact the website owner.",
-//     });
-//   const t1 = new Colleges(colleges);
-//   const t2 = new Departments(departments);
-//   return new AppCache(new Courses(courses, t1, t2), t1, t2);
-// };
