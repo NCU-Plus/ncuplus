@@ -277,8 +277,8 @@ importers:
         specifier: ^2.0.9
         version: 2.0.9(marked@11.2.0)
       marked-mangle:
-        specifier: ^1.1.6
-        version: 1.1.6(marked@11.2.0)
+        specifier: ^1.1.7
+        version: 1.1.7(marked@11.2.0)
       nuxt:
         specifier: ^3.10.0
         version: 3.10.0(@types/node@20.11.14)(eslint@8.55.0)(typescript@5.3.3)(vite@5.0.12)
@@ -10096,10 +10096,10 @@ packages:
       marked: 11.2.0
     dev: true
 
-  /marked-mangle@1.1.6(marked@11.2.0):
-    resolution: {integrity: sha512-4g4GevEeFE/RbB0Zue8k7e7RSDpEolb7yWVWzsAuuo2q4FMsVZiC+hqst762neHorCyjr32d5nNMZSWM/f27Ow==}
+  /marked-mangle@1.1.7(marked@11.2.0):
+    resolution: {integrity: sha512-bLsXKovJEEs/Dl++TBPmjX8ALFmrH5G0doTs+BdDOloBKWYRf3acyJghce78SnwInDkNPJ6crubr4MnFG7urOA==}
     peerDependencies:
-      marked: '>=4 <12'
+      marked: '>=4 <13'
     dependencies:
       marked: 11.2.0
     dev: true
