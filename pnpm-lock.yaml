@@ -274,8 +274,8 @@ importers:
         specifier: ^3.1.2
         version: 3.1.2(marked@11.2.0)
       marked-highlight:
-        specifier: ^2.0.9
-        version: 2.0.9(marked@11.2.0)
+        specifier: ^2.1.1
+        version: 2.1.1(marked@11.2.0)
       marked-mangle:
         specifier: ^1.1.6
         version: 1.1.6(marked@11.2.0)
@@ -10088,10 +10088,10 @@ packages:
       marked: 11.2.0
     dev: true
 
-  /marked-highlight@2.0.9(marked@11.2.0):
-    resolution: {integrity: sha512-HAK1WJSK6CGVDzplOf6layWFz1lHm8Fsjd+SEUYmLhAZmM8TlYmErC/hTphoiOxogYqGQGt3Ghug3Yhs+s+3jw==}
+  /marked-highlight@2.1.1(marked@11.2.0):
+    resolution: {integrity: sha512-ktdqwtBne8rim5mb+vvZ9FzElGFb+CHCgkx/g6DSzTjaSrVnxsJdSzB5YgCkknFrcOW+viocM1lGyIjC0oa3fg==}
     peerDependencies:
-      marked: '>=4 <12'
+      marked: '>=4 <13'
     dependencies:
       marked: 11.2.0
     dev: true
