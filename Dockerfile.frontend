@@ -31,4 +31,4 @@ USER node
 
 ENV NODE_ENV production
 EXPOSE 3000
-CMD [ "node", ".output/server/index.mjs" ]
+CMD [ "node", "--stack-size=3936", ".output/server/index.mjs" ]
