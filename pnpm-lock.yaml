@@ -27,8 +27,8 @@ importers:
         specifier: ^7.0.3
         version: 7.0.3
       cypress:
-        specifier: ^13.6.4
-        version: 13.6.4
+        specifier: ^13.7.1
+        version: 13.7.1
       eslint:
         specifier: ^8.55.0
         version: 8.55.0
@@ -209,7 +209,7 @@ importers:
         version: 6.3.3
       ts-jest:
         specifier: ^29.1.1
-        version: 29.1.1(@babel/core@7.23.6)(jest@29.7.0)(typescript@5.3.3)
+        version: 29.1.1(@babel/core@7.23.9)(jest@29.7.0)(typescript@5.3.3)
       ts-loader:
         specifier: ^9.5.1
         version: 9.5.1(typescript@5.3.3)(webpack@5.90.0)
@@ -6312,8 +6312,8 @@ packages:
       http-errors: 1.7.3
     dev: false
 
-  /cypress@13.6.4:
-    resolution: {integrity: sha512-pYJjCfDYB+hoOoZuhysbbYhEmNW7DEDsqn+ToCLwuVowxUXppIWRr7qk4TVRIU471ksfzyZcH+mkoF0CQUKnpw==}
+  /cypress@13.7.1:
+    resolution: {integrity: sha512-4u/rpFNxOFCoFX/Z5h+uwlkBO4mWzAjveURi3vqdSu56HPvVdyGTxGw4XKGWt399Y1JwIn9E1L9uMXQpc0o55w==}
     engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
     hasBin: true
     requiresBuild: true
@@ -13782,7 +13782,7 @@ packages:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
     dev: true
 
-  /ts-jest@29.1.1(@babel/core@7.23.6)(jest@29.7.0)(typescript@5.3.3):
+  /ts-jest@29.1.1(@babel/core@7.23.9)(jest@29.7.0)(typescript@5.3.3):
     resolution: {integrity: sha512-D6xjnnbP17cC85nliwGiL+tpoKN0StpgE0TeOjXQTU6MVCfsB4v7aW05CgQ/1OywGb0x/oy9hHFnN+sczTiRaA==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     hasBin: true
@@ -13803,7 +13803,7 @@ packages:
       esbuild:
         optional: true
     dependencies:
-      '@babel/core': 7.23.6
+      '@babel/core': 7.23.9
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
       jest: 29.7.0(@types/node@20.11.14)(ts-node@10.9.2)
