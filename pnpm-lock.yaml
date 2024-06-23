@@ -141,7 +141,7 @@ importers:
         specifier: ^1.7.0
         version: 1.8.0
       redis:
-        specifier: ^4.6.11
+        specifier: ^4.6.14
         version: 4.6.14
       reflect-metadata:
         specifier: ^0.2.1
