@@ -53,4 +53,5 @@ export default defineNuxtConfig({
     "highlight.js/styles/default.css",
     "@fortawesome/fontawesome-svg-core/styles.css",
   ],
+  devtools: { enabled: true },
 });

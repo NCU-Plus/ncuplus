@@ -22,7 +22,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 9
       - name: Disable husky install
         run: npm pkg delete scripts.prepare
       - name: Cypress install
@@ -56,7 +56,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 9
       - name: Disable husky install
         run: npm pkg delete scripts.prepare
       - name: Clean tsconfig
