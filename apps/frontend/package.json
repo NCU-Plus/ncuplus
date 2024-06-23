@@ -38,6 +38,6 @@
     "pinia": "^2.1.7",
     "tailwind-scrollbar-hide": "^1.1.7",
     "vitest": "^1.2.2",
-    "vue-chartjs": "^5.2.0"
+    "vue-chartjs": "^5.3.1"
   }
 }
