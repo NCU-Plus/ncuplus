@@ -117,7 +117,7 @@ importers:
         specifier: ^1.11.0
         version: 1.11.0
       express-session:
-        specifier: ^1.17.3
+        specifier: ^1.18.0
         version: 1.18.0
       file-type:
         specifier: ^16.5.4
@@ -172,7 +172,7 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       '@types/express-session':
-        specifier: ^1.17.10
+        specifier: ^1.18.0
         version: 1.18.0
       '@types/jest':
         specifier: 29.5.8
