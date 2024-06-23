@@ -274,7 +274,7 @@ importers:
         specifier: ^13.0.0
         version: 13.0.0
       marked-gfm-heading-id:
-        specifier: ^3.1.2
+        specifier: ^3.2.0
         version: 3.2.0(marked@13.0.0)
       marked-highlight:
         specifier: ^2.0.9
