@@ -69,7 +69,7 @@ importers:
   apps/backend:
     dependencies:
       '@casl/ability':
-        specifier: ^6.5.0
+        specifier: ^6.7.1
         version: 6.7.1
       '@nestjs/axios':
         specifier: ^3.0.1
