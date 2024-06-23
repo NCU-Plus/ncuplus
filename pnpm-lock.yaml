@@ -63,7 +63,7 @@ importers:
         specifier: ^5.3.3
         version: 5.5.2
       vue-eslint-parser:
-        specifier: ^9.4.2
+        specifier: ^9.4.3
         version: 9.4.3(eslint@8.57.0)
 
   apps/backend:
