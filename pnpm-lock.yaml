@@ -220,19 +220,19 @@ importers:
   apps/frontend:
     devDependencies:
       '@fortawesome/fontawesome-svg-core':
-        specifier: ^6.5.1
+        specifier: ^6.5.2
         version: 6.5.2
       '@fortawesome/free-brands-svg-icons':
-        specifier: ^6.5.1
+        specifier: ^6.5.2
         version: 6.5.2
       '@fortawesome/free-regular-svg-icons':
-        specifier: ^6.5.1
+        specifier: ^6.5.2
         version: 6.5.2
       '@fortawesome/free-solid-svg-icons':
-        specifier: ^6.5.1
+        specifier: ^6.5.2
         version: 6.5.2
       '@fortawesome/vue-fontawesome':
-        specifier: ^3.0.6
+        specifier: ^3.0.8
         version: 3.0.8(@fortawesome/fontawesome-svg-core@6.5.2)(vue@3.4.30(typescript@5.5.2))
       '@nuxt/devtools':
         specifier: ^1.3.6
