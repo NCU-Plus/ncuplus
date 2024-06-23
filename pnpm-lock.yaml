@@ -108,7 +108,7 @@ importers:
         specifier: ^0.14.1
         version: 0.14.1
       connect-redis:
-        specifier: ^7.1.0
+        specifier: ^7.1.1
         version: 7.1.1(express-session@1.18.0)
       cookie-parser:
         specifier: ^1.4.6
