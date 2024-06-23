@@ -295,7 +295,7 @@ importers:
         specifier: ^1.1.7
         version: 1.1.7
       vitest:
-        specifier: ^1.2.2
+        specifier: ^1.6.0
         version: 1.6.0(@types/node@20.14.8)(jsdom@24.1.0)(terser@5.31.1)
       vue-chartjs:
         specifier: ^5.2.0
