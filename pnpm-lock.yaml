@@ -12,7 +12,7 @@ importers:
         specifier: ^1.17.14
         version: 1.17.14
       '@types/node':
-        specifier: ^20.11.14
+        specifier: ^20.14.8
         version: 20.14.8
       '@typescript-eslint/eslint-plugin':
         specifier: ^6.14.0
@@ -181,7 +181,7 @@ importers:
         specifier: ^1.4.11
         version: 1.4.11
       '@types/node':
-        specifier: ^20.11.14
+        specifier: ^20.14.8
         version: 20.14.8
       '@types/passport':
         specifier: ^1.0.16
