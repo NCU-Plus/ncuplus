@@ -259,7 +259,7 @@ importers:
         specifier: ^2.4.3
         version: 2.4.6
       chart.js:
-        specifier: ^4.4.1
+        specifier: ^4.4.3
         version: 4.4.3
       easymde:
         specifier: ^2.18.0
