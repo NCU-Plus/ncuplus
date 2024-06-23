@@ -256,7 +256,7 @@ importers:
         specifier: ^18.6.4
         version: 18.6.4
       '@vue/test-utils':
-        specifier: ^2.4.3
+        specifier: ^2.4.6
         version: 2.4.6
       chart.js:
         specifier: ^4.4.1
