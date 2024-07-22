@@ -23,8 +23,8 @@
   "devDependencies": {
     "@types/http-proxy": "^1.17.14",
     "@types/node": "^20.14.8",
-    "@typescript-eslint/eslint-plugin": "^6.14.0",
-    "@typescript-eslint/parser": "^6.14.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
     "concurrently": "^8.2.2",
     "cross-env": "^7.0.3",
     "cypress": "^13.6.4",
