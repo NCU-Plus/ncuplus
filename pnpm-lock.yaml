@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@types/http-proxy':
-        specifier: ^1.17.14
-        version: 1.17.14
+        specifier: ^1.17.15
+        version: 1.17.15
       '@types/node':
         specifier: ^20.14.8
         version: 20.14.8
@@ -2102,8 +2102,8 @@ packages:
   '@types/http-errors@2.0.4':
     resolution: {integrity: sha512-D0CFMMtydbJAegzOyHjtiKPLlvnm3iTZyZRSZoLq2mRhDdmLfIWOCYPfQJ4cu2erKghU++QvjcUjp/5h7hESpA==}
 
-  '@types/http-proxy@1.17.14':
-    resolution: {integrity: sha512-SSrD0c1OQzlFX7pGu1eXxSEjemej64aaNPRhhVYUGqXh0BtldAAx37MG8btcumvpgKyZp1F5Gn3JkktdxiFv6w==}
+  '@types/http-proxy@1.17.15':
+    resolution: {integrity: sha512-25g5atgiVNTIv0LBDTg1H74Hvayx0ajtJPLLcYE3whFv75J0pWNtOBzaXJQgDTmrX1bx5U9YC2w/n65BN1HwRQ==}
 
   '@types/istanbul-lib-coverage@2.0.6':
     resolution: {integrity: sha512-2QF/t/auWm0lsy8XtKVPG19v3sSOQlJe/YHZgfjb/KBBHOGSV+J2q/S671rcq9uTBrLAXmZpqJiaQbMT+zNU1w==}
@@ -10321,7 +10321,7 @@ snapshots:
 
   '@types/http-errors@2.0.4': {}
 
-  '@types/http-proxy@1.17.14':
+  '@types/http-proxy@1.17.15':
     dependencies:
       '@types/node': 20.14.8
 
@@ -14628,7 +14628,7 @@ snapshots:
       '@rollup/plugin-replace': 5.0.7(rollup@4.18.0)
       '@rollup/plugin-terser': 0.4.4(rollup@4.18.0)
       '@rollup/pluginutils': 5.1.0(rollup@4.18.0)
-      '@types/http-proxy': 1.17.14
+      '@types/http-proxy': 1.17.15
       '@vercel/nft': 0.26.5(encoding@0.1.13)
       archiver: 7.0.1
       c12: 1.11.1(magicast@0.3.4)
