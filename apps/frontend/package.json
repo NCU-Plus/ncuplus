@@ -33,7 +33,7 @@
     "marked-gfm-heading-id": "^4.0.0",
     "marked-highlight": "^2.0.9",
     "marked-mangle": "^1.1.6",
-    "nuxt": "^3.10.0",
+    "nuxt": "^3.13.2",
     "nuxt-gtag": "^2.0.6",
     "pinia": "^2.1.7",
     "tailwind-scrollbar-hide": "^1.1.7",
