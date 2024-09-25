@@ -169,8 +169,8 @@ importers:
         specifier: ^1.11.5
         version: 1.11.5
       '@types/express':
-        specifier: ^4.17.21
-        version: 4.17.21
+        specifier: ^5.0.0
+        version: 5.0.0
       '@types/express-session':
         specifier: ^1.17.10
         version: 1.18.0
@@ -1058,6 +1058,7 @@ packages:
   '@koa/router@12.0.1':
     resolution: {integrity: sha512-ribfPYfHb+Uw3b27Eiw6NPqjhIhTpVFzEWLwyc/1Xp+DCdwRRyIlAUODX+9bPARF6aQtUu1+/PHzdNvRzcs/+Q==}
     engines: {node: '>= 12'}
+    deprecated: Use v12.0.2 or higher to fix the vulnerability issue
 
   '@kurkle/color@0.3.2':
     resolution: {integrity: sha512-fuscdXJ9G1qb7W8VdHi+IwRqij3lBkosAm4ydQtEmbY58OzHXqQhvlxqEkoz0yssNVn38bcpRWgA9PP+OGoisw==}
@@ -2090,11 +2091,14 @@ packages:
   '@types/express-serve-static-core@4.19.5':
     resolution: {integrity: sha512-y6W03tvrACO72aijJ5uF02FRq5cgDR9lUxddQ8vyF+GvmjJQqbzDcJngEjURc+ZsG31VI3hODNZJ2URj86pzmg==}
 
+  '@types/express-serve-static-core@5.0.0':
+    resolution: {integrity: sha512-AbXMTZGt40T+KON9/Fdxx0B2WK5hsgxcfXJLr5bFpZ7b4JCex2WyQPTEKdXqfHiY5nKKBScZ7yCoO6Pvgxfvnw==}
+
   '@types/express-session@1.18.0':
     resolution: {integrity: sha512-27JdDRgor6PoYlURY+Y5kCakqp5ulC0kmf7y+QwaY+hv9jEFuQOThgkjyA53RP3jmKuBsH5GR6qEfFmvb8mwOA==}
 
-  '@types/express@4.17.21':
-    resolution: {integrity: sha512-ejlPM315qwLpaQlQDTjPdsUFSc6ZsP4AN6AlWnogPjQ7CVi7PYF3YVz+CY3jE2pwYf7E/7HlDAN0rV2GxTG0HQ==}
+  '@types/express@5.0.0':
+    resolution: {integrity: sha512-DvZriSMehGHL1ZNLzi6MidnsDhUZM/x2pRdDIKdwbUNqqwHxMlRdkxtn6/EPKyqKpHqTl/4nRZsRNLpZxZRpPQ==}
 
   '@types/graceful-fs@4.1.9':
     resolution: {integrity: sha512-olP3sd1qOEe5dXTSaFvQG+02VdRXcdytWLAZsAq1PecU8uqQAhkrnbli7DagjtXKW/Bl7YJbUsa8MPcuc8LHEQ==}
@@ -10273,7 +10277,7 @@ snapshots:
 
   '@types/cookie-parser@1.4.7':
     dependencies:
-      '@types/express': 4.17.21
+      '@types/express': 5.0.0
 
   '@types/cookiejar@2.1.5': {}
 
@@ -10304,14 +10308,21 @@ snapshots:
       '@types/range-parser': 1.2.7
       '@types/send': 0.17.4
 
+  '@types/express-serve-static-core@5.0.0':
+    dependencies:
+      '@types/node': 20.14.8
+      '@types/qs': 6.9.15
+      '@types/range-parser': 1.2.7
+      '@types/send': 0.17.4
+
   '@types/express-session@1.18.0':
     dependencies:
-      '@types/express': 4.17.21
+      '@types/express': 5.0.0
 
-  '@types/express@4.17.21':
+  '@types/express@5.0.0':
     dependencies:
       '@types/body-parser': 1.19.5
-      '@types/express-serve-static-core': 4.19.5
+      '@types/express-serve-static-core': 5.0.0
       '@types/qs': 6.9.15
       '@types/serve-static': 1.15.7
 
@@ -10362,7 +10373,7 @@ snapshots:
 
   '@types/multer@1.4.11':
     dependencies:
-      '@types/express': 4.17.21
+      '@types/express': 5.0.0
 
   '@types/node@20.14.8':
     dependencies:
@@ -10376,24 +10387,24 @@ snapshots:
 
   '@types/passport-jwt@3.0.13':
     dependencies:
-      '@types/express': 4.17.21
+      '@types/express': 5.0.0
       '@types/jsonwebtoken': 9.0.6
       '@types/passport-strategy': 0.2.38
 
   '@types/passport-oauth2@1.4.17':
     dependencies:
-      '@types/express': 4.17.21
+      '@types/express': 5.0.0
       '@types/oauth': 0.9.5
       '@types/passport': 1.0.16
 
   '@types/passport-strategy@0.2.38':
     dependencies:
-      '@types/express': 4.17.21
+      '@types/express': 5.0.0
       '@types/passport': 1.0.16
 
   '@types/passport@1.0.16':
     dependencies:
-      '@types/express': 4.17.21
+      '@types/express': 5.0.0
 
   '@types/qs@6.9.15': {}
 
