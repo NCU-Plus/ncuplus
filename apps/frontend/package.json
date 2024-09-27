@@ -28,7 +28,7 @@
     "chart.js": "^4.4.1",
     "easymde": "^2.18.0",
     "highlight.js": "^11.9.0",
-    "isomorphic-dompurify": "^2.3.0",
+    "isomorphic-dompurify": "^2.16.0",
     "marked": "^13.0.0",
     "marked-gfm-heading-id": "^4.0.0",
     "marked-highlight": "^2.0.9",
