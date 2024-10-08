@@ -109,7 +109,7 @@ importers:
         version: 0.14.1
       connect-redis:
         specifier: ^7.1.0
-        version: 7.1.1(express-session@1.18.0)
+        version: 7.1.1(express-session@1.18.1)
       cookie-parser:
         specifier: ^1.4.6
         version: 1.4.6
@@ -117,8 +117,8 @@ importers:
         specifier: ^1.11.0
         version: 1.11.0
       express-session:
-        specifier: ^1.17.3
-        version: 1.18.0
+        specifier: ^1.18.1
+        version: 1.18.1
       file-type:
         specifier: ^16.5.4
         version: 16.5.4
@@ -172,7 +172,7 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       '@types/express-session':
-        specifier: ^1.17.10
+        specifier: ^1.18.0
         version: 1.18.0
       '@types/jest':
         specifier: 29.5.8
@@ -1058,6 +1058,7 @@ packages:
   '@koa/router@12.0.1':
     resolution: {integrity: sha512-ribfPYfHb+Uw3b27Eiw6NPqjhIhTpVFzEWLwyc/1Xp+DCdwRRyIlAUODX+9bPARF6aQtUu1+/PHzdNvRzcs/+Q==}
     engines: {node: '>= 12'}
+    deprecated: Use v12.0.2 or higher to fix the vulnerability issue
 
   '@kurkle/color@0.3.2':
     resolution: {integrity: sha512-fuscdXJ9G1qb7W8VdHi+IwRqij3lBkosAm4ydQtEmbY58OzHXqQhvlxqEkoz0yssNVn38bcpRWgA9PP+OGoisw==}
@@ -3294,6 +3295,10 @@ packages:
     resolution: {integrity: sha512-U71cyTamuh1CRNCfpGY6to28lxvNwPG4Guz/EVjgf3Jmzv0vlDp1atT9eS5dDjMYHucpHbWns6Lwf3BKz6svdw==}
     engines: {node: '>= 0.6'}
 
+  cookie@0.7.2:
+    resolution: {integrity: sha512-yki5XnKuf750l50uGTllt6kKILY4nQ1eNIQatoXEByZ5dWgnKqbnqmTrBE5B4N7lrMJKQ2ytWMiTO2o0v6Ew/w==}
+    engines: {node: '>= 0.6'}
+
   cookiejar@2.1.4:
     resolution: {integrity: sha512-LDx6oHrK+PhzLKJU9j5S7/Y3jM/mUHvD/DeI1WQmJn652iPC5Y4TBzC9l+5OMOXlyTTA+SmVUPm0HQUwpD5Jqw==}
 
@@ -3845,6 +3850,7 @@ packages:
   eslint@8.57.0:
     resolution: {integrity: sha512-dZ6+mexnaTIbSBZWgou51U6OmzIhYM2VcNdtiTtI7qPNZm35Akpr0f6vtw3w1Kmn5PYo+tZVfh13WrhpS6oLqQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   espree@9.6.1:
@@ -3938,8 +3944,8 @@ packages:
   exponential-backoff@3.1.1:
     resolution: {integrity: sha512-dX7e/LHVJ6W3DE1MHWi9S1EYzDESENfLrYohG2G++ovZrYOkm4Knwa0mc1cn84xJOR4KEU0WSchhLbd0UklbHw==}
 
-  express-session@1.18.0:
-    resolution: {integrity: sha512-m93QLWr0ju+rOwApSsyso838LQwgfs44QtOP/WBiwtAgPIo/SAh1a5c6nn2BR6mFNZehTpqKDESzP+fRHVbxwQ==}
+  express-session@1.18.1:
+    resolution: {integrity: sha512-a5mtTqEaZvBCL9A9aqkrtfz+3SMDhOVUnjafjo+s7A9Txkq+SVX2DLvSp1Zrv4uCXa3lMSK3viWnh9Gg07PBUA==}
     engines: {node: '>= 0.8.0'}
 
   express@4.19.2:
@@ -11642,9 +11648,9 @@ snapshots:
       ini: 1.3.8
       proto-list: 1.2.4
 
-  connect-redis@7.1.1(express-session@1.18.0):
+  connect-redis@7.1.1(express-session@1.18.1):
     dependencies:
-      express-session: 1.18.0
+      express-session: 1.18.1
 
   consola@2.15.3: {}
 
@@ -11728,6 +11734,8 @@ snapshots:
   cookie@0.4.1: {}
 
   cookie@0.6.0: {}
+
+  cookie@0.7.2: {}
 
   cookiejar@2.1.4: {}
 
@@ -12465,9 +12473,9 @@ snapshots:
 
   exponential-backoff@3.1.1: {}
 
-  express-session@1.18.0:
+  express-session@1.18.1:
     dependencies:
-      cookie: 0.6.0
+      cookie: 0.7.2
       cookie-signature: 1.0.7
       debug: 2.6.9
       depd: 2.0.0
