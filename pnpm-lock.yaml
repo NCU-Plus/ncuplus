@@ -271,17 +271,17 @@ importers:
         specifier: ^2.3.0
         version: 2.12.0
       marked:
-        specifier: ^13.0.0
-        version: 13.0.0
+        specifier: ^14.1.3
+        version: 14.1.3
       marked-gfm-heading-id:
         specifier: ^4.0.0
-        version: 4.0.0(marked@13.0.0)
+        version: 4.0.0(marked@14.1.3)
       marked-highlight:
         specifier: ^2.0.9
-        version: 2.1.3(marked@13.0.0)
+        version: 2.1.3(marked@14.1.3)
       marked-mangle:
         specifier: ^1.1.6
-        version: 1.1.8(marked@13.0.0)
+        version: 1.1.8(marked@14.1.3)
       nuxt:
         specifier: ^3.10.0
         version: 3.12.2(@opentelemetry/api@1.9.0)(@parcel/watcher@2.4.1)(@types/node@20.14.8)(encoding@0.1.13)(eslint@8.57.0)(ioredis@5.4.1)(magicast@0.3.4)(optionator@0.9.4)(rollup@4.18.0)(terser@5.31.1)(typescript@5.5.2)(vite@5.3.1(@types/node@20.14.8)(terser@5.31.1))
@@ -1058,6 +1058,7 @@ packages:
   '@koa/router@12.0.1':
     resolution: {integrity: sha512-ribfPYfHb+Uw3b27Eiw6NPqjhIhTpVFzEWLwyc/1Xp+DCdwRRyIlAUODX+9bPARF6aQtUu1+/PHzdNvRzcs/+Q==}
     engines: {node: '>= 12'}
+    deprecated: Use v12.0.2 or higher to fix the vulnerability issue
 
   '@kurkle/color@0.3.2':
     resolution: {integrity: sha512-fuscdXJ9G1qb7W8VdHi+IwRqij3lBkosAm4ydQtEmbY58OzHXqQhvlxqEkoz0yssNVn38bcpRWgA9PP+OGoisw==}
@@ -3845,6 +3846,7 @@ packages:
   eslint@8.57.0:
     resolution: {integrity: sha512-dZ6+mexnaTIbSBZWgou51U6OmzIhYM2VcNdtiTtI7qPNZm35Akpr0f6vtw3w1Kmn5PYo+tZVfh13WrhpS6oLqQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   espree@9.6.1:
@@ -5358,8 +5360,8 @@ packages:
     peerDependencies:
       marked: '>=4 <14'
 
-  marked@13.0.0:
-    resolution: {integrity: sha512-VTeDCd9txf4KLLljUZ0nljE/Incb9SrWuueE44QVuU0pkOdh4sfCeW1Z6lPcxyDRSVY6rm8db/0OPaN75RNUmw==}
+  marked@14.1.3:
+    resolution: {integrity: sha512-ZibJqTULGlt9g5k4VMARAktMAjXoVnnr+Y3aCqW1oDftcV4BA3UmrBifzXoZyenHRk75csiPu9iwsTj4VNBT0g==}
     engines: {node: '>= 18'}
     hasBin: true
 
@@ -14356,20 +14358,20 @@ snapshots:
 
   map-obj@4.3.0: {}
 
-  marked-gfm-heading-id@4.0.0(marked@13.0.0):
+  marked-gfm-heading-id@4.0.0(marked@14.1.3):
     dependencies:
       github-slugger: 2.0.0
-      marked: 13.0.0
+      marked: 14.1.3
 
-  marked-highlight@2.1.3(marked@13.0.0):
+  marked-highlight@2.1.3(marked@14.1.3):
     dependencies:
-      marked: 13.0.0
+      marked: 14.1.3
 
-  marked-mangle@1.1.8(marked@13.0.0):
+  marked-mangle@1.1.8(marked@14.1.3):
     dependencies:
-      marked: 13.0.0
+      marked: 14.1.3
 
-  marked@13.0.0: {}
+  marked@14.1.3: {}
 
   marked@4.3.0: {}
 
