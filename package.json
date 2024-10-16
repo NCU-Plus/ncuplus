@@ -4,7 +4,7 @@
   "workspaces": [
     "apps/*"
   ],
-  "packageManager": "pnpm@9.4.0",
+  "packageManager": "pnpm@9.12.2",
   "scripts": {
     "dev": "concurrently \"pnpm -F frontend dev\" \"pnpm -F backend start:dev\"",
     "build": "lerna run build",
