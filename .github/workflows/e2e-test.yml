@@ -26,7 +26,7 @@ jobs:
       - name: Disable husky install
         run: npm pkg delete scripts.prepare
       - name: Cypress install
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v7.4.1
         with:
           # Disable running of tests within install job
           runTests: false
@@ -64,7 +64,7 @@ jobs:
       - name: Disable husky install
         run: npm pkg delete scripts.prepare
       - name: 'UI Tests - Chrome'
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v7.4.1
         with:
           start: pnpm start:ci
           wait-on: 'http://localhost:4000'
